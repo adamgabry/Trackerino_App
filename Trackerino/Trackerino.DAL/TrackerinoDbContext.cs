@@ -13,7 +13,5 @@ namespace Trackerino.DAL
         public DbSet<UserEntity> Users => Set<UserEntity>();
         public DbSet<ProjectEntity> Projects => Set<ProjectEntity>();
         public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
-
-
     }
 }
