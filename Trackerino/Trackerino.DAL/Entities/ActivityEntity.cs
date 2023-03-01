@@ -1,9 +1,9 @@
 ﻿namespace Trackerino.DAL.Entities;
 public class ActivityEntity : IEntity
 {
-    public Guid Id { get; set; }
-    public DateTime StarDateTime { get; set; }
-    public DateTime EndDateTime { get; set; }
+    public required Guid Id { get; set; }
+    public required DateTime StarDateTime { get; set; }
+    public required DateTime EndDateTime { get; set; }
     public Enum Tag { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
 }

@@ -2,8 +2,8 @@
 
 public class ProjectEntity : IEntity
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public ICollection<ActivityEntity> Activities { get; set; }
-    public ICollection<UserEntity> Users { get; set; }
+    public required Guid Id { get; set; }
+    public required string Name { get; set; }
+    public ICollection<ActivityEntity>? Activities { get; set; }
+    public required ICollection<UserEntity> Users { get; set; }
 }
