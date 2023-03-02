@@ -6,4 +6,5 @@ public class ActivityEntity : IEntity
     public required DateTime EndDateTime { get; set; }
     public Enum Tag { get; set; }
     public string? Description { get; set; }
+    public required UserEntity User { get; set; }
 }
