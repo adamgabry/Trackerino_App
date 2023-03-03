@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackerino.DAL", "Trackerin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackerino.DAL.Tests", "Trackerino.DAL.Tests\Trackerino.DAL.Tests.csproj", "{1F7715A0-679A-4FC2-B6E9-8E4F6DCF1A9B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0DBFA024-B9CA-41DF-B46E-76260B1C5057}"
+	ProjectSection(SolutionItems) = preProject
+		Trackerino.DAL\Relations_Diagram.dgml = Trackerino.DAL\Relations_Diagram.dgml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
