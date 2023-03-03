@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Entities;
-
+using Trackerino.DAL.Factories;
 namespace Trackerino.DAL
 {
     public class TrackerinoDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
-        public TrackerinoDbContext(DbContextOptions options) : base(options)
-        {
-        }
+        private readonly bool _seedDemoData;
 
+        public TrackerinoDbContext(DbContextOptions contextOptions, bool seedDemoData = false) : base(contextOptions) =>
+            _seedDemoData = seedDemoData;
+
+        public DbSet<UserProjectEntity> UserProject=> Set<UserProjectEntity>();
         public DbSet<UserEntity> Users => Set<UserEntity>();
         public DbSet<ProjectEntity> Projects => Set<ProjectEntity>();
         public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
@@ -27,14 +20,19 @@ namespace Trackerino.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<UserEntity>()
-                .HasMany(i => i.Activities)
+                .HasMany(i => i.Projects)
                 .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.Cascade);
-
+                .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<ProjectEntity>()
                 .HasMany(i => i.Users)
                 .WithOne(i => i.Project)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(i => i.Activities)
+                .WithOne(i => i.User);
+            modelBuilder.Entity<ProjectEntity>()
+                .HasMany(i => i.Activities)
+                .WithOne(i => i.Project);
         }
 
     }
