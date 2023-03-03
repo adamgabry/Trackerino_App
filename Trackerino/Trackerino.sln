@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackerino.DAL", "Trackerin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackerino.DAL.Tests", "Trackerino.DAL.Tests\Trackerino.DAL.Tests.csproj", "{1F7715A0-679A-4FC2-B6E9-8E4F6DCF1A9B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{1EC9BF34-8ACF-4603-BB2C-DDAB3248044F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4487A0A4-9806-40ED-8F76-CA8D1CD47355}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enums", "Enums", "{75F8236C-50D0-4912-82D4-4C16C38ED7EC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enums", "Enums", "{226CEED5-029F-4102-8505-B58A7046E1A8}"
 	ProjectSection(SolutionItems) = preProject
-		ActivityTag.cs = ActivityTag.cs
+		Common\Enums\ActivityTag.cs = Common\Enums\ActivityTag.cs
 	EndProjectSection
 EndProject
 Global
@@ -33,7 +33,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{75F8236C-50D0-4912-82D4-4C16C38ED7EC} = {1EC9BF34-8ACF-4603-BB2C-DDAB3248044F}
+		{226CEED5-029F-4102-8505-B58A7046E1A8} = {4487A0A4-9806-40ED-8F76-CA8D1CD47355}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64829335-976C-4FF9-9B22-B3176CD5FE9D}
