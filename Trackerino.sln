@@ -9,8 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackerino.DAL.Tests", "Tra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0DBFA024-B9CA-41DF-B46E-76260B1C5057}"
 	ProjectSection(SolutionItems) = preProject
+		..\docs\ER.png = ..\docs\ER.png
 		Trackerino.DAL\Relations_Diagram.dgml = Trackerino.DAL\Relations_Diagram.dgml
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{46805476-0325-4C87-85B6-614691237581}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

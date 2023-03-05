@@ -6,7 +6,6 @@ namespace Trackerino.DAL
     public class TrackerinoDbContext : DbContext
     {
         private readonly bool _seedDemoData;
-
         public TrackerinoDbContext(DbContextOptions contextOptions, bool seedDemoData = false) : base(contextOptions) =>
             _seedDemoData = seedDemoData;
 
