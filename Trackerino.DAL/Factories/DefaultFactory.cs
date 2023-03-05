@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.Extensions.Configuration;
 
 namespace Trackerino.DAL.Factories
 {
@@ -9,18 +9,20 @@ namespace Trackerino.DAL.Factories
         public TrackerinoDbContext CreateDbContext(string[] args)
         {
             DbContextOptionsBuilder<TrackerinoDbContext> builder = new();
-            
-            builder.UseSqlServer(
-                );
-                return new TrackerinoDbContext(builder.Options);
+            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                 " Initial Catalog = Trackerino;" +
+                                 " MultipleActiveResultSets = True;" +
+                                 " Encrypt = False;" +
+                                 " TrustServerCertificate = True;");
+            return new TrackerinoDbContext(builder.Options);
         }
     }
-    public class SQLiteFactory : IDbContextFactory<TrackerinoDbContext>
+    public class SqLiteFactory : IDbContextFactory<TrackerinoDbContext>
     {
         public TrackerinoDbContext CreateDbContext()
         {
             DbContextOptionsBuilder<TrackerinoDbContext> builder = new();
-            builder.UseSqlite()
+            builder.UseSqlite("Data Source=Trackerino.db");
             return new TrackerinoDbContext(builder.Options);
         }
     }
