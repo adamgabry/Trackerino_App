@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Trackerino.DAL;
 
@@ -11,9 +12,11 @@ using Trackerino.DAL;
 namespace Trackerino.DAL.Migrations
 {
     [DbContext(typeof(TrackerinoDbContext))]
-    partial class TrackerinoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230305211452_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace Trackerino.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Activities", (string)null);
+                    b.ToTable("Activities");
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.ProjectEntity", b =>
@@ -67,7 +70,7 @@ namespace Trackerino.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.UserEntity", b =>
@@ -89,7 +92,7 @@ namespace Trackerino.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.UserProjectEntity", b =>
@@ -115,7 +118,7 @@ namespace Trackerino.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserProject", (string)null);
+                    b.ToTable("UserProject");
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.ActivityEntity", b =>
