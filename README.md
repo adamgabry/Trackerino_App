@@ -1,22 +1,24 @@
-# Documentation
+#Trackerino
+
+## Documentation
 [Wireframe on Figma](https://www.figma.com/file/Qz5WsGPIsTrbT9KmVWHumM/Trackerino?node-id=42%3A440&t=Wj4498UCIiKvloKl-1)
 
 #DAL
 
-***Migrace***
-Při přidání migrace:
-dotnet ef migrations add [nazev]
-Odstraneni:
-dotnet ef migrations remove
+###Migrace
+    cd Trackerino.DAL/
 
-***Nova migraci / zmena v DBcontextu***
- 1.v Trackerino.DAL/
- 2.dotnet ef database update
+| Příkaz | Význam |
+| ----------- | ----------- |
+| dotnet ef migrations add [nazev]  | Vytvoření/přidání migrace  |
+| dotnet ef migrations remove   | Odstranění poslední migrace |
+| dotnet ef database update   | Uplatnění změn v migracích na databázi |
 
-Používáme LocalDB pro počáteční migraci
+
+Používáme LocalDB pro počáteční migraci.
 TODO: SQLite pro testování v Azure.
 
-#Testy
+###Testy
     1. Po spuštění testu v UserTests se do databáze vytvoří jeden uživatel.
     2. přes SQL Server Object Explorer se můžete podívat, že tam je.
 
