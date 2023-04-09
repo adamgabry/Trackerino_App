@@ -10,7 +10,9 @@ namespace Trackerino.BL.Models
         public required DateTime EndDateTime { get; set; }
         public ActivityTag Tag { get; set; }
         public string? Description { get; set; }
-        public UserEntity User { get; set; }
-        public ProjectEntity Project { get; set; }
+        public Guid? UserId { get; set; }
+        public string User { get; set; }
+        public Guid? ProjectId { get; set; }
+        public string Project { get; set; }
     }
 }
