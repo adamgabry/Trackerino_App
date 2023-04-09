@@ -1,4 +1,5 @@
-﻿using Trackerino.DAL.Entities;
+﻿using System.Collections.ObjectModel;
+using Trackerino.DAL.Entities;
 
 namespace Trackerino.BL.Models
 {
@@ -6,6 +7,11 @@ namespace Trackerino.BL.Models
     {
         public required Guid Id { get; set; }
         public required string Name { get; set; }
-        public required ICollection<UserListModel> Users { get; set; } = new List<UserListModel>();
+        public ObservableCollection<UserProjectListModel>? Users { get; set; } = new();
+        public static ProjectListModel Empty => new()
+        {
+            Id = Guid.NewGuid(),
+            Name = string.Empty
+        };
     }
 }

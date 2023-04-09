@@ -1,4 +1,5 @@
-﻿using Trackerino.DAL.Common;
+﻿using System.Collections.ObjectModel;
+using Trackerino.DAL.Common;
 using Trackerino.DAL.Entities;
 
 namespace Trackerino.BL.Models
@@ -10,9 +11,16 @@ namespace Trackerino.BL.Models
         public required DateTime EndDateTime { get; set; }
         public ActivityTag Tag { get; set; }
         public string? Description { get; set; }
-        public Guid? UserId { get; set; }
-        public string UserName { get; set; }
-        public Guid? ProjectId { get; set; }
-        public string ProjectName { get; set; }
+        public UserListModel? User { get; set; }
+        public ProjectListModel? Project { get; set; }
+
+
+        public static ActivityDetailModel Empty => new()
+        {
+            Id = Guid.NewGuid(),
+            StartDateTime = default(DateTime),
+            EndDateTime = default(DateTime),
+            Tag = ActivityTag.None,
+        };
     }
 }

@@ -4,7 +4,7 @@ using Trackerino.DAL.Entities;
 
 namespace Trackerino.BL.Mappers
 {
-    public class ProjectModelMapper
+    public abstract class UserProjectModelMapper
     {
     }
 }

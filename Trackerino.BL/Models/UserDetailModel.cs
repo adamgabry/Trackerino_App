@@ -1,4 +1,6 @@
-﻿using Trackerino.DAL.Entities;
+﻿using System.Collections.ObjectModel;
+using Trackerino.DAL.Common;
+using Trackerino.DAL.Entities;
 
 namespace Trackerino.BL.Models
 {
@@ -8,7 +10,14 @@ namespace Trackerino.BL.Models
         public required string Name { get; set; }
         public required string Surname { get; set; }
         public string? ImageUrl { get; set; }
-        public ICollection<ActivityListModel>? Activities { get; set; }
-        public ICollection<ProjectListModel> Projects { get; set; } = new List<ProjectListModel>();
+        public ObservableCollection<ActivityListModel>? Activities { get; set; }
+        public ObservableCollection<ProjectListModel> Projects { get; set; } = new();
+
+        public static UserDetailModel Empty => new()
+        {
+            Id = Guid.NewGuid(),
+            Name = string.Empty,
+            Surname = string.Empty,
+        };
     }
 }
