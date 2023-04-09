@@ -24,6 +24,12 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    version: 7.x
+    performMultiLevelLookup: true
+
 - task: VSBuild@1
   inputs:
     platform:
@@ -33,5 +39,5 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'Trackerino.DAL.Tests/UserTests.cs'
+    projects: 'Trackerino.DAL.Tests/Trackerino.DAL.Tests.csproj'
     testRunTitle: 'User Tests'
