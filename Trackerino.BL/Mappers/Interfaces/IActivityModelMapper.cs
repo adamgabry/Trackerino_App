@@ -1,6 +1,6 @@
 ﻿namespace Trackerino.BL.Mappers.Interfaces
 {
-    public class IActivityModelMapper
+    public interface IActivityModelMapper
     {
         
     }

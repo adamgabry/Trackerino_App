@@ -1,6 +1,6 @@
 ﻿namespace Trackerino.BL.Mappers.Interfaces
 {
-    public class IProjectModelMapper
+    public interface IProjectModelMapper
     {
         
     }

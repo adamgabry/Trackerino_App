@@ -11,8 +11,8 @@ namespace Trackerino.BL.Models
         public ActivityTag Tag { get; set; }
         public string? Description { get; set; }
         public Guid? UserId { get; set; }
-        public string User { get; set; }
+        public string UserName { get; set; }
         public Guid? ProjectId { get; set; }
-        public string Project { get; set; }
+        public string ProjectName { get; set; }
     }
 }
