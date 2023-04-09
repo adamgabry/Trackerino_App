@@ -36,8 +36,14 @@ namespace Trackerino.DAL.Tests
             await repository.InsertAsync(user);
             await _dbContextSUT.SaveChangesAsync();
 
-            // Assert
+            // Assertprepare
             var result = await _dbContextSUT.Users.ToListAsync();
+
+            // Teardown
+            repository.Delete(user.Id);
+            await _dbContextSUT.SaveChangesAsync();
+
+            // Assert
             Assert.Single(result);
             Assert.Equal(user, result[0]);
         }
@@ -54,6 +60,12 @@ namespace Trackerino.DAL.Tests
             };
             var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
             await repository.InsertAsync(user);
+            await _dbContextSUT.SaveChangesAsync();
+
+            // Check that user exists in repository
+            var userExists = repository.Get().Any(u => u.Id == user.Id);
+            await _dbContextSUT.SaveChangesAsync();
+            Assert.True(userExists);
 
             // Modify user and call UpdateAsync()
             user.Name = "Pepa Updated";
@@ -61,73 +73,86 @@ namespace Trackerino.DAL.Tests
             await repository.UpdateAsync(user);
             await _dbContextSUT.SaveChangesAsync();
 
-            // Assert
+            // Assertprepare
             var result = await _dbContextSUT.Users.ToListAsync();
+
+            // Assert
             Assert.Single(result);
             Assert.Equal(user, result[0]);
+
+            // Teardown
+            repository.Delete(user.Id);
+            await _dbContextSUT.SaveChangesAsync();
         }
 
         [Fact]
-    public async Task ExistingUser_Delete_Deleted()
-    {
-    // Arrange
-    var user = new UserEntity
-    {
-        Id = Guid.NewGuid(),
-        Name = "Pepa",
-        Surname = "Novak",
-    };
-    var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
-    await _dbContextSUT.Users.AddAsync(user);
-    await _dbContextSUT.SaveChangesAsync();
+        public async Task ExistingUser_Delete_Deleted()
+        {
+        // Arrange
+        var user = new UserEntity
+        {
+            Id = Guid.NewGuid(),
+            Name = "Pepa",
+            Surname = "Novak",
+        };
+        var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
+        await _dbContextSUT.Users.AddAsync(user);
+        await _dbContextSUT.SaveChangesAsync();
 
-    // Act
-    repository.Delete(user.Id);
-    await _dbContextSUT.SaveChangesAsync();
+        // Act
+        repository.Delete(user.Id);
+        await _dbContextSUT.SaveChangesAsync();
 
-    // Assert
-    var result = await _dbContextSUT.Users.ToListAsync();
-    Assert.Empty(result);
-}
+        // Assert
+        var result = await _dbContextSUT.Users.ToListAsync();
+        Assert.Empty(result);
+    }
 
         [Fact]
-    public async Task ExistingUser_ExistsAsync_ReturnsTrue()
-    {
-        // Arrange
-        var user = new UserEntity
+        public async Task ExistingUser_ExistsAsync_ReturnsTrue()
         {
-            Id = Guid.NewGuid(),
-            Name = "Pepa",
-            Surname = "Novak",
-        };
-        var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
-        await repository.InsertAsync(user);
+            // Arrange
+            var user = new UserEntity
+            {
+                Id = Guid.NewGuid(),
+                Name = "Pepa",
+                Surname = "Novak",
+            };
+            var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
+            await repository.InsertAsync(user);
 
-        // Act
-        await _dbContextSUT.SaveChangesAsync();
-        var result = await repository.ExistsAsync(user);
+            // Act
+            await _dbContextSUT.SaveChangesAsync();
+            var result = await repository.ExistsAsync(user);
 
-        // Assert
-        Assert.True(result);
-    }
+            // Assert
+            Assert.True(result);
 
-    [Fact]
-    public async Task NonexistentUser_ExistsAsync_ReturnsFalse()
-    {
-        // Arrange
-        var user = new UserEntity
+            // Teardown
+            repository.Delete(user.Id);
+            await _dbContextSUT.SaveChangesAsync();
+            }
+
+        [Fact]
+        public async Task NonexistentUser_ExistsAsync_ReturnsFalse()
         {
-            Id = Guid.NewGuid(),
-            Name = "Pepa",
-            Surname = "Novak",
-        };
-        var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
+            // Arrange
+            var user = new UserEntity
+            {
+                Id = Guid.NewGuid(),
+                Name = "Pepa",
+                Surname = "Novak",
+            };
+            var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
+            await _dbContextSUT.SaveChangesAsync();
 
-        // Act
-        var result = await repository.ExistsAsync(user);
+            // Act
+            var result = await repository.ExistsAsync(user);
+            await _dbContextSUT.SaveChangesAsync();
 
-        // Assert
-        Assert.False(result);
-    }
+            // Assert
+            Assert.False(result);
+            await _dbContextSUT.SaveChangesAsync();
+        }
     }
 }
