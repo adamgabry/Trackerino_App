@@ -12,13 +12,13 @@ public class Repository<TEntity> : IRepository<TEntity>
 {
     private readonly DbSet<TEntity> _dbSet;
     private readonly IEntityMapper<TEntity> _entityMapper;
+    private readonly DbContext _dbContext;
 
-    public Repository(
-        DbContext dbContext,
-        IEntityMapper<TEntity> entityMapper)
+    public Repository(DbContext dbContext, IEntityMapper<TEntity> entityMapper)
     {
         _dbSet = dbContext.Set<TEntity>();
         _entityMapper = entityMapper;
+        _dbContext = dbContext;
     }
 
     public IQueryable<TEntity> Get() => _dbSet;
@@ -33,6 +33,7 @@ public class Repository<TEntity> : IRepository<TEntity>
     {
         TEntity existingEntity = await _dbSet.SingleAsync(e => e.Id == entity.Id);
         _entityMapper.MapToExistingEntity(existingEntity, entity);
+        await _dbContext.SaveChangesAsync();
         return existingEntity;
     }
 
