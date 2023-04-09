@@ -1,21 +1,27 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Xunit.Abstractions;
+using Trackerino.DAL.Factories;
 namespace Trackerino.DAL.Tests;
 
 public class DbContextTestsBase : IAsyncLifetime
-{
-    ///NOT implemented
-    protected DbContextTestsBase(ITestOutputHelper output)
+{   
+    //private readonly TrackerinoDbContext _dbContextSut;
+    protected DbContextTestsBase()
     {
-        throw new NotImplementedException();
+        TrackerinoDbContextSUT = new Trackerino.DAL.Factories.DefaultFactory().CreateDbContext(new[] { "" });
+    }
+    protected TrackerinoDbContext TrackerinoDbContextSUT { get; }
+
+    public async Task InitializeAsync()
+    {
+        await TrackerinoDbContextSUT.Database.EnsureDeletedAsync();
+        await TrackerinoDbContextSUT.Database.EnsureCreatedAsync();
     }
 
-    public Task InitializeAsync()
+    public async Task DisposeAsync()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task DisposeAsync()
-    {
-        throw new NotImplementedException();
+        await TrackerinoDbContextSUT.Database.EnsureDeletedAsync();
+        await TrackerinoDbContextSUT.DisposeAsync();
     }
 }

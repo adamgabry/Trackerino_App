@@ -4,22 +4,14 @@ using Trackerino.DAL.Entities;
 using Trackerino.DAL.Mappers;
 using Trackerino.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Trackerino.DAL.Factories;
 using Xunit;
 using System.Threading.Channels;
 
 namespace Trackerino.DAL.Tests
 {
-    public class UserRepositoryTests
+    public class UserRepositoryTests : DbContextTestsBase
     {
-        private readonly TrackerinoDbContext _dbContextSUT;
-
-        public UserRepositoryTests()
-        {
-            _dbContextSUT = new TrackerinoDbContext(new DbContextOptionsBuilder<TrackerinoDbContext>()
-                .UseInMemoryDatabase(databaseName: "test_database")
-                .Options);
-        }
-
         [Fact]
         public async Task NewUser_InsertAsync_Inserted()
         {
@@ -30,18 +22,18 @@ namespace Trackerino.DAL.Tests
                 Name = "Pepa",
                 Surname = "Novak",
             };
-            var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
+            var repository = new Repository<UserEntity>(TrackerinoDbContextSUT, new UserEntityMapper());
 
             // Act
             await repository.InsertAsync(user);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
 
             // Assertprepare
-            var result = await _dbContextSUT.Users.ToListAsync();
+            var result = await TrackerinoDbContextSUT.Users.ToListAsync();
 
             // Teardown
             repository.Delete(user.Id);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
 
             // Assert
             Assert.Single(result);
@@ -58,23 +50,23 @@ namespace Trackerino.DAL.Tests
                 Name = "Pepa",
                 Surname = "Novak",
             };
-            var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
+            var repository = new Repository<UserEntity>(TrackerinoDbContextSUT, new UserEntityMapper());
             await repository.InsertAsync(user);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
 
             // Check that user exists in repository
             var userExists = repository.Get().Any(u => u.Id == user.Id);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
             Assert.True(userExists);
 
             // Modify user and call UpdateAsync()
             user.Name = "Pepa Updated";
             user.Surname = "Novak Updated";
             await repository.UpdateAsync(user);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
 
             // Assertprepare
-            var result = await _dbContextSUT.Users.ToListAsync();
+            var result = await TrackerinoDbContextSUT.Users.ToListAsync();
 
             // Assert
             Assert.Single(result);
@@ -82,7 +74,7 @@ namespace Trackerino.DAL.Tests
 
             // Teardown
             repository.Delete(user.Id);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
         }
 
         [Fact]
@@ -95,16 +87,16 @@ namespace Trackerino.DAL.Tests
             Name = "Pepa",
             Surname = "Novak",
         };
-        var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
-        await _dbContextSUT.Users.AddAsync(user);
-        await _dbContextSUT.SaveChangesAsync();
+        var repository = new Repository<UserEntity>(TrackerinoDbContextSUT, new UserEntityMapper());
+        await TrackerinoDbContextSUT.Users.AddAsync(user);
+        await TrackerinoDbContextSUT.SaveChangesAsync();
 
         // Act
         repository.Delete(user.Id);
-        await _dbContextSUT.SaveChangesAsync();
+        await TrackerinoDbContextSUT.SaveChangesAsync();
 
         // Assert
-        var result = await _dbContextSUT.Users.ToListAsync();
+        var result = await TrackerinoDbContextSUT.Users.ToListAsync();
         Assert.Empty(result);
     }
 
@@ -118,11 +110,11 @@ namespace Trackerino.DAL.Tests
                 Name = "Pepa",
                 Surname = "Novak",
             };
-            var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
+            var repository = new Repository<UserEntity>(TrackerinoDbContextSUT, new UserEntityMapper());
             await repository.InsertAsync(user);
 
             // Act
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
             var result = await repository.ExistsAsync(user);
 
             // Assert
@@ -130,7 +122,7 @@ namespace Trackerino.DAL.Tests
 
             // Teardown
             repository.Delete(user.Id);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
             }
 
         [Fact]
@@ -143,16 +135,16 @@ namespace Trackerino.DAL.Tests
                 Name = "Pepa",
                 Surname = "Novak",
             };
-            var repository = new Repository<UserEntity>(_dbContextSUT, new UserEntityMapper());
-            await _dbContextSUT.SaveChangesAsync();
+            var repository = new Repository<UserEntity>(TrackerinoDbContextSUT, new UserEntityMapper());
+            await TrackerinoDbContextSUT.SaveChangesAsync();
 
             // Act
             var result = await repository.ExistsAsync(user);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
 
             // Assert
             Assert.False(result);
-            await _dbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSUT.SaveChangesAsync();
         }
     }
 }

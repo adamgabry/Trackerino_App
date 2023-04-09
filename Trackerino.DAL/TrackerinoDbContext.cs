@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Entities;
-using Trackerino.DAL.Factories;
 namespace Trackerino.DAL
 {
     public class TrackerinoDbContext : DbContext
