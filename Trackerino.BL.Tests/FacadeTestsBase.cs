@@ -4,6 +4,7 @@ using Xunit.Abstractions;
 using Trackerino.BL.Mappers;
 using Trackerino.BL.Mappers.Interfaces;
 using Trackerino.DAL;
+using Trackerino.DAL.Mappers;
 using Trackerino.DAL.UnitOfWork;
 
 namespace Trackerino.BL.Tests
@@ -16,15 +17,25 @@ namespace Trackerino.BL.Tests
 
             DbContextFactory = new DbContextLocalDBTestingFactory(GetType().FullName!, seedTestingData: true);
 
-            ActivityModelMapper = new ActivityModelMapper();
-            ProjectModelMapper = new ProjectModelMapper();
-            UserModelMapper = new UserModelMapper();
-            UserProjectModelMapper = new UserProjectModelMapper();
+            ActivityEntityMapper = new ActivityEntityMapper();
+            ProjectEntityMapper = new ProjectEntityMapper();
+            UserEntityMapper = new UserEntityMapper();
+            UserProjectEntityMapper = new UserProjectEntityMapper();
+
+            ActivityModelMapper = new ActivityModelMapper(UserModelMapper, ProjectModelMapper);
+            ProjectModelMapper = new ProjectModelMapper(UserProjectModelMapper, ActivityModelMapper);
+            UserModelMapper = new UserModelMapper(ActivityModelMapper, UserProjectModelMapper);
+            UserProjectModelMapper = new UserProjectModelMapper(UserModelMapper, ProjectModelMapper);
 
             UnitOfWorkFactory = new UnitOfWorkFactory(DbContextFactory);
         }
 
         protected IDbContextFactory<TrackerinoDbContext> DbContextFactory { get; }
+
+        protected ActivityEntityMapper ActivityEntityMapper { get; }
+        protected ProjectEntityMapper ProjectEntityMapper { get; }
+        protected UserEntityMapper UserEntityMapper { get; }
+        protected UserProjectEntityMapper UserProjectEntityMapper { get; }
 
         protected IActivityModelMapper ActivityModelMapper { get; }
         protected IProjectModelMapper ProjectModelMapper { get; }

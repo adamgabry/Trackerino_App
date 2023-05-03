@@ -4,7 +4,7 @@ using Trackerino.DAL.Entities;
 
 namespace Trackerino.BL.Mappers
 {
-    public abstract class UserProjectModelMapper : ModelMapperBase<UserProjectEntity, UserProjectListModel, UserProjectDetailModel>, IUserProjectModelMapper
+    public class UserProjectModelMapper : ModelMapperBase<UserProjectEntity, UserProjectListModel, UserProjectDetailModel>, IUserProjectModelMapper
     {
         private readonly IUserModelMapper _userModelMapper;
         private readonly IProjectModelMapper _projectModelMapper;
@@ -14,6 +14,7 @@ namespace Trackerino.BL.Mappers
             _userModelMapper = userModelMapper;
             _projectModelMapper = projectModelMapper;
         }
+
         public override UserProjectListModel MapToListModel(UserProjectEntity? entity)
             => entity?.User is null
                 ? UserProjectListModel.Empty
