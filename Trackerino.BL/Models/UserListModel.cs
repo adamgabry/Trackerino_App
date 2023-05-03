@@ -6,7 +6,7 @@
         public required string Name { get; set; }
         public required string Surname { get; set; }
         public string? ImageUrl { get; set; }
-        public static UserDetailModel Empty => new()
+        public static UserListModel Empty => new()
         {
             Id = Guid.NewGuid(),
             Name = string.Empty,
