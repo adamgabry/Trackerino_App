@@ -12,6 +12,7 @@ using Trackerino.DAL.Repositories;
 using Trackerino.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Mappers.Interfaces;
 
 namespace Trackerino.BL.Facades;
