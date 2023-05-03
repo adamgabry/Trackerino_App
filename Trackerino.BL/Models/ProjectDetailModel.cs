@@ -8,8 +8,8 @@ namespace Trackerino.BL.Models
     {
         public required Guid Id { get; set; }
         public required string Name { get; set; }
-        public ObservableCollection<ActivityListModel>? Activities { get; set; }
-        public ObservableCollection<UserProjectListModel>? Users { get; set; } = new();
+        public ObservableCollection<ActivityListModel>? Activities { get; set; } = new ();
+        public ObservableCollection<UserProjectListModel> Users { get; set; } = new();
 
         public static ProjectDetailModel Empty => new()
         {
