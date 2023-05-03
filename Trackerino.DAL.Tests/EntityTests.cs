@@ -1,13 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Trackerino.DAL.Entities;
-using Trackerino.DAL.Mappers;
-using Trackerino.DAL.Repositories;
+﻿using Trackerino.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using Trackerino.DAL.Factories;
-using Xunit;
-using System.Threading.Channels;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Trackerino.DAL.Tests
 {
@@ -21,17 +13,16 @@ namespace Trackerino.DAL.Tests
             {
                 Id = Guid.Parse(input: "fabde0cd-eefe-443f-baf6-3d96cc2cbf2e"),
                 Name = "Name",
-                Surname = "Surname",
-                Projects = null
+                Surname = "Surname"
             };
 
             // Assert
-            Assert.Empty(await TrackerinoDbContextSUT.Users.ToListAsync());
+            Assert.Empty(await TrackerinoDbContextSut.Users.ToListAsync());
 
             // Act
-            await TrackerinoDbContextSUT.Users.AddAsync(user);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var result = await TrackerinoDbContextSUT.Users.ToListAsync();
+            await TrackerinoDbContextSut.Users.AddAsync(user);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var result = await TrackerinoDbContextSut.Users.ToListAsync();
 
             // Assert
             Assert.Single(result);
@@ -48,19 +39,18 @@ namespace Trackerino.DAL.Tests
                 {
                     Id = Guid.NewGuid(),
                     Name = "Name",
-                    Surname = "Surname",
-                    Projects = null
+                    Surname = "Surname"
                 };
 
-                await TrackerinoDbContextSUT.Users.AddAsync(user);
+                await TrackerinoDbContextSut.Users.AddAsync(user);
             }
 
             // Act
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var result = await TrackerinoDbContextSUT.Users.ToListAsync();
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var result = await TrackerinoDbContextSut.Users.ToListAsync();
 
             // Assert
-            Assert.Equal(5, result.Count());
+            Assert.Equal(5, result.Count);
         }
 
 
@@ -72,23 +62,22 @@ namespace Trackerino.DAL.Tests
             {
                 Id = Guid.Parse(input: "fabde0cd-eefe-443f-baf6-3d96cc2cbf2e"),
                 Name = "Name",
-                Surname = "Surname",
-                Projects = null
+                Surname = "Surname"
             };
 
             // Act
-            await TrackerinoDbContextSUT.Users.AddAsync(user);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var result = await TrackerinoDbContextSUT.Users.ToListAsync();
+            await TrackerinoDbContextSut.Users.AddAsync(user);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var result = await TrackerinoDbContextSut.Users.ToListAsync();
 
             // Assert
             Assert.Single(result);
             Assert.Equal(user, result[0]);
 
             // Remove
-            TrackerinoDbContextSUT.Users.Remove(user);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var deleteResult = await TrackerinoDbContextSUT.Users.ToListAsync();
+            TrackerinoDbContextSut.Users.Remove(user);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var deleteResult = await TrackerinoDbContextSut.Users.ToListAsync();
 
             Assert.Empty(deleteResult);
         }
@@ -123,12 +112,12 @@ namespace Trackerino.DAL.Tests
                 User = user
             };
 
-            await TrackerinoDbContextSUT.Users.AddAsync(user);
-            await TrackerinoDbContextSUT.Projects.AddAsync(project);
-            await TrackerinoDbContextSUT.UserProject.AddAsync(userProject);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSut.Users.AddAsync(user);
+            await TrackerinoDbContextSut.Projects.AddAsync(project);
+            await TrackerinoDbContextSut.UserProject.AddAsync(userProject);
+            await TrackerinoDbContextSut.SaveChangesAsync();
 
-            var result = await TrackerinoDbContextSUT.UserProject.ToListAsync();
+            var result = await TrackerinoDbContextSut.UserProject.ToListAsync();
 
             Assert.Single(result);
             Assert.Equal(userProject, result[0]);
@@ -183,16 +172,16 @@ namespace Trackerino.DAL.Tests
                 User = user2
             };
 
-            await TrackerinoDbContextSUT.Users.AddAsync(user1);
-            await TrackerinoDbContextSUT.Users.AddAsync(user2);
-            await TrackerinoDbContextSUT.Projects.AddAsync(project);
-            await TrackerinoDbContextSUT.UserProject.AddAsync(user1Project);
-            await TrackerinoDbContextSUT.UserProject.AddAsync(user2Project);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSut.Users.AddAsync(user1);
+            await TrackerinoDbContextSut.Users.AddAsync(user2);
+            await TrackerinoDbContextSut.Projects.AddAsync(project);
+            await TrackerinoDbContextSut.UserProject.AddAsync(user1Project);
+            await TrackerinoDbContextSut.UserProject.AddAsync(user2Project);
+            await TrackerinoDbContextSut.SaveChangesAsync();
 
-            var result = await TrackerinoDbContextSUT.UserProject.ToListAsync();
+            var result = await TrackerinoDbContextSut.UserProject.ToListAsync();
 
-            Assert.Equal(result.Count(), 2);
+            Assert.Equal(2, result.Count);
 
             Assert.Equal(result[0].ProjectId, result[1].ProjectId);
             Assert.NotEqual(result[0].UserId, result[1].UserId);
@@ -218,9 +207,9 @@ namespace Trackerino.DAL.Tests
                 Projects = null!
             };
 
-            await TrackerinoDbContextSUT.Users.AddAsync(user);
-            await TrackerinoDbContextSUT.Projects.AddAsync(project);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSut.Users.AddAsync(user);
+            await TrackerinoDbContextSut.Projects.AddAsync(project);
+            await TrackerinoDbContextSut.SaveChangesAsync();
 
             // Arrange
             var activity = new ActivityEntity()
@@ -235,12 +224,12 @@ namespace Trackerino.DAL.Tests
             };
 
             // Assert
-            Assert.Empty(await TrackerinoDbContextSUT.Activities.ToListAsync());
+            Assert.Empty(await TrackerinoDbContextSut.Activities.ToListAsync());
 
             // Act
-            await TrackerinoDbContextSUT.Activities.AddAsync(activity);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var result = await TrackerinoDbContextSUT.Activities.ToListAsync();
+            await TrackerinoDbContextSut.Activities.AddAsync(activity);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var result = await TrackerinoDbContextSut.Activities.ToListAsync();
 
             // Assert
             Assert.Single(result);
@@ -267,9 +256,9 @@ namespace Trackerino.DAL.Tests
                 Projects = null!
             };
 
-            await TrackerinoDbContextSUT.Users.AddAsync(user);
-            await TrackerinoDbContextSUT.Projects.AddAsync(project);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
+            await TrackerinoDbContextSut.Users.AddAsync(user);
+            await TrackerinoDbContextSut.Projects.AddAsync(project);
+            await TrackerinoDbContextSut.SaveChangesAsync();
 
             // Arrange
             var activity = new ActivityEntity()
@@ -285,18 +274,18 @@ namespace Trackerino.DAL.Tests
 
 
             // Act
-            await TrackerinoDbContextSUT.Activities.AddAsync(activity);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var result = await TrackerinoDbContextSUT.Activities.ToListAsync();
+            await TrackerinoDbContextSut.Activities.AddAsync(activity);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var result = await TrackerinoDbContextSut.Activities.ToListAsync();
 
             // Assert
             Assert.Single(result);
             Assert.Equal(activity, result[0]);
 
             // Remove
-            TrackerinoDbContextSUT.Activities.Remove(activity);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var deleteResult = await TrackerinoDbContextSUT.Activities.ToListAsync();
+            TrackerinoDbContextSut.Activities.Remove(activity);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var deleteResult = await TrackerinoDbContextSut.Activities.ToListAsync();
 
             Assert.Empty(deleteResult);
         }
@@ -314,12 +303,12 @@ namespace Trackerino.DAL.Tests
             };
 
             // Assert
-            Assert.Empty(await TrackerinoDbContextSUT.Projects.ToListAsync());
+            Assert.Empty(await TrackerinoDbContextSut.Projects.ToListAsync());
 
             // Act
-            await TrackerinoDbContextSUT.Projects.AddAsync(project);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var result = await TrackerinoDbContextSUT.Projects.ToListAsync();
+            await TrackerinoDbContextSut.Projects.AddAsync(project);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var result = await TrackerinoDbContextSut.Projects.ToListAsync();
 
             // Assert
             Assert.Single(result);
@@ -339,18 +328,18 @@ namespace Trackerino.DAL.Tests
             };
 
             // Act
-            await TrackerinoDbContextSUT.Projects.AddAsync(project);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var result = await TrackerinoDbContextSUT.Projects.ToListAsync();
+            await TrackerinoDbContextSut.Projects.AddAsync(project);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var result = await TrackerinoDbContextSut.Projects.ToListAsync();
 
             // Assert
             Assert.Single(result);
             Assert.Equal(project, result[0]);
 
             // Remove
-            TrackerinoDbContextSUT.Projects.Remove(project);
-            await TrackerinoDbContextSUT.SaveChangesAsync();
-            var deleteResult = await TrackerinoDbContextSUT.Projects.ToListAsync();
+            TrackerinoDbContextSut.Projects.Remove(project);
+            await TrackerinoDbContextSut.SaveChangesAsync();
+            var deleteResult = await TrackerinoDbContextSut.Projects.ToListAsync();
 
             Assert.Empty(deleteResult);
         }
