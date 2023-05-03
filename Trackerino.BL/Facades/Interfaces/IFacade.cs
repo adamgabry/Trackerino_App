@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Trackerino.BL.Models;
 using Trackerino.DAL.Entities;
 
-namespace Trackerino.BL.Facades;
+namespace Trackerino.BL.Facades.Interfaces;
 
 public interface IFacade<TEntity, TListModel, TDetailModel>
     where TEntity : class, IEntity
