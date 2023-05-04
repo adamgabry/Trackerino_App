@@ -19,7 +19,7 @@ namespace Trackerino.BL.Mappers
                 ? UserProjectListModel.Empty
                 : new UserProjectListModel
                 {
-                    Id = entity.Id,
+                    UserProjectId = entity.Id,
                     UserId = entity.UserId,
                     ProjectId = entity.ProjectId,
                     User = _userModelMapper.MapToListModel(entity.User),
@@ -32,7 +32,7 @@ namespace Trackerino.BL.Mappers
                 ? UserProjectDetailModel.Empty
                 : new UserProjectDetailModel
                 {
-                    Id = entity.Id,
+                    UserProjectId = entity.Id,
                     UserId = entity.UserId,
                     ProjectId = entity.ProjectId,
                     User = _userModelMapper.MapToListModel(entity.User),
@@ -42,7 +42,7 @@ namespace Trackerino.BL.Mappers
         public UserProjectListModel MapToListModel(UserProjectDetailModel detailModel)
             => new()
             {
-                Id = detailModel.Id,
+                UserProjectId = detailModel.UserProjectId,
                 UserId = detailModel.UserId,
                 ProjectId = detailModel.ProjectId,
                 User = detailModel.User,
@@ -53,7 +53,7 @@ namespace Trackerino.BL.Mappers
         public void MapToExistingDetailModel(UserProjectDetailModel existingDetailModel,
             UserProjectListModel userProject)
         {
-            existingDetailModel.Id = userProject.Id;
+            existingDetailModel.UserProjectId = userProject.UserProjectId;
             existingDetailModel.UserId = userProject.UserId;
             existingDetailModel.ProjectId = userProject.ProjectId;
         }
@@ -65,7 +65,7 @@ namespace Trackerino.BL.Mappers
         public UserProjectEntity MapToEntity(UserProjectDetailModel model, Guid userId)
             => new()
             {
-                Id = model.Id,
+                Id = model.UserProjectId,
                 UserId = model.UserId,
                 ProjectId = model.ProjectId
             };
@@ -73,7 +73,7 @@ namespace Trackerino.BL.Mappers
         public UserProjectEntity MapToEntity(UserProjectListModel model, Guid userId)
             => new()
             {
-                Id = model.Id,
+                Id = model.UserProjectId,
                 UserId = model.UserId,
                 ProjectId = model.ProjectId,
             };

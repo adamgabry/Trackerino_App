@@ -9,12 +9,13 @@ namespace Trackerino.BL.Models
         public required Guid ProjectId { get; set; }
         public UserListModel? User { get; init; }
         public ProjectListModel? Project { get; init; }
-        public Guid Id { get; set; }
+        public Guid UserProjectId { get; set; }
         public static UserProjectListModel Empty => new()
         {
             Id = Guid.NewGuid(),
-            UserId = Guid.NewGuid(),
-            ProjectId = Guid.NewGuid(),
+            UserProjectId = Guid.Empty,
+            UserId = Guid.Empty,
+            ProjectId = Guid.Empty,
         };
     }
 }
