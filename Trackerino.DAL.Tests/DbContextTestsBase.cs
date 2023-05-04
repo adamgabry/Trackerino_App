@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Xunit.Abstractions;
 using Trackerino.DAL.Factories;
+
 namespace Trackerino.DAL.Tests;
 
 public class DbContextTestsBase : IAsyncLifetime
@@ -9,19 +8,23 @@ public class DbContextTestsBase : IAsyncLifetime
     //private readonly TrackerinoDbContext _dbContextSut;
     protected DbContextTestsBase()
     {
-        TrackerinoDbContextSUT = new Trackerino.DAL.Factories.DefaultFactory().CreateDbContext(new[] { "" });
+
+        TrackerinoDbContextFactory = new DbContextLocalDbFactory(GetType().FullName!, seedDemoData: false);
+        TrackerinoDbContextSut = TrackerinoDbContextFactory.CreateDbContext();
+
     }
-    protected TrackerinoDbContext TrackerinoDbContextSUT { get; }
+    protected TrackerinoDbContext TrackerinoDbContextSut { get; }
+    protected IDbContextFactory<TrackerinoDbContext> TrackerinoDbContextFactory { get; }
 
     public async Task InitializeAsync()
     {
-        await TrackerinoDbContextSUT.Database.EnsureDeletedAsync();
-        await TrackerinoDbContextSUT.Database.EnsureCreatedAsync();
+        await TrackerinoDbContextSut.Database.EnsureDeletedAsync();
+        await TrackerinoDbContextSut.Database.EnsureCreatedAsync();
     }
 
     public async Task DisposeAsync()
     {
-        await TrackerinoDbContextSUT.Database.EnsureDeletedAsync();
-        await TrackerinoDbContextSUT.DisposeAsync();
+        await TrackerinoDbContextSut.Database.EnsureDeletedAsync();
+        await TrackerinoDbContextSut.DisposeAsync();
     }
 }
