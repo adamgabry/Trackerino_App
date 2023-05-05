@@ -11,11 +11,15 @@
         </Picker>
         <StackLayout>
             <Button Text="Login"
-                    ImageSource="Resources/Images/icon_open.png"
-                    ContentLayout="Left, 20"/>
-            <Button Text="Edit"/>
+                    ImageSource="icon_unlock.png"
+                    ContentLayout="Left"/>
+            <Button Text="Edit"
+                    ImageSource="icon_edit.png"
+                    ContentLayout="Left" />
         </StackLayout>
-        <Button Text="New user"/>
+        <Button Text="New user"
+                    ImageSource="icon_person.png"
+                    ContentLayout="Left" />
     </StackLayout>
 
 </ContentPage>
