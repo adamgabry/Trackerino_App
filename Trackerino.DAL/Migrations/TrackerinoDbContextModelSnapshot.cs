@@ -17,7 +17,7 @@ namespace Trackerino.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -34,16 +34,16 @@ namespace Trackerino.DAL.Migrations
                     b.Property<DateTime>("EndDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("StarDateTime")
+                    b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Tag")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -52,7 +52,7 @@ namespace Trackerino.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Activities", (string)null);
+                    b.ToTable("Activities");
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.ProjectEntity", b =>
@@ -67,7 +67,7 @@ namespace Trackerino.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.UserEntity", b =>
@@ -89,16 +89,13 @@ namespace Trackerino.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.UserProjectEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ProjectEntityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProjectId")
@@ -109,28 +106,22 @@ namespace Trackerino.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectEntityId");
-
                     b.HasIndex("ProjectId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserProject", (string)null);
+                    b.ToTable("UserProject");
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.ActivityEntity", b =>
                 {
                     b.HasOne("Trackerino.DAL.Entities.ProjectEntity", "Project")
                         .WithMany("Activities")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("Trackerino.DAL.Entities.UserEntity", "User")
                         .WithMany("Activities")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Project");
 
@@ -139,12 +130,8 @@ namespace Trackerino.DAL.Migrations
 
             modelBuilder.Entity("Trackerino.DAL.Entities.UserProjectEntity", b =>
                 {
-                    b.HasOne("Trackerino.DAL.Entities.ProjectEntity", null)
-                        .WithMany("Users")
-                        .HasForeignKey("ProjectEntityId");
-
                     b.HasOne("Trackerino.DAL.Entities.ProjectEntity", "Project")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -152,7 +139,7 @@ namespace Trackerino.DAL.Migrations
                     b.HasOne("Trackerino.DAL.Entities.UserEntity", "User")
                         .WithMany("Projects")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Project");

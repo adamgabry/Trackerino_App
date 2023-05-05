@@ -9,6 +9,6 @@ public class ActivityEntity : IEntity
     public required DateTime EndDateTime { get; set; }
     public ActivityTag Tag { get; set; }
     public string? Description { get; set; }
-    public UserEntity User { get; set; }
-    public ProjectEntity Project { get; set; }
+    public UserEntity? User { get; set; }
+    public ProjectEntity? Project { get; set; }
 }
