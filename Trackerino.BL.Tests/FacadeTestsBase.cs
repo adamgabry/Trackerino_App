@@ -6,6 +6,7 @@ using Trackerino.BL.Mappers.Interfaces;
 using Trackerino.DAL;
 using Trackerino.DAL.Mappers;
 using Trackerino.DAL.UnitOfWork;
+using Trackerino.DAL.Factories;
 
 namespace Trackerino.BL.Tests
 {
@@ -15,7 +16,7 @@ namespace Trackerino.BL.Tests
         {
             // XUnitTestOutputConverter
 
-            DbContextFactory = new DbContextLocalDBTestingFactory(GetType().FullName!, seedTestingData: true);
+            DbContextFactory = new DbContextLocalDbFactory(GetType().FullName!, seedDemoData: true);
 
             ActivityEntityMapper = new ActivityEntityMapper();
             ProjectEntityMapper = new ProjectEntityMapper();
