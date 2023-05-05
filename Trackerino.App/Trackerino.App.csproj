@@ -138,4 +138,12 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Messages\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Trackerino.BL\Trackerino.BL.csproj" />
+	</ItemGroup>
+
 </Project>

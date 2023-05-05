@@ -1,6 +1,6 @@
-using CookBook.App.ViewModels;
+using Trackerino.App.ViewModels;
 
-namespace CookBook.App.Views;
+namespace Trackerino.App.Views;
 
 public partial class ContentPageBase
 {
