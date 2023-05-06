@@ -91,6 +91,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\ActivityListView.xaml.cs">
+	    <DependentUpon>ActivityListView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ActivityView.xaml.cs">
 	    <DependentUpon>ActivityView.xaml</DependentUpon>
 	  </Compile>
@@ -100,6 +103,12 @@
 	  <Compile Update="Views\UserEditView.xaml.cs">
 	    <DependentUpon>UserEditView.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\ActivityListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
