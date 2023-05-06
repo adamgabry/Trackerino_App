@@ -14,14 +14,15 @@ using Trackerino.BL.Models;
 namespace Trackerino.App.ViewModels
 {
     [QueryProperty(nameof(Id), nameof(Id))]
-    public partial class UserDetailViewModel : ViewModelBase, IRecipient<UserEditMessage>
+    public partial class UserDetailViewModel : ViewModelBase, IRecipient<UserEditMessage>, IRecipient<UserActivitiesAddMessage>, IRecipient<UserActivitiesDeleteMessage>,
+        IRecipient<UserProjectsAddMessage>, IRecipient<UserProjectsDeleteMessage>
     {
         private readonly IUserFacade userFacade;
         private readonly INavigationService navigationService;
         private readonly IAlertService alertService;
 
         public Guid Id { get; set; }
-        public UserDetailModel? Ingredient { get; private set; }
+        public UserDetailModel? User { get; private set; }
 
         public UserDetailViewModel(
             IUserFacade userFacade,
@@ -39,17 +40,17 @@ namespace Trackerino.App.ViewModels
         {
             await base.LoadDataAsync();
 
-            Ingredient = await userFacade.GetAsync(Id);
+            User = await userFacade.GetAsync(Id);
         }
 
         [RelayCommand]
         private async Task DeleteAsync()
         {
-            if (Ingredient is not null)
+            if (User is not null)
             {
                 try
                 {
-                    await userFacade.DeleteAsync(Ingredient.Id);
+                    await userFacade.DeleteAsync(User.Id);
                     messengerService.Send(new UserDeleteMessage());
                     navigationService.SendBackButtonPressed();
                 }
@@ -64,15 +65,34 @@ namespace Trackerino.App.ViewModels
         private async Task GoToEditAsync()
         {
             await navigationService.GoToAsync("/edit",
-                new Dictionary<string, object?> { [nameof(UserDetailViewModel.Ingredient)] = Ingredient });
+                new Dictionary<string, object?> { [nameof(UserDetailViewModel.User)] = User });
         }
 
         public async void Receive(UserEditMessage message)
         {
-            if (message.UserId == Ingredient?.Id)
+            if (message.UserId == User?.Id)
             {
                 await LoadDataAsync();
             }
+        }
+        public async void Receive(UserActivitiesAddMessage message)
+        {
+            await LoadDataAsync();
+        }
+
+        public async void Receive(UserActivitiesDeleteMessage message)
+        {
+            await LoadDataAsync();
+        }
+
+        public async void Receive(UserProjectsAddMessage message)
+        {
+            await LoadDataAsync();
+        }
+
+        public async void Receive(UserProjectsDeleteMessage message)
+        {
+            await LoadDataAsync();
         }
     }
 
