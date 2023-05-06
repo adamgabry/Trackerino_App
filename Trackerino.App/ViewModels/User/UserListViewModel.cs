@@ -1,9 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using Trackerino.App.Messages;
 using Trackerino.App.Services;
@@ -15,8 +10,8 @@ namespace Trackerino.App.ViewModels
 {
     public partial class UserListViewModel : ViewModelBase, IRecipient<UserEditMessage>, IRecipient<UserDeleteMessage>
     {
-        private readonly IUserFacade userFacade;
-        private readonly INavigationService navigationService;
+        private readonly IUserFacade _userFacade;
+        private readonly INavigationService _navigationService;
 
         public IEnumerable<UserListModel> Users { get; set; } = null!;
 
@@ -26,27 +21,27 @@ namespace Trackerino.App.ViewModels
             IMessengerService messengerService)
             : base(messengerService)
         {
-            this.userFacade = userFacade;
-            this.navigationService = navigationService;
+            this._userFacade = userFacade;
+            this._navigationService = navigationService;
         }
 
         protected override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
 
-            Users = await userFacade.GetAsync();
+            Users = await _userFacade.GetAsync();
         }
 
         [RelayCommand]
         private async Task GoToCreateAsync()
         {
-            await navigationService.GoToAsync("/edit");
+            await _navigationService.GoToAsync("/edit");
         }
 
         [RelayCommand]
         private async Task GoToDetailAsync(Guid id)
         {
-            await navigationService.GoToAsync<UserDetailViewModel>(
+            await _navigationService.GoToAsync<UserDetailViewModel>(
                 new Dictionary<string, object?> { [nameof(UserDetailViewModel.Id)] = id });
         }
 

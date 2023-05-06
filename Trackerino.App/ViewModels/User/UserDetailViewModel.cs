@@ -17,9 +17,9 @@ namespace Trackerino.App.ViewModels
     public partial class UserDetailViewModel : ViewModelBase, IRecipient<UserEditMessage>, IRecipient<UserActivitiesAddMessage>, IRecipient<UserActivitiesDeleteMessage>,
         IRecipient<UserProjectsAddMessage>, IRecipient<UserProjectsDeleteMessage>
     {
-        private readonly IUserFacade userFacade;
-        private readonly INavigationService navigationService;
-        private readonly IAlertService alertService;
+        private readonly IUserFacade _userFacade;
+        private readonly INavigationService _navigationService;
+        private readonly IAlertService _alertService;
 
         public Guid Id { get; set; }
         public UserDetailModel? User { get; private set; }
@@ -31,16 +31,16 @@ namespace Trackerino.App.ViewModels
             IAlertService alertService)
             : base(messengerService)
         {
-            this.userFacade = userFacade;
-            this.navigationService = navigationService;
-            this.alertService = alertService;
+            this._userFacade = userFacade;
+            this._navigationService = navigationService;
+            this._alertService = alertService;
         }
 
         protected override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
 
-            User = await userFacade.GetAsync(Id);
+            User = await _userFacade.GetAsync(Id);
         }
 
         [RelayCommand]
@@ -50,13 +50,13 @@ namespace Trackerino.App.ViewModels
             {
                 try
                 {
-                    await userFacade.DeleteAsync(User.Id);
-                    messengerService.Send(new UserDeleteMessage());
-                    navigationService.SendBackButtonPressed();
+                    await _userFacade.DeleteAsync(User.Id);
+                    MessengerService.Send(new UserDeleteMessage());
+                    _navigationService.SendBackButtonPressed();
                 }
                 catch (InvalidOperationException)
                 {
-                    await alertService.DisplayAsync(UserDetailViewModelTexts.DeleteError_Alert_Title, UserDetailViewModelTexts.DeleteError_Alert_Message);
+                    await _alertService.DisplayAsync(UserDetailViewModelTexts.DeleteError_Alert_Title, UserDetailViewModelTexts.DeleteError_Alert_Message);
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task GoToEditAsync()
         {
-            await navigationService.GoToAsync("/edit",
+            await _navigationService.GoToAsync("/edit",
                 new Dictionary<string, object?> { [nameof(UserDetailViewModel.User)] = User });
         }
 

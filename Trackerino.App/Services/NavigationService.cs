@@ -5,8 +5,6 @@ using Trackerino.App.Views.Project;
 using ActivityDetailView = Trackerino.App.Views.Activity.ActivityDetailView;
 using ActivityEditView = Trackerino.App.Views.Activity.ActivityEditView;
 using ActivityListView = Trackerino.App.Views.Activity.ActivityListView;
-using ActivityProjectEditView = Trackerino.App.Views.Activity.ActivityProjectEditView;
-using ActivityUserEditView = Trackerino.App.Views.Activity.ActivityUserEditView;
 
 namespace Trackerino.App.Services;
 
@@ -26,11 +24,8 @@ public class NavigationService : INavigationService
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
         new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
 
-        new("//activities/edit", typeof(ActivityEditView), typeof(ActivityProjectEditViewModel)),
-        new("//activities/detail/edit", typeof(ActivityEditView), typeof(ActivityProjectEditViewModel)),
-
-        new("//activities/detail/edit/user", typeof(ActivityUserEditView), typeof(ActivityUserEditViewModel)),
-        new("//activities/detail/edit/project", typeof(ActivityProjectEditView), typeof(ActivityProjectEditViewModel)),
+        new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
 
         new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
         new("//projects/detail", typeof(ProjectDetailView), typeof(ProjectDetailViewModel)),
