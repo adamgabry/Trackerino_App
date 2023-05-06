@@ -14,7 +14,7 @@
 		<!-- Display name -->
 		<ApplicationTitle>Trackerino</ApplicationTitle>
 
-		<!-- App Identifier -->
+    <!-- App Identifier -->
 		<ApplicationId>com.companyname.trackerino.app</ApplicationId>
 		<ApplicationIdGuid>bd7f9bcb-c3c2-405e-8a0f-b09c07bd8e83</ApplicationIdGuid>
 
@@ -61,6 +61,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Inter-Bold.ttf" />
+	  <None Remove="Resources\Fonts\Inter-Regular.ttf" />
 	  <None Remove="Resources\Images\icon_calendar.svg" />
 	  <None Remove="Resources\Images\icon_dollar.svg" />
 	  <None Remove="Resources\Images\icon_down.svg" />
@@ -83,6 +85,9 @@
 	<ItemGroup>
 	  <Compile Update="LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UserEditPage.xaml.cs">
+	    <DependentUpon>UserEditPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

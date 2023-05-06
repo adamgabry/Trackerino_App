@@ -3,23 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Trackerino.App.LoginPage">
 
-    <StackLayout Margin="20">
-        <Picker Title="Select user">
+    <StackLayout Margin="20" Spacing="10">
+
+        <HorizontalStackLayout Spacing="10">
+            <Image Source="icon_person.png"
+                   HeightRequest="20"/>
+            <Label Text="Select user"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextTransform="Uppercase"/>
+        </HorizontalStackLayout>
+
+        <Picker>
             <Picker.Items>
                 <x:String>John Appleseed</x:String>
             </Picker.Items>
         </Picker>
-        <StackLayout>
+
+        <StackLayout Spacing="10">
+
             <Button Text="Login"
                     ImageSource="icon_unlock.png"
                     ContentLayout="Left"/>
+
             <Button Text="Edit"
                     ImageSource="icon_edit.png"
                     ContentLayout="Left" />
+
         </StackLayout>
+
         <Button Text="New user"
-                    ImageSource="icon_person.png"
-                    ContentLayout="Left" />
+                ImageSource="icon_person.png"
+                ContentLayout="Left" />
+
+
     </StackLayout>
 
 </ContentPage>
