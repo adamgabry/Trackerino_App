@@ -5,8 +5,8 @@ namespace Trackerino.BL.Models
     public record ProjectDetailModel : ModelBase
     {
         public required string Name { get; set; }
-        public ObservableCollection<ActivityListModel>? Activities { get; set; } = new ();
-        public ObservableCollection<UserProjectListModel> Users { get; set; } = new();
+        public ObservableCollection<UserProjectActivityListModel>? Activities { get; set; } = new ();
+        public ObservableCollection<ProjectUserListModel> Users { get; set; } = new();
 
         public static ProjectDetailModel Empty => new()
         {
