@@ -103,6 +103,7 @@ namespace Trackerino.App.ViewModels
             {
                 Id = Guid.NewGuid(),
                 ProjectId = projectFirst.Id,
+                ProjectName = projectFirst.Name,
             };
         }
     }
