@@ -15,8 +15,8 @@ namespace Trackerino.BL.Models
         {
             Id = Guid.NewGuid(),
             ActivityId = Guid.Empty,
-            StartDateTime = default(DateTime),
-            EndDateTime = default(DateTime),
+            StartDateTime = default,
+            EndDateTime = default,
             Tag = ActivityTag.None,
         };
     }

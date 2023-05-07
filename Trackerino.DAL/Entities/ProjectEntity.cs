@@ -1,9 +1,9 @@
 ﻿namespace Trackerino.DAL.Entities;
 
-public class ProjectEntity : IEntity
+public record ProjectEntity : IEntity
 {
     public required Guid Id { get; set; }
     public required string Name { get; set; }
-    public ICollection<ActivityEntity>? Activities { get; set; }
-    public required ICollection<UserProjectEntity> Users { get; set; } = new List<UserProjectEntity>();
+    public ICollection<ActivityEntity>? Activities { get; init; } = new List<ActivityEntity>();
+    public ICollection<UserProjectEntity>? Users { get; init; } = new List<UserProjectEntity>();
 }

@@ -27,9 +27,7 @@ namespace Trackerino.BL.Mappers
                 };
 
         public override UserDetailModel MapToDetailModel(UserEntity? entity)
-            => entity is null
-                ? UserDetailModel.Empty
-                : new UserDetailModel
+            => entity is null ? UserDetailModel.Empty : new UserDetailModel
                 {
                     UserId = entity.Id,
                     Name = entity.Name,

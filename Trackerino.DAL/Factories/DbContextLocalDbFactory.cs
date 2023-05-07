@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-namespace Trackerino.DAL.Factories
-{
+namespace Trackerino.DAL.Factories;
+
     public class DbContextLocalDbFactory : IDbContextFactory<TrackerinoDbContext>
     {
-        private readonly bool _seedDemoData;
+        public readonly bool _seedDemoData;
         private readonly DbContextOptionsBuilder<TrackerinoDbContext> _dbContextOptionsBuilder = new();
 
-        public DbContextLocalDbFactory(string databaseName, bool seedDemoData = false)
+        public DbContextLocalDbFactory(string databaseName, bool seedDemoData)
         {
             _seedDemoData = seedDemoData;
             _dbContextOptionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;" +
@@ -17,4 +17,3 @@ namespace Trackerino.DAL.Factories
         }
         public TrackerinoDbContext CreateDbContext() => new (_dbContextOptionsBuilder.Options, _seedDemoData);
     }
-}

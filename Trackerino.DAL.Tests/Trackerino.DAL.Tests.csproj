@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Trackerino.Common.Tests\Trackerino.Common.Tests.csproj" />
     <ProjectReference Include="..\Trackerino.DAL\Trackerino.DAL.csproj" />
   </ItemGroup>
 

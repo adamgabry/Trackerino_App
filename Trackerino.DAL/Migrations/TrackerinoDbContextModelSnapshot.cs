@@ -34,7 +34,7 @@ namespace Trackerino.DAL.Migrations
                     b.Property<DateTime>("EndDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("ProjectId")
+                    b.Property<Guid>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("StartDateTime")
@@ -43,7 +43,7 @@ namespace Trackerino.DAL.Migrations
                     b.Property<int>("Tag")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -117,11 +117,15 @@ namespace Trackerino.DAL.Migrations
                 {
                     b.HasOne("Trackerino.DAL.Entities.ProjectEntity", "Project")
                         .WithMany("Activities")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Trackerino.DAL.Entities.UserEntity", "User")
                         .WithMany("Activities")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Project");
 

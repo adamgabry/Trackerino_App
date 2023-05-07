@@ -1,6 +1,6 @@
 ﻿namespace Trackerino.DAL.Entities;
 
-public class UserEntity : IEntity
+public record UserEntity : IEntity
 {
     public Guid Id { get; set; }
     public required string Name { get; set; }

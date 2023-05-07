@@ -51,7 +51,10 @@ namespace Trackerino.BL.Mappers
                 Description = model.Description,
                 StartDateTime = model.StartDateTime,
                 EndDateTime = model.EndDateTime,
-                Tag = model.Tag
+                Tag = model.Tag,
+                ProjectId = model.Project.Id,
+                UserId = model.User.Id
+
             };
     }
 }
