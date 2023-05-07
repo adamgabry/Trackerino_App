@@ -13,7 +13,7 @@ namespace Trackerino.BL.Tests
     {
         private readonly IActivityFacade _activityFacadeSUT;
 
-        public ActivityFacadeTests(ITestOutputHelper output) : base(output)
+        public ActivityFacadeTests()
         {
             _activityFacadeSUT = new ActivityFacade(UnitOfWorkFactory, ActivityModelMapper);
         }
