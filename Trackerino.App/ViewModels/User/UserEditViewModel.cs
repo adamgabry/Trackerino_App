@@ -49,7 +49,7 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task SaveAsync()
         {
-            await _userFacade.SaveAsync(User with { Projects = default!});
+            await _userFacade.SaveAsync(User with { Projects = default!, Activities = default!});
 
             MessengerService.Send(new UserEditMessage { UserId = User.Id });
 
