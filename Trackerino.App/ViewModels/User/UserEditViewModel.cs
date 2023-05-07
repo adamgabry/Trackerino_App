@@ -28,8 +28,8 @@ namespace Trackerino.App.ViewModels
             IMessengerService messengerService)
             : base(messengerService)
         {
-            this._userFacade = userFacade;
-            this._navigationService = navigationService;
+            _userFacade = userFacade;
+            _navigationService = navigationService;
         }
 
         [RelayCommand]
