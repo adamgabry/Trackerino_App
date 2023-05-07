@@ -24,9 +24,10 @@ namespace Trackerino.BL.Tests
             UserProjectEntityMapper = new UserProjectEntityMapper();
 
             ActivityModelMapper = new ActivityModelMapper(UserModelMapper, ProjectModelMapper);
-            ProjectModelMapper = new ProjectModelMapper(UserProjectModelMapper, ActivityModelMapper);
-            UserModelMapper = new UserModelMapper(ActivityModelMapper, UserProjectModelMapper);
-            UserProjectModelMapper = new UserProjectModelMapper(UserModelMapper, ProjectModelMapper);
+            ProjectModelMapper = new ProjectModelMapper(ProjectUserModelMapper, UserProjectActivityModelMapper);
+            UserModelMapper = new UserModelMapper(UserProjectActivityModelMapper, UserProjectModelMapper);
+            UserProjectModelMapper = new UserProjectModelMapper();
+            ProjectUserModelMapper = new ProjectUserModelMapper();
 
             UnitOfWorkFactory = new UnitOfWorkFactory(DbContextFactory);
         }
@@ -38,10 +39,13 @@ namespace Trackerino.BL.Tests
         protected UserEntityMapper UserEntityMapper { get; }
         protected UserProjectEntityMapper UserProjectEntityMapper { get; }
 
+
         protected IActivityModelMapper ActivityModelMapper { get; }
         protected IProjectModelMapper ProjectModelMapper { get; }
         protected IUserModelMapper UserModelMapper { get; }
         protected IUserProjectModelMapper UserProjectModelMapper { get; }
+        protected IProjectUserModelMapper ProjectUserModelMapper { get; }
+        protected IUserProjectActivityModelMapper UserProjectActivityModelMapper { get; }
         protected IUnitOfWorkFactory UnitOfWorkFactory { get; }
 
         public async Task InitializeAsync()

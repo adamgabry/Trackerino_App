@@ -6,12 +6,12 @@ namespace Trackerino.BL.Mappers
 {
     public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDetailModel>, IUserModelMapper
     {
-        private readonly IActivityModelMapper _activityModelMapper;
+        private readonly IUserProjectActivityModelMapper _userProjectActivityModelMapper;
         private readonly IUserProjectModelMapper _userProjectModelMapper;
 
-        public UserModelMapper(IActivityModelMapper activityModelMapper, IUserProjectModelMapper userProjectModelMapper)
+        public UserModelMapper(IUserProjectActivityModelMapper userProjectActivityModelMapper, IUserProjectModelMapper userProjectModelMapper)
         {
-            _activityModelMapper = activityModelMapper;
+            _userProjectActivityModelMapper = userProjectActivityModelMapper;
             _userProjectModelMapper = userProjectModelMapper;
         }
 
@@ -20,7 +20,7 @@ namespace Trackerino.BL.Mappers
                 ? UserListModel.Empty
                 : new UserListModel
                 {
-                    UserId = entity.Id,
+                    Id = entity.Id,
                     Name = entity.Name,
                     Surname = entity.Surname,
                     ImageUrl = entity.ImageUrl
@@ -29,18 +29,18 @@ namespace Trackerino.BL.Mappers
         public override UserDetailModel MapToDetailModel(UserEntity? entity)
             => entity is null ? UserDetailModel.Empty : new UserDetailModel
                 {
-                    UserId = entity.Id,
+                    Id = entity.Id,
                     Name = entity.Name,
                     Surname = entity.Surname,
                     ImageUrl = entity.ImageUrl,
-                    Activities = _activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection(),
+                    Activities = _userProjectActivityModelMapper.MapToListModel(entity.Activities).ToObservableCollection(),
                     Projects = _userProjectModelMapper.MapToListModel(entity.Projects).ToObservableCollection()
                 };
 
         public override UserEntity MapToEntity(UserDetailModel model)
             => new()
             {
-                Id = model.UserId,
+                Id = model.Id,
                 Name = model.Name,
                 Surname = model.Surname,
                 ImageUrl = model.ImageUrl,

@@ -6,57 +6,42 @@ namespace Trackerino.BL.Mappers
 {
     public class UserProjectModelMapper : ModelMapperBase<UserProjectEntity, UserProjectListModel, UserProjectDetailModel>, IUserProjectModelMapper
     {
-        private readonly IUserModelMapper _userModelMapper;
-        private readonly IProjectModelMapper _projectModelMapper;
-
-        public UserProjectModelMapper(IUserModelMapper userModelMapper, IProjectModelMapper projectModelMapper)
-        {
-            _userModelMapper = userModelMapper;
-            _projectModelMapper = projectModelMapper;
-        }
 
         public override UserProjectListModel MapToListModel(UserProjectEntity? entity)
-            => entity?.User is null
+            => entity?.Project is null
                 ? UserProjectListModel.Empty
                 : new UserProjectListModel
                 {
-                    UserProjectId = entity.Id,
-                    UserId = entity.UserId,
+                    Id = entity.Id,
                     ProjectId = entity.ProjectId,
-                    User = _userModelMapper.MapToListModel(entity.User),
-                    Project = _projectModelMapper.MapToListModel(entity.Project)
+                    ProjectName = entity.Project.Name
 
                 };
 
         public override UserProjectDetailModel MapToDetailModel(UserProjectEntity? entity)
-            => entity?.User is null
+            => entity?.Project is null
                 ? UserProjectDetailModel.Empty
                 : new UserProjectDetailModel
                 {
-                    UserProjectId = entity.Id,
-                    UserId = entity.UserId,
+                    Id= entity.Id,
                     ProjectId = entity.ProjectId,
-                    User = _userModelMapper.MapToListModel(entity.User),
-                    Project = _projectModelMapper.MapToListModel(entity.Project)
+                    ProjectName = entity.Project.Name
 
                 };
         public UserProjectListModel MapToListModel(UserProjectDetailModel detailModel)
             => new()
             {
-                UserProjectId = detailModel.UserProjectId,
-                UserId = detailModel.UserId,
+                Id = detailModel.Id,
+                ProjectName = detailModel.ProjectName,
                 ProjectId = detailModel.ProjectId,
-                User = detailModel.User,
-                Project = detailModel.Project,
 
             };
 
         public void MapToExistingDetailModel(UserProjectDetailModel existingDetailModel,
-            UserProjectListModel userProject)
+            ProjectListModel project)
         {
-            existingDetailModel.UserProjectId = userProject.UserProjectId;
-            existingDetailModel.UserId = userProject.UserId;
-            existingDetailModel.ProjectId = userProject.ProjectId;
+            existingDetailModel.ProjectId = project.Id;
+            existingDetailModel.ProjectName = project.Name;
         }
 
         public override UserProjectEntity MapToEntity(UserProjectDetailModel model)
@@ -66,16 +51,16 @@ namespace Trackerino.BL.Mappers
         public UserProjectEntity MapToEntity(UserProjectDetailModel model, Guid userId)
             => new()
             {
-                Id = model.UserProjectId,
-                UserId = model.UserId,
+                Id = model.Id,
+                UserId = userId,
                 ProjectId = model.ProjectId
             };
 
         public UserProjectEntity MapToEntity(UserProjectListModel model, Guid userId)
             => new()
             {
-                Id = model.UserProjectId,
-                UserId = model.UserId,
+                Id = model.Id,
+                UserId = userId,
                 ProjectId = model.ProjectId,
             };
     }
