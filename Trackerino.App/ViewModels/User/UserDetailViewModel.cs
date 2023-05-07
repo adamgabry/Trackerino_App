@@ -31,9 +31,9 @@ namespace Trackerino.App.ViewModels
             IAlertService alertService)
             : base(messengerService)
         {
-            this._userFacade = userFacade;
-            this._navigationService = navigationService;
-            this._alertService = alertService;
+            _userFacade = userFacade;
+            _navigationService = navigationService;
+            _alertService = alertService;
         }
 
         protected override async Task LoadDataAsync()
