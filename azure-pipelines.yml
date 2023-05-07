@@ -17,7 +17,7 @@ variables:
   buildConfiguration: 
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
-- task: DotNetCoreCLI@2
+- task: DotNetCoreCLI@1
   inputs:
     command: 'dotnet restore workload'
 
