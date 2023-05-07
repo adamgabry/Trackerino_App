@@ -68,32 +68,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\ActivityListView.xaml.cs">
-	    <DependentUpon>ActivityListView.xaml</DependentUpon>
+	  <Compile Update="Shells\AppShell.xaml.cs">
+	    <DependentUpon>AppShell.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ActivityView.xaml.cs">
-	    <DependentUpon>ActivityView.xaml</DependentUpon>
+	  <Compile Update="Views\ContentPageBase.xaml.cs">
+	    <DependentUpon>ContentPageBase.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\LoginView.xaml.cs">
-	    <DependentUpon>LoginView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\UserEditView.xaml.cs">
-	    <DependentUpon>UserEditView.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
+  </ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\ActivityListView.xaml">
+	  <MauiXaml Update="Shells\AppShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="Views\ContentPageBase.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
