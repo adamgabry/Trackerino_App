@@ -17,29 +17,31 @@ namespace Trackerino.App.ViewModels
     [QueryProperty(nameof(User), nameof(User))]
     public partial class UserActivitiesEditViewModel : ViewModelBase
     {
-        private readonly IUserFacade userFacade;
-        private readonly IActivityFacade activityFacade;
-        private readonly IActivityModelMapper activityModelMapper;
+        private readonly IActivityFacade _activityFacade;
+        private readonly IUserProjectActivityFacade _userProjectActivityFacade;
+        private readonly IUserProjectActivityModelMapper _userProjectActivityModelMapper;
 
         public UserDetailModel? User { get; set; }
+
+        public ProjectDetailModel? Project { get; set; }
 
         public List<ActivityTag> ActivityTags { get; set; }
         public ObservableCollection<ActivityListModel> Activities { get; set; } = new();
 
         public ActivityListModel? ActivitySelected { get; set; }
 
-        public ActivityDetailModel? ActivityNew { get; private set; }
+        public UserProjectActivityDetailModel? ActivityNew { get; private set; }
 
         public UserActivitiesEditViewModel(
-            IUserFacade userFacade,
             IActivityFacade activityFacade,
-            IActivityModelMapper activityModelMapper,
+            IUserProjectActivityFacade userProjectActivityFacade,
+            IUserProjectActivityModelMapper userProjectActivityModelMapper,
             IMessengerService messengerService)
             : base(messengerService)
         {
-            this.userFacade = userFacade;
-            this.activityFacade = activityFacade;
-            this.activityModelMapper = activityModelMapper;
+            this._activityFacade = activityFacade;
+            this._userProjectActivityFacade = userProjectActivityFacade;
+            this._userProjectActivityModelMapper = userProjectActivityModelMapper;
 
             ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
         }
@@ -49,7 +51,7 @@ namespace Trackerino.App.ViewModels
             await base.LoadDataAsync();
 
             Activities.Clear();
-            var ingredients = await activityFacade.GetAsync();
+            var ingredients = await _activityFacade.GetAsync();
             foreach (var ingredient in ingredients)
             {
                 Activities.Add(ingredient);
@@ -64,42 +66,42 @@ namespace Trackerino.App.ViewModels
                 && ActivitySelected is not null
                 && User is not null)
             {
-                activityModelMapper.MapToExistingDetailModel(ActivityNew, ActivitySelected);
+                _userProjectActivityModelMapper.MapToExistingDetailModel(ActivityNew, ActivitySelected);
 
-                await activityModelMapper.SaveAsync(ActivityNew, ActivitySelected);
-                User.Activities.Add(activityModelMapper.MapToListModel(ActivityNew));
+                await _userProjectActivityFacade.SaveAsync(ActivityNew, User.Id, Project.Id);
+                User.Activities.Add(_userProjectActivityModelMapper.MapToListModel(ActivityNew));
 
                 ActivityNew = GetActivityNew();
 
-                messengerService.Send(new UserActivitiesAddMessage());
+                MessengerService.Send(new UserActivitiesAddMessage());
             }
         }
 
         [RelayCommand]
-        private async Task UpdateActivityAsync(ActivityListModel? model)
+        private async Task UpdateActivityAsync(UserProjectActivityListModel? model)
         {
             if (model is not null
                 && User is not null)
             {
-                await activityFacade.SaveAsync(model, User.Id);
+                await _userProjectActivityFacade.SaveAsync(model, User.Id, Project.Id);
 
-                messengerService.Send(new UserActivitiesEditMessage());
+                MessengerService.Send(new UserActivitiesEditMessage());
             }
         }
 
         [RelayCommand]
-        private async Task RemoveActivityAsync(ActivityListModel model)
+        private async Task RemoveActivityAsync(UserProjectActivityListModel model)
         {
             if (User is not null)
             {
-                await activityFacade.DeleteAsync(model.Id);
+                await _activityFacade.DeleteAsync(model.Id);
                 User.Activities.Remove(model);
 
-                messengerService.Send(new UserActivitiesDeleteMessage());
+                MessengerService.Send(new UserActivitiesDeleteMessage());
             }
         }
 
-        private ActivityDetailModel GetActivityNew()
+        private UserProjectActivityDetailModel GetActivityNew()
         {
             var activityFirst = Activities.First();
             return new()

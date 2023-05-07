@@ -6,13 +6,13 @@ namespace Trackerino.BL.Mappers
 {
     public class ProjectModelMapper : ModelMapperBase<ProjectEntity, ProjectListModel, ProjectDetailModel>, IProjectModelMapper
     {
-        private readonly IUserProjectModelMapper _userProjectModelMapper;
-        private readonly IActivityModelMapper _activityModelMapper;
+        private readonly IProjectUserModelMapper _projectUserModelMapper;
+        private readonly IUserProjectActivityModelMapper _userProjectActivityModelMapper;
 
-        public ProjectModelMapper(IUserProjectModelMapper userProjectModelMapper, IActivityModelMapper activityModelMapper)
+        public ProjectModelMapper(IProjectUserModelMapper projectUserModelMapper, IUserProjectActivityModelMapper userProjectActivityModelMapper)
         {
-            _userProjectModelMapper = userProjectModelMapper;
-            _activityModelMapper = activityModelMapper;
+            _projectUserModelMapper = projectUserModelMapper;
+            _userProjectActivityModelMapper = userProjectActivityModelMapper;
         }
 
         public override ProjectListModel MapToListModel(ProjectEntity? entity)
@@ -31,8 +31,8 @@ namespace Trackerino.BL.Mappers
                 {
                     Id = entity.Id,
                     Name = entity.Name,
-                    Users = _userProjectModelMapper.MapToListModel(entity.Users).ToObservableCollection(),
-                    Activities = _activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
+                    Users = _projectUserModelMapper.MapToListModel(entity.Users).ToObservableCollection(),
+                    Activities = _userProjectActivityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
                 };
 
         public override ProjectEntity MapToEntity(ProjectDetailModel model)

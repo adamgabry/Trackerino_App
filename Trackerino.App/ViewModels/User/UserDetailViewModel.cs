@@ -56,7 +56,7 @@ namespace Trackerino.App.ViewModels
                 }
                 catch (InvalidOperationException)
                 {
-                    await _alertService.DisplayAsync(UserDetailViewModelTexts.DeleteError_Alert_Title, UserDetailViewModelTexts.DeleteError_Alert_Message);
+                    //TODO await _alertService.DisplayAsync(UserDetailViewModelTexts.DeleteError_Alert_Title, UserDetailViewModelTexts.DeleteError_Alert_Message);
                 }
             }
         }

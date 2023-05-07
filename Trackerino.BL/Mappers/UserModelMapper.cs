@@ -6,12 +6,12 @@ namespace Trackerino.BL.Mappers
 {
     public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDetailModel>, IUserModelMapper
     {
-        private readonly IActivityModelMapper _activityModelMapper;
+        private readonly IUserProjectActivityModelMapper _userProjectActivityModelMapper;
         private readonly IUserProjectModelMapper _userProjectModelMapper;
 
-        public UserModelMapper(IActivityModelMapper activityModelMapper, IUserProjectModelMapper userProjectModelMapper)
+        public UserModelMapper(IUserProjectActivityModelMapper userProjectActivityModelMapper, IUserProjectModelMapper userProjectModelMapper)
         {
-            _activityModelMapper = activityModelMapper;
+            _userProjectActivityModelMapper = userProjectActivityModelMapper;
             _userProjectModelMapper = userProjectModelMapper;
         }
 
@@ -33,7 +33,7 @@ namespace Trackerino.BL.Mappers
                     Name = entity.Name,
                     Surname = entity.Surname,
                     ImageUrl = entity.ImageUrl,
-                    Activities = _activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection(),
+                    Activities = _userProjectActivityModelMapper.MapToListModel(entity.Activities).ToObservableCollection(),
                     Projects = _userProjectModelMapper.MapToListModel(entity.Projects).ToObservableCollection()
                 };
 
