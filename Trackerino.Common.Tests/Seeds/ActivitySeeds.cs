@@ -59,6 +59,7 @@ public static class ActivitySeeds
         modelBuilder.Entity<ActivityEntity>().HasData(
             ActivityEntity1,
             ActivityEntity2,
+            EmptyActivityEntity,
             ActivityEntity,
             ActivityEntityUpdate,
             ActivityEntityDelete
