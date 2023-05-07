@@ -20,7 +20,7 @@ namespace Trackerino.BL.Mappers
                 ? UserListModel.Empty
                 : new UserListModel
                 {
-                    UserId = entity.Id,
+                    Id = entity.Id,
                     Name = entity.Name,
                     Surname = entity.Surname,
                     ImageUrl = entity.ImageUrl
@@ -31,7 +31,7 @@ namespace Trackerino.BL.Mappers
                 ? UserDetailModel.Empty
                 : new UserDetailModel
                 {
-                    UserId = entity.Id,
+                    Id = entity.Id,
                     Name = entity.Name,
                     Surname = entity.Surname,
                     ImageUrl = entity.ImageUrl,
@@ -42,7 +42,7 @@ namespace Trackerino.BL.Mappers
         public override UserEntity MapToEntity(UserDetailModel model)
             => new()
             {
-                Id = model.UserId,
+                Id = model.Id,
                 Name = model.Name,
                 Surname = model.Surname,
                 ImageUrl = model.ImageUrl,

@@ -20,9 +20,8 @@ namespace Trackerino.BL.Mappers
                 ? ProjectListModel.Empty
                 : new ProjectListModel
                 {
-                    ProjectId = entity.Id,
+                    Id = entity.Id,
                     Name = entity.Name,
-                    Users = _userProjectModelMapper.MapToListModel(entity.Users).ToObservableCollection()
                 };
 
         public override ProjectDetailModel MapToDetailModel(ProjectEntity? entity)
@@ -30,7 +29,7 @@ namespace Trackerino.BL.Mappers
                 ? ProjectDetailModel.Empty
                 : new ProjectDetailModel
                 {
-                    ProjectId = entity.Id,
+                    Id = entity.Id,
                     Name = entity.Name,
                     Users = _userProjectModelMapper.MapToListModel(entity.Users).ToObservableCollection(),
                     Activities = _activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
@@ -39,7 +38,7 @@ namespace Trackerino.BL.Mappers
         public override ProjectEntity MapToEntity(ProjectDetailModel model)
             => new()
             {
-                Id = model.ProjectId,
+                Id = model.Id,
                 Name = model.Name,
                 Activities = (ICollection<ActivityEntity>)model.Activities,
                 Users = (ICollection<UserProjectEntity>)model.Users

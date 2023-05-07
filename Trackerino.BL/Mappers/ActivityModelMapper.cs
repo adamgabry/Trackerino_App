@@ -22,12 +22,10 @@ namespace Trackerino.BL.Mappers
                 ? ActivityListModel.Empty
                 : new ActivityListModel
                 {
-                    ActivityId = entity.Id,
+                    Id = entity.Id,
                     StartDateTime = entity.StartDateTime,
                     EndDateTime = entity.EndDateTime,
                     Tag = entity.Tag,
-                    User = _userModelMapper.MapToListModel(entity.User),
-                    Project = _projectModelMapper.MapToListModel(entity.Project)
                 };
 
         public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
@@ -35,7 +33,7 @@ namespace Trackerino.BL.Mappers
                 ? ActivityDetailModel.Empty 
                 : new ActivityDetailModel
                 {
-                    ActivityId = entity.Id, 
+                    Id = entity.Id, 
                     Description = entity.Description,
                     StartDateTime = entity.StartDateTime,
                     EndDateTime = entity.EndDateTime,
@@ -47,7 +45,7 @@ namespace Trackerino.BL.Mappers
 
         public override ActivityEntity MapToEntity(ActivityDetailModel model)
             => new() { 
-                Id = model.ActivityId,
+                Id = model.Id,
                 Description = model.Description,
                 StartDateTime = model.StartDateTime,
                 EndDateTime = model.EndDateTime,
