@@ -36,9 +36,9 @@ namespace Trackerino.App.ViewModels
             IMessengerService messengerService)
             : base(messengerService)
         {
-            this._projectFacade = projectFacade;
-            this._userProjectFacade = userProjectFacade;
-            this._userProjectModelMapper = userProjectModelMapper;
+            _projectFacade = projectFacade;
+            _userProjectFacade = userProjectFacade;
+            _userProjectModelMapper = userProjectModelMapper;
         }
 
         protected override async Task LoadDataAsync()
