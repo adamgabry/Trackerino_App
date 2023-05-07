@@ -25,7 +25,7 @@ public class DbContextTestsBase : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        await TrackerinoDbContextSut.Database.EnsureDeletedAsync();
-        await TrackerinoDbContextSut.DisposeAsync();
+        //await TrackerinoDbContextSut.Database.EnsureDeletedAsync();
+        //await TrackerinoDbContextSut.DisposeAsync();
     }
 }
