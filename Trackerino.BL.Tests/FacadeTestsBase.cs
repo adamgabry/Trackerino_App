@@ -12,10 +12,8 @@ namespace Trackerino.BL.Tests
 {
     public class FacadeTestsBase : IAsyncLifetime
     {
-        protected FacadeTestsBase(ITestOutputHelper output)
+        protected FacadeTestsBase()
         {
-            // XUnitTestOutputConverter
-
             DbContextFactory = new DbContextLocalDbFactory(GetType().FullName!, seedDemoData: true);
 
             ActivityEntityMapper = new ActivityEntityMapper();
