@@ -14,7 +14,7 @@ using Trackerino.DAL.Common;
 
 namespace Trackerino.App.ViewModels
 {
-    [QueryProperty(nameof(User), nameof(User))]
+    [QueryProperty(nameof(User), nameof(User)), QueryProperty(nameof(Project), nameof(Project))]
     public partial class UserActivitiesEditViewModel : ViewModelBase
     {
         private readonly IActivityFacade _activityFacade;
