@@ -17,11 +17,6 @@ variables:
   buildConfiguration: 
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-
 steps:
 - task: NuGetToolInstaller@1
 
