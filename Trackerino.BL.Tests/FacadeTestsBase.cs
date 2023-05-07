@@ -26,7 +26,7 @@ namespace Trackerino.BL.Tests
             ActivityModelMapper = new ActivityModelMapper(UserModelMapper, ProjectModelMapper);
             ProjectModelMapper = new ProjectModelMapper(UserProjectModelMapper, ActivityModelMapper);
             UserModelMapper = new UserModelMapper(ActivityModelMapper, UserProjectModelMapper);
-            UserProjectModelMapper = new UserProjectModelMapper(UserModelMapper, ProjectModelMapper);
+            UserProjectModelMapper = new UserProjectModelMapper();
 
             UnitOfWorkFactory = new UnitOfWorkFactory(DbContextFactory);
         }

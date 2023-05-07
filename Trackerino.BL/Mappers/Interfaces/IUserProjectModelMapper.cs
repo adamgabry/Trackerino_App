@@ -8,7 +8,7 @@ namespace Trackerino.BL.Mappers.Interfaces
     {
         UserProjectListModel MapToListModel(UserProjectDetailModel detailModel);
         UserProjectEntity MapToEntity(UserProjectDetailModel model, Guid userId);
-        void MapToExistingDetailModel(UserProjectDetailModel existingDetailModel, UserProjectListModel userProject);
+        void MapToExistingDetailModel(UserProjectDetailModel existingDetailModel, ProjectListModel project);
         UserProjectEntity MapToEntity(UserProjectListModel model, Guid userId);
     }
 }
