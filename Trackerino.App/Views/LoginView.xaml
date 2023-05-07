@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Trackerino.App.LoginView">
+
+    <StackLayout Margin="20" Spacing="10">
+
+        <HorizontalStackLayout Spacing="10">
+            <Image Source="icon_person.png"
+                   HeightRequest="20"/>
+            <Label Text="Select user"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextTransform="Uppercase"/>
+        </HorizontalStackLayout>
+
+        <Picker>
+            <Picker.Items>
+                <x:String>John Appleseed</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <StackLayout Spacing="10">
+
+            <Button Text="Login"
+                    ImageSource="icon_unlock.png"
+                    ContentLayout="Left"/>
+
+            <Button Text="Edit"
+                    ImageSource="icon_edit.png"
+                    ContentLayout="Left" />
+
+        </StackLayout>
+
+        <Button Text="New user"
+                ImageSource="icon_person.png"
+                ContentLayout="Left" />
+
+
+    </StackLayout>
+
+</ContentPage>
