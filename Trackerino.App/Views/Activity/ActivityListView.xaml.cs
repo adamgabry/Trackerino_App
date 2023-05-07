@@ -1,4 +1,4 @@
-namespace Trackerino.App.Views.Project;
+namespace Trackerino.App.Views.Activity;
 
 public partial class ActivityListView : ContentView
 {
