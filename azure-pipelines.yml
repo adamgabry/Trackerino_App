@@ -21,7 +21,6 @@ variables:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    feedsToUse: 'select'
 
 steps:
 - task: NuGetToolInstaller@1
