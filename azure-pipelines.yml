@@ -17,8 +17,10 @@ variables:
   buildConfiguration: 
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
-steps:
-- task: NuGetToolInstaller@1
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'dotnet restore workload'
+
 
 - task: NuGetCommand@2
   inputs:
@@ -36,6 +38,7 @@ steps:
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
