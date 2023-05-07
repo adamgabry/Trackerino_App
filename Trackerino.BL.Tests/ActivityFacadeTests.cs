@@ -12,7 +12,7 @@ namespace Trackerino.BL.Tests
     public sealed class ActivityFacadeTests : FacadeTestsBase
     {
         private readonly IActivityFacade _activityFacadeSUT;
-   
+
         public ActivityFacadeTests(ITestOutputHelper output) : base(output)
         {
             _activityFacadeSUT = new ActivityFacade(UnitOfWorkFactory, ActivityModelMapper);
@@ -25,7 +25,7 @@ namespace Trackerino.BL.Tests
             {
                 User = UserListModel.Empty,
                 Project = ProjectListModel.Empty,
-                ActivityId = Guid.Empty,
+                Id = Guid.Empty,
                 Description = @"Test Description",
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now.AddHours(1),
@@ -39,7 +39,7 @@ namespace Trackerino.BL.Tests
         public async Task GetAll_Single_SeededActivity()
         {
             var activities = await _activityFacadeSUT.GetAsync();
-            var activity = activities.Single(i => i.ActivityId == ActivitySeeds.ActivityEntity1.Id);
+            var activity = activities.Single(i => i.Id == ActivitySeeds.ActivityEntity1.Id);
 
             DeepAssert.Equal(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1), activity);
         }
@@ -82,7 +82,7 @@ namespace Trackerino.BL.Tests
             //Arrange
             var activity = new ActivityDetailModel()
             {
-                ActivityId = Guid.Empty,
+                Id = Guid.Empty,
                 User = UserListModel.Empty,
                 Project = ProjectListModel.Empty,
                 Description = "Test Description",
@@ -96,7 +96,7 @@ namespace Trackerino.BL.Tests
 
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var activityFromDb = await dbxAssert.Activities.SingleAsync(i => i.Id == activity.ActivityId);
+            var activityFromDb = await dbxAssert.Activities.SingleAsync(i => i.Id == activity.Id);
             DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb));
         }
     }
