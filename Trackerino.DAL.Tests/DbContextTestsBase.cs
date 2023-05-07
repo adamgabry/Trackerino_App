@@ -1,18 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Factories;
+using Trackerino.Common.Tests;
 
 namespace Trackerino.DAL.Tests;
 
 public class DbContextTestsBase : IAsyncLifetime
-{   
-    //private readonly TrackerinoDbContext _dbContextSut;
+{
     protected DbContextTestsBase()
     {
-
-        TrackerinoDbContextFactory = new DbContextLocalDbFactory(GetType().FullName!, seedDemoData: false);
+        //TrackerinoContextTestingFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: false);
+        TrackerinoDbContextFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: true);
         TrackerinoDbContextSut = TrackerinoDbContextFactory.CreateDbContext();
 
     }
+    //protected IDbContextFactory<TrackerinoDbContext> TrackerinoContextTestingFactory { get; }
     protected TrackerinoDbContext TrackerinoDbContextSut { get; }
     protected IDbContextFactory<TrackerinoDbContext> TrackerinoDbContextFactory { get; }
 

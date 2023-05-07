@@ -9,17 +9,19 @@ namespace Trackerino.BL.Models
         public required DateTime EndDateTime { get; set; }
         public ActivityTag Tag { get; set; }
         public string? Description { get; set; }
-        public UserListModel? User { get; set; }
-        public ProjectListModel? Project { get; set; }
+        public required UserListModel User { get; set; } 
+        public required ProjectListModel Project { get; set; } 
 
 
         public static ActivityDetailModel Empty => new()
         {
             Id = Guid.NewGuid(),
             ActivityId = Guid.Empty,
-            StartDateTime = default(DateTime),
-            EndDateTime = default(DateTime),
+            StartDateTime = default,
+            EndDateTime = default,
             Tag = ActivityTag.None,
+            User = UserListModel.Empty,
+            Project = ProjectListModel.Empty
         };
     }
 }

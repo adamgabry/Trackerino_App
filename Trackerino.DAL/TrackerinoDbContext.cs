@@ -32,7 +32,14 @@ namespace Trackerino.DAL
             modelBuilder.Entity<ProjectEntity>()
                 .HasMany(i => i.Activities)
                 .WithOne(i => i.Project);
-        }
 
+            // if (_seedDemoData)
+            // {
+            //     ActitySeeds.Seed(modelBuilder);
+            //     UserSeeds.Seed(modelBuilder);
+            //     UserProjectSeeds.Seed(modelBuilder);
+            //     ProjectSeeds.Seed(modelBuilder);
+            // }
+        }
     }
 }
