@@ -30,8 +30,8 @@ public static class ActivitySeeds
     };
 
     //To ensure that no tests reuse these clones for non-idempotent operations
-    public static readonly ActivityEntity ActivityEntityUpdate = ActivityEntity with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052") };
-    public static readonly ActivityEntity ActivityEntityDelete = ActivityEntity with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619") };
+    public static readonly ActivityEntity ActivityEntityUpdate = ActivityEntity with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052"),ProjectId = ProjectSeeds.ProjectEntity.Id};
+    public static readonly ActivityEntity ActivityEntityDelete = ActivityEntity with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"),ProjectId = ProjectSeeds.ProjectEntity.Id};
 
     public static ActivityEntity ActivityEntity1 = new()
     {
@@ -60,7 +60,6 @@ public static class ActivitySeeds
         modelBuilder.Entity<ActivityEntity>().HasData(
             ActivityEntity1,
             ActivityEntity2,
-            EmptyActivityEntity,
             ActivityEntity,
             ActivityEntityUpdate,
             ActivityEntityDelete

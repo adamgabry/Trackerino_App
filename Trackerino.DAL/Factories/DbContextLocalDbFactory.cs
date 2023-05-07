@@ -6,7 +6,7 @@ namespace Trackerino.DAL.Factories;
         public readonly bool _seedDemoData;
         private readonly DbContextOptionsBuilder<TrackerinoDbContext> _dbContextOptionsBuilder = new();
 
-        public DbContextLocalDbFactory(string databaseName, bool seedDemoData)
+        public DbContextLocalDbFactory(string databaseName, bool seedDemoData = true)
         {
             _seedDemoData = seedDemoData;
             _dbContextOptionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;" +
@@ -14,6 +14,7 @@ namespace Trackerino.DAL.Factories;
                                                   " MultipleActiveResultSets = True;" +
                                                   " Encrypt = False;" +
                                                   " TrustServerCertificate = True;");
+            _dbContextOptionsBuilder.EnableSensitiveDataLogging();
         }
         public TrackerinoDbContext CreateDbContext() => new (_dbContextOptionsBuilder.Options, _seedDemoData);
     }

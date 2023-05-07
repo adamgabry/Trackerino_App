@@ -9,7 +9,7 @@ public class DbContextTestsBase : IAsyncLifetime
     protected DbContextTestsBase()
     {
         //TrackerinoContextTestingFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: false);
-        TrackerinoDbContextFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: true);
+        TrackerinoDbContextFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: false);
         TrackerinoDbContextSut = TrackerinoDbContextFactory.CreateDbContext();
 
     }
@@ -25,7 +25,7 @@ public class DbContextTestsBase : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        //await TrackerinoDbContextSut.Database.EnsureDeletedAsync();
-        //await TrackerinoDbContextSut.DisposeAsync();
+        await TrackerinoDbContextSut.Database.EnsureDeletedAsync();
+        await TrackerinoDbContextSut.DisposeAsync();
     }
 }

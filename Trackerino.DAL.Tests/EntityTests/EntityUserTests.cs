@@ -25,7 +25,7 @@ namespace Trackerino.DAL.Tests.EntityTests
             await TrackerinoDbContextSut.SaveChangesAsync();
 
             //Assert
-            await using var dbx = await TrackerinoDbContextFactory.CreateDbContextAsync();
+            await using var dbx = TrackerinoDbContextFactory.CreateDbContext();
             var actualEntities = await dbx.Users.SingleAsync(i => i.Id == user.Id);
             DeepAssert.Equal(user, actualEntities);
         }
