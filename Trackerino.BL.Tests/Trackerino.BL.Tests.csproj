@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Trackerino.BL\Trackerino.BL.csproj" />
+    <ProjectReference Include="..\Trackerino.Common.Tests\Trackerino.Common.Tests.csproj" />
   </ItemGroup>
 
 </Project>
