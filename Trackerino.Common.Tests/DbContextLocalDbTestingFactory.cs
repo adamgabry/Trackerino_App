@@ -7,17 +7,25 @@ namespace Trackerino.Common.Tests;
 public class DbContextLocalDbTestingFactory : IDbContextFactory<TrackerinoDbContext>
 {
     private readonly bool _seedTestingData;
-    private readonly DbContextOptionsBuilder<TrackerinoDbContext> _dbContextOptionsBuilder = new();
+    private readonly string _databaseName;
 
-    public DbContextLocalDbTestingFactory(string databaseName, bool seedTestingData = true)
+    public DbContextLocalDbTestingFactory(string databaseName, bool seedTestingData = false)
     {
+        _databaseName = databaseName;
         _seedTestingData = seedTestingData;
-        _dbContextOptionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;" +
-                                              $" Initial Catalog = {databaseName};" +
-                                              " MultipleActiveResultSets = True;" +
-                                              " Encrypt = False;" +
-                                              " TrustServerCertificate = True;");
     }
-    public TrackerinoDbContext CreateDbContext() => new(_dbContextOptionsBuilder.Options, _seedTestingData);
+
+
+    public TrackerinoDbContext CreateDbContext()
+    {
+        DbContextOptionsBuilder<TrackerinoDbContext> builder = new();
+        builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                             $" Initial Catalog = {_databaseName};" +
+                             " MultipleActiveResultSets = True;" +
+                             " Encrypt = False;" +
+                             " TrustServerCertificate = True;");
+        builder.EnableSensitiveDataLogging();
+        return new TrackerinoTestingDbContext(builder.Options, _seedTestingData);
+    }
 }
 

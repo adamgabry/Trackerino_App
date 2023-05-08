@@ -3,6 +3,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Trackerino.BL.Mappers;
 using Trackerino.BL.Mappers.Interfaces;
+using Trackerino.Common.Tests;
 using Trackerino.DAL;
 using Trackerino.DAL.Mappers;
 using Trackerino.DAL.UnitOfWork;
@@ -12,11 +13,9 @@ namespace Trackerino.BL.Tests
 {
     public class FacadeTestsBase : IAsyncLifetime
     {
-        protected FacadeTestsBase(ITestOutputHelper output)
+        protected FacadeTestsBase()
         {
-            // XUnitTestOutputConverter
-
-            DbContextFactory = new DbContextLocalDbFactory(GetType().FullName!, seedDemoData: true);
+            DbContextFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: true);
 
             ActivityEntityMapper = new ActivityEntityMapper();
             ProjectEntityMapper = new ProjectEntityMapper();

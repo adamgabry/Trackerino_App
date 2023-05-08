@@ -9,7 +9,7 @@ public class DbContextTestsBase : IAsyncLifetime
     protected DbContextTestsBase()
     {
         //TrackerinoContextTestingFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: false);
-        TrackerinoDbContextFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: true);
+        TrackerinoDbContextFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: false);
         TrackerinoDbContextSut = TrackerinoDbContextFactory.CreateDbContext();
 
     }

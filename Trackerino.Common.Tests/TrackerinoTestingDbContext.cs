@@ -20,9 +20,9 @@ public class TrackerinoTestingDbContext : TrackerinoDbContext
 
         if (_seedTestingData)
         {
+            ActivitySeeds.Seed(modelBuilder);
             ProjectSeeds.Seed(modelBuilder);
             UserSeeds.Seed(modelBuilder);
-            ActivitySeeds.Seed(modelBuilder);
             UserProjectSeeds.Seed(modelBuilder);
         }
     }
