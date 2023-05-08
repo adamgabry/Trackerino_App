@@ -7,8 +7,8 @@ public partial class ContentPageBase
     protected IViewModel ViewModel { get; }
 
     public ContentPageBase(IViewModel viewModel)
-    {
-        InitializeComponent();
+	{
+		InitializeComponent();
 
         BindingContext = ViewModel = viewModel;
     }
@@ -16,7 +16,7 @@ public partial class ContentPageBase
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
+        
         await ViewModel.OnAppearingAsync();
     }
 }

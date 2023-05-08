@@ -17,7 +17,7 @@ public static class DALInstaller
 {
     public static IServiceCollection AddDALServices(this IServiceCollection services)
     {
-        services.AddSingleton<IDbContextFactory<TrackerinoDbContext>>(provider => new DbContextLocalDbFactory("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog = Trackerino; MultipleActiveResultSets = True; Encrypt = False; TrustServerCertificate = True;", true)); // TODO correct call?
+        services.AddSingleton<IDbContextFactory<TrackerinoDbContext>>(provider => new DbContextLocalDbFactory("Trackerino", true)); // TODO correct call?
         services.AddSingleton<IDbMigrator, NoneDbMigrator>();
 
         services.AddSingleton<ActivityModelMapper>();
