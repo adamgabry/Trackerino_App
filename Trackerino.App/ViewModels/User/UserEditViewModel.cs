@@ -32,12 +32,12 @@ namespace Trackerino.App.ViewModels
             _navigationService = navigationService;
         }
 
-        [RelayCommand]
-        private async Task GoToUserActivitiesEditAsync()
-        {
-            await _navigationService.GoToAsync("/activities",
-                new Dictionary<string, object?> { [nameof(UserActivitiesEditViewModel.User)] = User });
-        }
+        //[RelayCommand]
+        //private async Task GoToUserActivitiesEditAsync()
+        //{
+        //    await _navigationService.GoToAsync("/activities",
+        //        new Dictionary<string, object?> { [nameof(UserActivitiesEditViewModel.User)] = User });
+        //}
 
         [RelayCommand]
         private async Task GoToUserProjectsEditAsync()

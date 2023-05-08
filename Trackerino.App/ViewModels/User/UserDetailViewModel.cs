@@ -65,7 +65,7 @@ namespace Trackerino.App.ViewModels
         private async Task GoToEditAsync()
         {
             await _navigationService.GoToAsync("/edit",
-                new Dictionary<string, object?> { [nameof(UserDetailViewModel.User)] = User });
+                new Dictionary<string, object?> { [nameof(User)] = User });
         }
 
         public async void Receive(UserEditMessage message)

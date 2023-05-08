@@ -21,8 +21,8 @@ namespace Trackerino.App.ViewModels
             IMessengerService messengerService)
             : base(messengerService)
         {
-            this._projectFacade = projectFacade;
-            this._navigationService = navigationService;
+            _projectFacade = projectFacade;
+            _navigationService = navigationService;
         }
 
         protected override async Task LoadDataAsync()

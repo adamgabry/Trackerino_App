@@ -1,5 +1,6 @@
 ﻿using Trackerino.App.Models;
 using Trackerino.App.ViewModels;
+using Trackerino.App.Services.Interfaces;
 using Trackerino.App.Views.User;
 using Trackerino.App.Views.Project;
 using ActivityDetailView = Trackerino.App.Views.Activity.ActivityDetailView;
@@ -60,6 +61,6 @@ public class NavigationService : INavigationService
         => Shell.Current.SendBackButtonPressed();
 
     private string GetRouteByViewModel<TViewModel>()
-        where TViewModel : IViewModel 
+        where TViewModel : IViewModel
         => Routes.First(route => route.ViewModelType == typeof(TViewModel)).Route;
 }

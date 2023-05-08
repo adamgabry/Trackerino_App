@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Entities;
+using Trackerino.DAL.Seeds;
 
 namespace Trackerino.DAL
 {
     public class TrackerinoDbContext : DbContext
     {
         private readonly bool _seedDemoData;
-        public TrackerinoDbContext(DbContextOptions contextOptions, bool seedDemoData)
+        public TrackerinoDbContext(DbContextOptions contextOptions, bool seedDemoData = false)
             : base(contextOptions) =>
             _seedDemoData = seedDemoData;
 
@@ -18,10 +19,7 @@ namespace Trackerino.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<ActivityEntity>()
-                .HasOne(i => i.Project)
-                .WithMany(i => i.Activities)
-                .HasForeignKey(i => i.ProjectId);
+
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Projects)
                 .WithOne(i => i.User)
@@ -29,30 +27,22 @@ namespace Trackerino.DAL
             modelBuilder.Entity<ProjectEntity>()
                 .HasMany(i => i.Users)
                 .WithOne(i => i.Project)
-                .HasForeignKey(i => i.ProjectId)
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Activities)
-                .WithOne(i => i.User)
-                .HasForeignKey(i => i.UserId);
+                .WithOne(i => i.User);
             modelBuilder.Entity<ProjectEntity>()
                 .HasMany(i => i.Activities)
                 .WithOne(i => i.Project);
 
-            // if (_seedTestingData)
-            // {
-            //     ProjectSeeds.Seed(modelBuilder);
-            //     ActivitySeeds.Seed(modelBuilder);
-            //     UserSeeds.Seed(modelBuilder);
-            //     UserProjectSeeds.Seed(modelBuilder);
-            // }
-            // if (_seedDemoData)
-            // {
-            //     ActitySeeds.Seed(modelBuilder);
-            //     UserSeeds.Seed(modelBuilder);
-            //     UserProjectSeeds.Seed(modelBuilder);
-            //     ProjectSeeds.Seed(modelBuilder);
-            // }
+            if (_seedDemoData)
+            {
+                ProjectSeeds.Seed(modelBuilder);
+                UserSeeds.Seed(modelBuilder);
+                ActivitySeeds.Seed(modelBuilder);
+                UserProjectSeeds.Seed(modelBuilder);
+                
+            }
         }
     }
 }
