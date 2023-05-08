@@ -38,7 +38,7 @@ namespace Trackerino.BL.Mappers
                     StartDateTime = entity.StartDateTime,
                     EndDateTime = entity.EndDateTime,
                     Tag = entity.Tag,
-                   // User = _userModelMapper.MapToListModel(entity.User),
+                   //User = _userModelMapper.MapToListModel(entity.User),
                    //Project = _projectModelMapper.MapToListModel(entity.Project)
 
                 };

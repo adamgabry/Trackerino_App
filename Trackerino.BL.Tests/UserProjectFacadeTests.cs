@@ -10,6 +10,7 @@ using Trackerino.BL.Models;
 using Trackerino.BL.Tests;
 using Trackerino.Common.Tests;
 using Trackerino.Common.Tests.Seeds;
+using Trackerino.DAL.Entities;
 using Trackerino.DAL.UnitOfWork;
 using Xunit;
 using Xunit.Abstractions;
@@ -31,7 +32,7 @@ namespace Trackerino.BL.Tests.Facades
             // Arrange
             var userProject = new UserProjectDetailModel()
             {
-                Id = UserSeeds.UserEntity1.Id,
+                Id = UserProjectSeeds.UserProjectEntity1.Id,
                 ProjectId = ProjectSeeds.ProjectEntity.Id,
                 ProjectName = ProjectSeeds.ProjectEntity.Name
             };
@@ -42,7 +43,7 @@ namespace Trackerino.BL.Tests.Facades
 
             // Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var userProjectFromDb = await dbxAssert.UserProject.SingleOrDefaultAsync(up => up.ProjectId == userProject.ProjectId && up.UserId == userId);
+            var userProjectFromDb = await dbxAssert.UserProject.SingleOrDefaultAsync(up => up.ProjectId == userProject.ProjectId && up.UserId == userId && up.Project == null && up.User == null);
             Assert.NotNull(userProjectFromDb);
             DeepAssert.Equal(userProject, UserProjectModelMapper.MapToDetailModel(userProjectFromDb));
         }

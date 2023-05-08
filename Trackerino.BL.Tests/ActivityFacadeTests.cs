@@ -82,8 +82,7 @@ namespace Trackerino.BL.Tests
                 Description = ActivitySeeds.ActivityEntity.Description,
                 StartDateTime = ActivitySeeds.ActivityEntity.StartDateTime,
                 EndDateTime = ActivitySeeds.ActivityEntity.EndDateTime,
-                // Project = ProjectSeeds.ProjectEntity,
-                // User = UserSeeds.UserEntity
+
                 Project = new ProjectListModel() {
                     Id = Guid.Parse("4FD824C0-A7D1-48BA-8E7C-4F136CF8BF31"),
                     Name = "projectTest"
@@ -104,7 +103,7 @@ namespace Trackerino.BL.Tests
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             var activityFromDb = await dbxAssert.Activities.SingleAsync(i => i.Id == activity.Id);
-            DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb));
+            DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb));   //activityFromDb still has user and project set to null, but activity doesnt contain it at all, otherwise same.
         }
 
 
