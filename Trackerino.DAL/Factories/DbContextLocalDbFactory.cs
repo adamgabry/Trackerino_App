@@ -13,6 +13,7 @@ namespace Trackerino.DAL.Factories;
                                                   $" Initial Catalog = {databaseName};" +
                                                   " MultipleActiveResultSets = True;" +
                                                   " Encrypt = False;" +
+                                                  "Integrated Security = True;" +
                                                   " TrustServerCertificate = True;");
         }
         public TrackerinoDbContext CreateDbContext() => new (_dbContextOptionsBuilder.Options, _seedDemoData);

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Entities;
+using Trackerino.DAL.Seeds;
+
 namespace Trackerino.DAL
 {
     public class TrackerinoDbContext : DbContext
@@ -33,13 +35,14 @@ namespace Trackerino.DAL
                 .HasMany(i => i.Activities)
                 .WithOne(i => i.Project);
 
-            // if (_seedDemoData)
-            // {
-            //     ActitySeeds.Seed(modelBuilder);
-            //     UserSeeds.Seed(modelBuilder);
-            //     UserProjectSeeds.Seed(modelBuilder);
-            //     ProjectSeeds.Seed(modelBuilder);
-            // }
+            if (_seedDemoData)
+            {
+                ProjectSeeds.Seed(modelBuilder);
+                UserSeeds.Seed(modelBuilder);
+                ActivitySeeds.Seed(modelBuilder);
+                UserProjectSeeds.Seed(modelBuilder);
+                
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ABI.Windows.Devices.Printers;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Trackerino.BL.Mappers;
 using Trackerino.DAL;
