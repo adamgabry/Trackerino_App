@@ -38,8 +38,8 @@ namespace Trackerino.BL.Mappers
                     StartDateTime = entity.StartDateTime,
                     EndDateTime = entity.EndDateTime,
                     Tag = entity.Tag,
-                    User = _userModelMapper.MapToListModel(entity.User),
-                    Project = _projectModelMapper.MapToListModel(entity.Project)
+                   // User = _userModelMapper.MapToListModel(entity.User),
+                   //Project = _projectModelMapper.MapToListModel(entity.Project)
 
                 };
 
@@ -50,8 +50,8 @@ namespace Trackerino.BL.Mappers
                 StartDateTime = model.StartDateTime,
                 EndDateTime = model.EndDateTime,
                 Tag = model.Tag,
-                ProjectId = model.Project.Id,
-                UserId = model.User.Id
+                ProjectId = model.Project.Id,   //this is required but tests FAIL at mapping here
+                UserId = model.User.Id          //this is required but tests FAIL at mapping here
 
             };
     }
