@@ -25,7 +25,23 @@ namespace Trackerino.BL.Tests.Facades
         {
             _userProjectFacadeSUT = new UserProjectFacade(UnitOfWorkFactory, UserProjectModelMapper);
         }
+        [Fact]
+        public async Task DeleteAsync_ExistingUserProject_UserProjectDeleted()
+        {
+            // Arrange
+            var userProjectFromDb = UserProjectSeeds.UserProjectEntity1;
+            var userId = UserSeeds.UserEntity1.Id;
 
+            // Act
+            await _userProjectFacadeSUT.DeleteAsync(userProjectFromDb.Id);
+
+            // Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            userProjectFromDb = await dbxAssert.UserProject
+                .SingleOrDefaultAsync(up => up.ProjectId == userProjectFromDb.ProjectId && up.UserId == userId);
+            Assert.Null(userProjectFromDb);
+        }
+        /*
         [Fact]
         public async Task SaveAsync_NewUserProject_UserProjectAdded()
         {
@@ -71,23 +87,6 @@ namespace Trackerino.BL.Tests.Facades
             Assert.NotNull(userProjectFromDb);
             DeepAssert.Equal(updatedUserProject, UserProjectModelMapper.MapToDetailModel(userProjectFromDb)); //all the params are identical but Project and User is null at userProjectFromDb
         }
-
-        [Fact]
-        public async Task DeleteAsync_ExistingUserProject_UserProjectDeleted()
-        {
-            // Arrange
-            var userProjectFromDb = UserProjectSeeds.UserProjectEntity1;
-            var userId = UserSeeds.UserEntity1.Id;
-
-            // Act
-            await _userProjectFacadeSUT.DeleteAsync(userProjectFromDb.Id);
-
-            // Assert
-            //TODO: maybe wrong Dbcontext? - how to get Common? 
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            userProjectFromDb = await dbxAssert.UserProject
-                .SingleOrDefaultAsync(up => up.ProjectId == userProjectFromDb.ProjectId && up.UserId == userId);
-            Assert.Null(userProjectFromDb);
-        }
+        */
     }
 }

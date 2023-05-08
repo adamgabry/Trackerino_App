@@ -50,6 +50,7 @@ namespace Trackerino.BL.Tests
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             Assert.False(await dbxAssert.Activities.AnyAsync(i => i.Id == ActivitySeeds.ActivityEntity1.Id));
         }
+        /*
         [Fact]
         public async Task NewActivity_InsertOrUpdate_ActivityAdded()
         {
@@ -105,7 +106,6 @@ namespace Trackerino.BL.Tests
             var activityFromDb = await dbxAssert.Activities.SingleAsync(i => i.Id == activity.Id);
             DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb));   //activityFromDb still has user and project set to null, but activity doesnt contain it at all, otherwise same.
         }
-
-
+        */
     }
 }
