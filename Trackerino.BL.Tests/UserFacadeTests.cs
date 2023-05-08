@@ -10,6 +10,7 @@ using Trackerino.Common.Tests;
 using Trackerino.DAL.UnitOfWork;
 using Xunit.Abstractions;
 using Microsoft.EntityFrameworkCore.Query;
+using Trackerino.DAL.Common;
 
 /*      UserEntityWithNoActivities,
         UserEntityWithNoProjects,
@@ -41,6 +42,26 @@ namespace Trackerino.BL.Tests
                 ImageUrl = null,
                 Projects = new ObservableCollection<UserProjectListModel>(),
                 Activities = new ObservableCollection<UserProjectActivityListModel>()
+                /* Projects = new ObservableCollection<UserProjectListModel>() {
+                     new()
+                     {
+                         Id = Guid.Empty,
+                         ProjectName = "projecttest",
+                         ProjectId = Guid.Empty,
+                     }
+                 },
+                 Activities = new ObservableCollection<UserProjectActivityListModel>()
+                 {
+                     new()
+                     {
+                     Id = Guid.Empty,
+                     ActivityId = Guid.Empty,
+                     StartDateTime = DateTime.Now,
+                     EndDateTime = DateTime.Now.AddHours(1),
+                     Tag = ActivityTag.None,
+                     }
+                 }
+                */
             };
 
             var _ = await _userFacadeSUT.SaveAsync(model);
