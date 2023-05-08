@@ -31,8 +31,6 @@ namespace Trackerino.BL.Mappers
                 {
                     Id = entity.Id,
                     Name = entity.Name,
-                    Users = _projectUserModelMapper.MapToListModel(entity.Users).ToObservableCollection(),
-                    Activities = _userProjectActivityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
                 };
 
         public override ProjectEntity MapToEntity(ProjectDetailModel model)
@@ -40,8 +38,6 @@ namespace Trackerino.BL.Mappers
             {
                 Id = model.Id,
                 Name = model.Name,
-                Activities = (ICollection<ActivityEntity>)model.Activities,
-                Users = (ICollection<UserProjectEntity>)model.Users
             };
     }
 }

@@ -17,7 +17,7 @@ namespace Trackerino.BL.Tests
     {
         private readonly IProjectFacade _projectFacadeSUT;
 
-        public ProjectFacadeTests(ITestOutputHelper output) : base(output)
+        public ProjectFacadeTests()
         {
             _projectFacadeSUT = new ProjectFacade(UnitOfWorkFactory, ProjectModelMapper);
         }
@@ -82,11 +82,11 @@ namespace Trackerino.BL.Tests
         public async Task SeededProject_DeleteById_Deleted()
         {
             // Act
-            await _projectFacadeSUT.DeleteAsync(ProjectSeeds.ProjectForUserProjectEntityDelete.Id);
+            await _projectFacadeSUT.DeleteAsync(ProjectSeeds.ProjectEntityDelete.Id);
 
             // Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Projects.AnyAsync(p => p.Id == ProjectSeeds.ProjectForUserProjectEntityDelete.Id));
+            Assert.False(await dbxAssert.Projects.AnyAsync(p => p.Id == ProjectSeeds.ProjectEntityDelete.Id));
         }
 
         [Fact]

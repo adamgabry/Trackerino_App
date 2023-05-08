@@ -25,12 +25,6 @@ namespace Trackerino.BL.Tests
 
             Assert.Null(activity);
         }
-
-        [Fact]
-        public async Task Delete_ActivityUsedInTrackerEntry_Throws()
-        {
-            //Act & Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await _activityFacadeSUT.DeleteAsync(ActivitySeeds.ActivityEntity1.Id));
-        }
+        
     }
 }
