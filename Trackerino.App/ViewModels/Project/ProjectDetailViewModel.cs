@@ -60,7 +60,7 @@ namespace Trackerino.App.ViewModels
         private async Task GoToEditAsync()
         {
             await _navigationService.GoToAsync("/edit",
-                new Dictionary<string, object?> { [nameof(ProjectDetailViewModel.Project)] = Project });
+                new Dictionary<string, object?> { [nameof(Project)] = Project });
         }
 
         public async void Receive(ProjectEditMessage message)
