@@ -25,38 +25,76 @@ namespace Trackerino.BL.Tests
 
             Assert.Null(activity);
         }
+
         [Fact]
-        public async Task CreateUser_NotThrowingException()
+        public async Task GetAll_Single_UserEntity1()
         {
-            // Arrange
-            var model = new ActivityDetailModel()
+            var activities = await _activityFacadeSUT.GetAsync();
+            var activity = activities.Single(i => i.Id == ActivitySeeds.ActivityEntity1.Id);
+
+            DeepAssert.Equal(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1), activity);
+        }
+
+        [Fact]
+        public async Task GetById_UserEntity()
+        {
+            var activity = await _activityFacadeSUT.GetAsync(ActivitySeeds.ActivityEntity1.Id);
+
+            DeepAssert.Equal(ActivityModelMapper.MapToDetailModel(ActivitySeeds.ActivityEntity1), activity);
+        }
+        [Fact]
+        public async Task UserEntity_DeleteById_Deleted()
+        {
+            await _activityFacadeSUT.DeleteAsync(ActivitySeeds.ActivityEntity1.Id);
+
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            Assert.False(await dbxAssert.Activities.AnyAsync(i => i.Id == ActivitySeeds.ActivityEntity1.Id));
+        }
+        [Fact]
+        public async Task NewActivity_InsertOrUpdate_ActivityAdded()
+        {
+            //Arrange
+            var activitySeed = ActivitySeeds.EmptyActivityEntity;
+            var activity = new ActivityDetailModel()
             {
-                Id = Guid.Empty,
-                StartDateTime = DateTime.UtcNow,
-                EndDateTime = DateTime.UtcNow.AddHours(2),
-                Tag = ActivityTag.Work,
-                Description = "Test activity",
-                User = new UserListModel() { Id = Guid.NewGuid(), Name = "John", Surname = "Doe" },
-                Project = new ProjectListModel() { Id = Guid.NewGuid(), Name = "Test project" }
+                Id = activitySeed.Id,
+                StartDateTime = DateTime.Now,
+                EndDateTime = DateTime.Now.AddMinutes(2),
+                Tag = ActivityTag.Meeting
             };
 
-            // Act
-            var result = await _activityFacadeSUT.SaveAsync(model);
+            //Act
+            activity = await _activityFacadeSUT.SaveAsync(activity); //Fails here
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.NotEqual(Guid.Empty, result.Id);
-            Assert.Equal(model.StartDateTime, result.StartDateTime);
-            Assert.Equal(model.EndDateTime, result.EndDateTime);
-            Assert.Equal(model.Tag, result.Tag);
-            Assert.Equal(model.Description, result.Description);
-            Assert.NotNull(result.User);
-            Assert.Equal(model.User?.Id, result.User.Id);
-            Assert.Equal(model.User?.Name, result.User.Name);
-            Assert.NotNull(result.Project);
-            Assert.Equal(model.Project?.Id, result.Project.Id);
-            Assert.Equal(model.Project?.Name, result.Project.Name);
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            var activityFromDb = await dbxAssert.Activities.SingleAsync(i => i.Id == activity.Id);
+            DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb));
+        }
+        [Fact]
+        public async Task SeededActivity_InsertOrUpdate_ActivityUpdated()
+        {
+            //Arrange
+            var activity = new ActivityDetailModel()
+            {
+                Id = ActivitySeeds.ActivityEntity.Id,
+                Tag = ActivitySeeds.ActivityEntity.Tag,
+                Description = ActivitySeeds.ActivityEntity.Description,
+                StartDateTime = ActivitySeeds.ActivityEntity.StartDateTime,
+                EndDateTime = ActivitySeeds.ActivityEntity.EndDateTime,
+               // Project = ProjectSeeds.ProjectEntity,
+               // User = UserSeeds.UserEntity
+            };
+            activity.Description += "updated";
+            activity.Tag = ActivityTag.Work;
 
+            //Act
+            await _activityFacadeSUT.SaveAsync(activity); // again fails at MapToEntity
+
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            var activityFromDb = await dbxAssert.Activities.SingleAsync(i => i.Id == activity.Id);
+            DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb));
         }
 
 
