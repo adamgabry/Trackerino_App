@@ -16,6 +16,9 @@ using Xunit.Abstractions;
 
 namespace Trackerino.BL.Tests.Facades
 {
+    internal class UserProjectFacadeTests
+    {
+    }
     /*
      * NOT WORKING NOW - run after discussing/repairing seeds
      * 
