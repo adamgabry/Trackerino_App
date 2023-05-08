@@ -6,14 +6,6 @@ namespace Trackerino.BL.Mappers
 {
     public class UserProjectActivityModelMapper : ModelMapperBase<ActivityEntity, UserProjectActivityListModel, UserProjectActivityDetailModel>, IUserProjectActivityModelMapper
     {
-        private readonly IUserModelMapper _userModelMapper;
-        private readonly IProjectModelMapper _projectModelMapper;
-
-        public UserProjectActivityModelMapper(IUserModelMapper userModelMapper, IProjectModelMapper projectModelMapper)
-        {
-            _userModelMapper = userModelMapper;
-            _projectModelMapper = projectModelMapper;
-        }
 
         public override UserProjectActivityListModel MapToListModel(ActivityEntity? entity)
             => entity?.Project is null
