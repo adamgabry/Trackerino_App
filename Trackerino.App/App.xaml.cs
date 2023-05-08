@@ -1,13 +1,14 @@
 ﻿using Trackerino.App.Shells;
 
-namespace Trackerino.App;
-
-public partial class App : Application
+namespace Trackerino.App
 {
-    public App(IServiceProvider serviceProvider)
+    public partial class App : Application
     {
-        InitializeComponent();
+        public App()
+        {
+            InitializeComponent();
 
-        MainPage = serviceProvider.GetRequiredService<AppShell>();
+            MainPage = new AppShell();
+        }
     }
 }

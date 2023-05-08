@@ -1,28 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Trackerino.App.Shells.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Trackerino.App"
+    Shell.FlyoutBehavior="Disabled">
 
-<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:a="clr-namespace:Trackerino.App.Views.Activity"
-       xmlns:p="clr-namespace:Trackerino.App.Views.Project"
-       xmlns:u="clr-namespace:Trackerino.App.Views.User"
-       x:Class="Trackerino.App.Shells.AppShell"
-       x:Name="AppShellRoot"
-       FlyoutBehavior="Disabled">
-    <Shell.MenuBarItems>
-        <MenuBarItem Text="Menu">
-            <MenuFlyoutItem Text="GoToActivityListCommand"
-                            Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToActivityListCommand}" />
-
-            <MenuFlyoutItem Text="GoToProjectListCommand"
-                            Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToProjectListCommand}" />
-
-            <MenuFlyoutItem Text="GoToUsersListCommand"
-                            Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersListCommand}" />
-        </MenuBarItem>
-    </Shell.MenuBarItems>
-
-    <ShellContent ContentTemplate="{DataTemplate a:ActivityListView}" Route="//activities" />
-    <ShellContent ContentTemplate="{DataTemplate p:ProjectListView}" Route="//projects" />
-    <ShellContent ContentTemplate="{DataTemplate u:UserListView}" Route="//users" />
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
 </Shell>
