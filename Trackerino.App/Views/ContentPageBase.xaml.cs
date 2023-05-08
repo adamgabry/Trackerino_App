@@ -2,7 +2,7 @@
 
 namespace Trackerino.App.Views;
 
-public partial class ContentPageBase : ContentPage
+public partial class ContentPageBase
 {
     protected IViewModel ViewModel { get; }
 

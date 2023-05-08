@@ -1,9 +1,11 @@
+using Trackerino.App.ViewModels;
+
 namespace Trackerino.App.Views.User;
 
-public partial class UserListView : ContentView
+public partial class UserListView
 {
-	public UserListView()
-	{
+	public UserListView(UserListViewModel viewModel)
+    {
 		InitializeComponent();
 	}
 }
