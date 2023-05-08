@@ -8,21 +8,20 @@ public class TrackerinoTestingDbContext : TrackerinoDbContext
 {
     private readonly bool _seedTestingData;
 
-    public TrackerinoTestingDbContext(DbContextOptions contextOptions, bool seedTestingData = false)
-        : base(contextOptions, seedDemoData:false)
+    public TrackerinoTestingDbContext(DbContextOptions contextOptions, bool seedTestingData = true)
+        : base(contextOptions, seedDemoData: true)
     {
         _seedTestingData = seedTestingData;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
         base.OnModelCreating(modelBuilder);
 
         if (_seedTestingData)
         {
-            ProjectSeeds.Seed(modelBuilder);
             ActivitySeeds.Seed(modelBuilder);
+            ProjectSeeds.Seed(modelBuilder);
             UserSeeds.Seed(modelBuilder);
             UserProjectSeeds.Seed(modelBuilder);
         }
