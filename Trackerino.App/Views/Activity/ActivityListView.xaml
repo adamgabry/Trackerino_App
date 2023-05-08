@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Trackerino.App.Views.Activity.ActivityListView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentView>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:Trackerino.App.Views"
+                       xmlns:vm="clr-namespace:Trackerino.App.ViewModels"
+                       xmlns:m="clr-namespace:Trackerino.BL.Models;assembly=Trackerino.BL"
+                       x:DataType="vm:ActivityListViewModel"
+                       x:Name="ActivityListViewRoot"
+                       x:Class="Trackerino.App.Views.Activity.ActivityListView"
+                       Title = "Activities" >
+
+    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *"
+          RowSpacing="20">
+        <Label Grid.Row="0"
+               FontSize="24"
+               Text="Title" />
+
+        <Button Grid.Row="0"
+                Padding="12, 6"
+                HorizontalOptions="End" VerticalOptions="Start"
+                Text="Add"
+                Command="{Binding GoToCreateCommand}"
+                CornerRadius="5" FontFamily="MontserratMedium"
+                FontSize="14" />
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Activities}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Horizontal"
+                                 HorizontalItemSpacing="10" VerticalItemSpacing="10"
+                                 Span="2" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ActivityListModel">
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                                  CommandParameter="{Binding Id}" />
+                        </Frame.GestureRecognizers>
+                        <Grid RowDefinitions="*, *">
+
+                            <Label Grid.Row="0"
+                                   Margin="22,12"
+                                   FontSize="20" LineBreakMode="WordWrap"
+                                   Text="{ Binding Tag}"
+                                   TextColor="White" VerticalOptions="End" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</views:ContentPageBase>
