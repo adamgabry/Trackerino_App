@@ -6,7 +6,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<Trackerino
     private readonly DbContextLocalDbFactory _dbContextLocalDbFactory;
     public DesignTimeDbContextFactory()
     {
-        _dbContextLocalDbFactory = new DbContextLocalDbFactory("Trackerino", seedDemoData:false);
+        _dbContextLocalDbFactory = new DbContextLocalDbFactory("Trackerino", seedDemoData:true);
     }
 
     public TrackerinoDbContext CreateDbContext(string[] args) => _dbContextLocalDbFactory.CreateDbContext();

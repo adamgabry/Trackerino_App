@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Trackerino.DAL.Entities;
 using Trackerino.DAL.Seeds;
 
@@ -7,7 +8,7 @@ namespace Trackerino.DAL
     public class TrackerinoDbContext : DbContext
     {
         private readonly bool _seedDemoData;
-        public TrackerinoDbContext(DbContextOptions contextOptions, bool seedDemoData = false)
+        public TrackerinoDbContext(DbContextOptions contextOptions, bool seedDemoData)
             : base(contextOptions) =>
             _seedDemoData = seedDemoData;
 
@@ -15,6 +16,7 @@ namespace Trackerino.DAL
         public DbSet<UserEntity> Users => Set<UserEntity>();
         public DbSet<ProjectEntity> Projects => Set<ProjectEntity>();
         public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,14 +36,13 @@ namespace Trackerino.DAL
             modelBuilder.Entity<ProjectEntity>()
                 .HasMany(i => i.Activities)
                 .WithOne(i => i.Project);
-
+            
             if (_seedDemoData)
             {
                 ProjectSeeds.Seed(modelBuilder);
                 UserSeeds.Seed(modelBuilder);
                 ActivitySeeds.Seed(modelBuilder);
                 UserProjectSeeds.Seed(modelBuilder);
-                
             }
         }
     }
