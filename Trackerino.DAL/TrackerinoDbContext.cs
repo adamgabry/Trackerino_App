@@ -17,7 +17,10 @@ namespace Trackerino.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Projects)
                 .WithOne(i => i.User)
@@ -28,7 +31,16 @@ namespace Trackerino.DAL
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Activities)
+<<<<<<< Updated upstream
                 .WithOne(i => i.User);
+=======
+                .WithOne(i => i.User)
+                .HasForeignKey(i => i.UserId);
+            modelBuilder.Entity<ActivityEntity>()
+                .HasOne(i => i.Project)
+                .WithMany(i => i.Activities)
+                .HasForeignKey(i => i.ProjectId);
+>>>>>>> Stashed changes
             modelBuilder.Entity<ProjectEntity>()
                 .HasMany(i => i.Activities)
                 .WithOne(i => i.Project);
