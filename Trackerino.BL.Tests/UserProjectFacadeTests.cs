@@ -16,18 +16,11 @@ using Xunit.Abstractions;
 
 namespace Trackerino.BL.Tests.Facades
 {
-    internal class UserProjectFacadeTests
-    {
-    }
-    /*
-     * NOT WORKING NOW - run after discussing/repairing seeds
-     * 
-     * 
     public sealed class UserProjectFacadeTests : FacadeTestsBase
     {
         private readonly IUserProjectFacade _userProjectFacadeSUT;
 
-        public UserProjectFacadeTests(ITestOutputHelper output) : base(output)
+        public UserProjectFacadeTests()
         {
             _userProjectFacadeSUT = new UserProjectFacade(UnitOfWorkFactory, UserProjectModelMapper);
         }
@@ -38,7 +31,7 @@ namespace Trackerino.BL.Tests.Facades
             // Arrange
             var userProject = new UserProjectDetailModel()
             {
-                Id = Guid.Empty,
+                Id = UserSeeds.UserEntity1.Id,
                 ProjectId = ProjectSeeds.ProjectEntity.Id,
                 ProjectName = ProjectSeeds.ProjectEntity.Name
             };
@@ -49,8 +42,7 @@ namespace Trackerino.BL.Tests.Facades
 
             // Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var userProjectFromDb = await dbxAssert.UserProject
-                .SingleOrDefaultAsync(up => up.ProjectId == userProject.ProjectId && up.UserId == userId);
+            var userProjectFromDb = await dbxAssert.UserProject.SingleOrDefaultAsync(up => up.ProjectId == userProject.ProjectId && up.UserId == userId);
             Assert.NotNull(userProjectFromDb);
             DeepAssert.Equal(userProject, UserProjectModelMapper.MapToDetailModel(userProjectFromDb));
         }
@@ -76,7 +68,7 @@ namespace Trackerino.BL.Tests.Facades
             userProjectFromDb = await dbxAssert.UserProject
                 .SingleOrDefaultAsync(up => up.ProjectId == updatedUserProject.ProjectId && up.UserId == userId);
             Assert.NotNull(userProjectFromDb);
-            DeepAssert.Equal(updatedUserProject, UserProjectModelMapper.MapToDetailModel(userProjectFromDb));
+            DeepAssert.Equal(updatedUserProject, UserProjectModelMapper.MapToDetailModel(userProjectFromDb)); //all the params are identical but Project and User is null at userProjectFromDb
         }
 
         [Fact]
@@ -96,5 +88,5 @@ namespace Trackerino.BL.Tests.Facades
                 .SingleOrDefaultAsync(up => up.ProjectId == userProjectFromDb.ProjectId && up.UserId == userId);
             Assert.Null(userProjectFromDb);
         }
-    }*/
+    }
 }

@@ -82,8 +82,8 @@ namespace Trackerino.BL.Tests
                 Description = ActivitySeeds.ActivityEntity.Description,
                 StartDateTime = ActivitySeeds.ActivityEntity.StartDateTime,
                 EndDateTime = ActivitySeeds.ActivityEntity.EndDateTime,
-               // Project = ProjectSeeds.ProjectEntity,
-               // User = UserSeeds.UserEntity
+                //Project = ActivitySeeds.ActivityEntity.Project,
+                //User = UserSeeds.UserEntity
             };
             activity.Description += "updated";
             activity.Tag = ActivityTag.Work;
