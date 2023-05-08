@@ -60,7 +60,7 @@ namespace Trackerino.BL.Tests
                 Id = activitySeed.Id,
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now.AddMinutes(2),
-                Tag = ActivityTag.Meeting
+                Tag = ActivityTag.Meeting,
             };
 
             //Act
@@ -82,8 +82,18 @@ namespace Trackerino.BL.Tests
                 Description = ActivitySeeds.ActivityEntity.Description,
                 StartDateTime = ActivitySeeds.ActivityEntity.StartDateTime,
                 EndDateTime = ActivitySeeds.ActivityEntity.EndDateTime,
-                //Project = ActivitySeeds.ActivityEntity.Project,
-                //User = UserSeeds.UserEntity
+                // Project = ProjectSeeds.ProjectEntity,
+                // User = UserSeeds.UserEntity
+                Project = new ProjectListModel() {
+                    Id = Guid.Parse("4FD824C0-A7D1-48BA-8E7C-4F136CF8BF31"),
+                    Name = "projectTest"
+                },
+                User = new UserListModel() {
+                    Id = Guid.Parse("77146EA0-2D86-4874-B75E-FBA628AFC698"),
+                    Name = "TestName",
+                    Surname = "TestSurname",
+
+                }
             };
             activity.Description += "updated";
             activity.Tag = ActivityTag.Work;
