@@ -17,7 +17,7 @@ namespace Trackerino.BL.Tests
     {
         private readonly IProjectFacade _projectFacadeSUT;
 
-        public ProjectFacadeTests(ITestOutputHelper output) : base(output)
+        public ProjectFacadeTests() : base()
         {
             _projectFacadeSUT = new ProjectFacade(UnitOfWorkFactory, ProjectModelMapper);
         }
