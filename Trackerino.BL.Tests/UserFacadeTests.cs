@@ -22,7 +22,7 @@ public sealed class UserFacadeTests : FacadeTestsBase
 {
     private readonly IUserFacade _userFacadeSUT;
 
-    public UserFacadeTests(ITestOutputHelper output) : base(output)
+    public UserFacadeTests() : base()
     {
         _userFacadeSUT = new UserFacade(UnitOfWorkFactory, UserModelMapper);
     }
