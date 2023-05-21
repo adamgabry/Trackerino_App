@@ -19,11 +19,12 @@ public static class DALInstaller
 {
     public static IServiceCollection AddDALServices(this IServiceCollection services)
     {
-        string connectionString =
-            "Data Source=(LocalDB)\\MSSQLLocalDB; Initial Catalog = Trackerino; MultipleActiveResultSets = True; Integrated Security = True; Encrypt=False; TrustServerCertificate = True;";
+        //string connectionString =
+        //    "Data Source=(LocalDB)\\MSSQLLocalDB; Initial Catalog = Trackerino; MultipleActiveResultSets = True; Integrated Security = True; Encrypt=False; TrustServerCertificate = True;";
 
-        services.AddSingleton<IDbContextFactory<TrackerinoDbContext>>(provider => new SqlServerDbContextFactory(connectionString));
-        services.AddSingleton<IDbMigrator, NoneDbMigrator>();
+        //services.AddSingleton<IDbContextFactory<TrackerinoDbContext>>(provider => new SqlServerDbContextFactory(connectionString));
+        services.AddSingleton<IDbContextFactory<TrackerinoDbContext>>(provider => new DbContextSqlLiteFactory());
+        services.AddSingleton<IDbMigrator, SqliteDbMigrator>();
 
         services.AddSingleton<ActivityModelMapper>();
         services.AddSingleton<ProjectModelMapper>();

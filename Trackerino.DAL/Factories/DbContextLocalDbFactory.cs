@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using Trackerino.DAL.Migrations;
 
 namespace Trackerino.DAL.Factories;
 
