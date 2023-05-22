@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ABI.Windows.Devices.Printers;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.BL.Mappers;
 using Trackerino.DAL;
 using Trackerino.DAL.Factories;
-using Trackerino.App.Options;
+
 
 namespace Trackerino.App;
 
