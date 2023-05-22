@@ -17,11 +17,11 @@ public class NoneDbMigrator : IDbMigrator
     public Task MigrateAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }
 
-public class SqliteDbMigrator : IDbMigrator 
+public class SqLiteDbMigrator : IDbMigrator 
 {
     private readonly IDbContextFactory<TrackerinoDbContext> _dbContextFactory;
 
-    public SqliteDbMigrator(IDbContextFactory<TrackerinoDbContext> dbContextFactory)
+    public SqLiteDbMigrator(IDbContextFactory<TrackerinoDbContext> dbContextFactory)
     {
         _dbContextFactory = dbContextFactory;
     }
@@ -32,6 +32,7 @@ public class SqliteDbMigrator : IDbMigrator
     {
         await using TrackerinoDbContext dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
 
+        await dbContext.Database.EnsureDeletedAsync(cancellationToken);
         // Ensures that database is created applying the latest state
         // Application of migration later on may fail
         // If you want to use migrations, you should create database by calling  dbContext.Database.MigrateAsync(cancellationToken) instead
