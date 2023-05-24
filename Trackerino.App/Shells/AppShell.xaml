@@ -10,10 +10,6 @@
     x:Name="AppShellRoot"
     FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
     <Shell.MenuBarItems>
         <MenuBarItem Text="File">
             <MenuFlyoutItem Text="Users"
