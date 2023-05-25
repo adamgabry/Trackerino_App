@@ -26,6 +26,7 @@ namespace Trackerino.BL.Mappers
                     StartDateTime = entity.StartDateTime,
                     EndDateTime = entity.EndDateTime,
                     Tag = entity.Tag,
+                    Description = entity.Description,
                 };
 
         public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)

@@ -10,10 +10,10 @@
             VerticalOptions="Center">
             
             <Label
-                        Text="Trackerino"
-                        SemanticProperties.HeadingLevel="Level1"
-                        FontSize="32"
-                        HorizontalOptions="Center" />
+                Text="Trackerino"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
 
             <Label
                 Text="Track your time!"
