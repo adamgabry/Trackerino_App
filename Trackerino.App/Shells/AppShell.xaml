@@ -11,7 +11,7 @@
     FlyoutBehavior="Disabled">
 
     <Shell.MenuBarItems>
-        <MenuBarItem Text="File">
+        <MenuBarItem Text="Screen">
             <MenuFlyoutItem Text="Users"
                             Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}" />
 
