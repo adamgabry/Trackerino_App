@@ -20,9 +20,8 @@ public static class ActivitySeeds
     public static readonly ActivityEntity ActivityEntity = new()
     {
         Id = Guid.Parse(input: "4FA608F9-77D2-498B-A6C1-387FDA3DFB3D"),
-        Tag = ActivityTag.Meeting,
+        Tag = ActivityTag.Work,
         Description = "Hour long meeting",
-        //Parse("2023-04-18, 15:23:00")
         StartDateTime = new DateTime(2023, 1, 24, 14, 0, 0),
         EndDateTime = new DateTime(2023, 1, 24, 15, 0, 0),
         UserId = UserSeeds.UserEntity.Id,
@@ -30,8 +29,8 @@ public static class ActivitySeeds
     };
 
     //To ensure that no tests reuse these clones for non-idempotent operations
-    public static readonly ActivityEntity ActivityEntityUpdate = ActivityEntity with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052") };
-    public static readonly ActivityEntity ActivityEntityDelete = ActivityEntity with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619") };
+    public static readonly ActivityEntity ActivityEntityUpdate = ActivityEntity with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052"),ProjectId = ProjectSeeds.ProjectEntity.Id, UserId = UserSeeds.UserEntity.Id};
+    public static readonly ActivityEntity ActivityEntityDelete = ActivityEntity with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"),ProjectId = ProjectSeeds.ProjectEntity.Id, UserId = UserSeeds.UserEntity.Id};
 
     public static ActivityEntity ActivityEntity1 = new()
     {
@@ -52,15 +51,15 @@ public static class ActivitySeeds
         StartDateTime = new DateTime(2023, 1, 1, 8, 0, 0),
         EndDateTime = new DateTime(2023, 1, 1, 9, 0, 0),
         UserId = UserSeeds.UserEntity2.Id,
-        ProjectId = ProjectSeeds.ProjectEntity.Id
+        ProjectId = ProjectSeeds.ProjectEntity.Id,
     };
+
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ActivityEntity>().HasData(
             ActivityEntity1,
             ActivityEntity2,
-            EmptyActivityEntity,
             ActivityEntity,
             ActivityEntityUpdate,
             ActivityEntityDelete

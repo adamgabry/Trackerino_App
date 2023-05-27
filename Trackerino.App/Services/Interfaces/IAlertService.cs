@@ -1,4 +1,4 @@
-﻿namespace Trackerino.App.Services;
+﻿namespace Trackerino.App.Services.Interfaces;
 
 public interface IAlertService
 {

@@ -14,7 +14,7 @@ using Trackerino.DAL.Common;
 
 namespace Trackerino.App.ViewModels
 {
-    [QueryProperty(nameof(User), nameof(User))]
+    [QueryProperty(nameof(User), nameof(User)), QueryProperty(nameof(Project), nameof(Project))]
     public partial class UserActivitiesEditViewModel : ViewModelBase
     {
         private readonly IActivityFacade _activityFacade;
@@ -39,9 +39,9 @@ namespace Trackerino.App.ViewModels
             IMessengerService messengerService)
             : base(messengerService)
         {
-            this._activityFacade = activityFacade;
-            this._userProjectActivityFacade = userProjectActivityFacade;
-            this._userProjectActivityModelMapper = userProjectActivityModelMapper;
+            _activityFacade = activityFacade;
+            _userProjectActivityFacade = userProjectActivityFacade;
+            _userProjectActivityModelMapper = userProjectActivityModelMapper;
 
             ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
         }

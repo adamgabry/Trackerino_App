@@ -32,12 +32,12 @@ namespace Trackerino.App.ViewModels
             _navigationService = navigationService;
         }
 
-        [RelayCommand]
-        private async Task GoToUserActivitiesEditAsync()
-        {
-            await _navigationService.GoToAsync("/activities",
-                new Dictionary<string, object?> { [nameof(UserActivitiesEditViewModel.User)] = User });
-        }
+        //[RelayCommand]
+        //private async Task GoToUserActivitiesEditAsync()
+        //{
+        //    await _navigationService.GoToAsync("/activities",
+        //        new Dictionary<string, object?> { [nameof(UserActivitiesEditViewModel.User)] = User });
+        //}
 
         [RelayCommand]
         private async Task GoToUserProjectsEditAsync()
@@ -49,7 +49,7 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task SaveAsync()
         {
-            await _userFacade.SaveAsync(User with { Projects = default!});
+            await _userFacade.SaveAsync(User with { Projects = default!, Activities = default!});
 
             MessengerService.Send(new UserEditMessage { UserId = User.Id });
 

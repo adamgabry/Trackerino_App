@@ -1,5 +1,6 @@
 ﻿using Trackerino.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Trackerino.Common.Tests;
 
 namespace Trackerino.DAL.Tests.EntityTests
 {
@@ -20,13 +21,13 @@ namespace Trackerino.DAL.Tests.EntityTests
             Assert.Empty(await TrackerinoDbContextSut.Users.ToListAsync());
 
             // Act
-            await TrackerinoDbContextSut.Users.AddAsync(user);
+            TrackerinoDbContextSut.Users.Add(user);
             await TrackerinoDbContextSut.SaveChangesAsync();
-            var result = await TrackerinoDbContextSut.Users.ToListAsync();
 
-            // Assert
-            Assert.Single(result);
-            Assert.Equal(user, result[0]);
+            //Assert
+            await using var dbx = TrackerinoDbContextFactory.CreateDbContext();
+            var actualEntities = await dbx.Users.SingleAsync(i => i.Id == user.Id);
+            DeepAssert.Equal(user, actualEntities);
         }
 
         [Fact]

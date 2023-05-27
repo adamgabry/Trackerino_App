@@ -40,8 +40,6 @@ namespace Trackerino.BL.Mappers
             {
                 Id = model.Id,
                 Name = model.Name,
-                Activities = (ICollection<ActivityEntity>)model.Activities,
-                Users = (ICollection<UserProjectEntity>)model.Users
             };
     }
 }

@@ -44,8 +44,6 @@ namespace Trackerino.BL.Mappers
                 Name = model.Name,
                 Surname = model.Surname,
                 ImageUrl = model.ImageUrl,
-                Projects = (ICollection<UserProjectEntity>)model.Projects,
-                Activities = (ICollection<ActivityEntity>)model.Activities
             };
     }
 }

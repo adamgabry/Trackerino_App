@@ -1,40 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-    <Nullable>enable</Nullable>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<!--<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>-->
+    <TargetFramework Condition=" '$(OS)' == 'Windows_NT' ">net7.0-windows10.0.19041.0</TargetFramework>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Trackerino.App</RootNamespace>
 		<UseMaui>true</UseMaui>
+    <Nullable>enable</Nullable>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Trackerino</ApplicationTitle>
+		<ApplicationTitle>Trackerino.App</ApplicationTitle>
 
-    <!-- App Identifier -->
+		<!-- App Identifier -->
 		<ApplicationId>com.companyname.trackerino.app</ApplicationId>
-		<ApplicationIdGuid>bd7f9bcb-c3c2-405e-8a0f-b09c07bd8e83</ApplicationIdGuid>
+		<ApplicationIdGuid>89f5c160-d06e-4bd1-a157-d374021b01af</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationTitle>Trackerino</ApplicationTitle>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationTitle>Trackerino</ApplicationTitle>
+		<!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>-->
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+    <!--<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>-->
+		<!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>-->
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-      <MauiIcon Include="Resources\AppIcon\icon.svg" />
+    <MauiIcon Include="Resources\AppIcon\icon.svg" />
 
     <!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -47,109 +46,136 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
+  </ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Inter-Bold.ttf" />
 	  <None Remove="Resources\Fonts\Inter-Regular.ttf" />
+	  <None Remove="Resources\Images\icon_calendar.png" />
 	  <None Remove="Resources\Images\icon_calendar.svg" />
+	  <None Remove="Resources\Images\icon_dollar.png" />
 	  <None Remove="Resources\Images\icon_dollar.svg" />
+	  <None Remove="Resources\Images\icon_down.png" />
 	  <None Remove="Resources\Images\icon_down.svg" />
+	  <None Remove="Resources\Images\icon_edit.png" />
 	  <None Remove="Resources\Images\icon_edit.svg" />
+	  <None Remove="Resources\Images\icon_filter.png" />
 	  <None Remove="Resources\Images\icon_filter.svg" />
+	  <None Remove="Resources\Images\icon_info.png" />
 	  <None Remove="Resources\Images\icon_info.svg" />
+	  <None Remove="Resources\Images\icon_minus.png" />
 	  <None Remove="Resources\Images\icon_minus.svg" />
+	  <None Remove="Resources\Images\icon_person.png" />
 	  <None Remove="Resources\Images\icon_person.svg" />
+	  <None Remove="Resources\Images\icon_play.png" />
 	  <None Remove="Resources\Images\icon_play.svg" />
+	  <None Remove="Resources\Images\icon_plus.png" />
 	  <None Remove="Resources\Images\icon_plus.svg" />
+	  <None Remove="Resources\Images\icon_stop.png" />
 	  <None Remove="Resources\Images\icon_stop.svg" />
+	  <None Remove="Resources\Images\icon_unlock.png" />
 	  <None Remove="Resources\Images\icon_unlock.svg" />
+	  <None Remove="Resources\Images\icon_up.png" />
 	  <None Remove="Resources\Images\icon_up.svg" />
 	</ItemGroup>
 
+
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+		<PackageReference Include="Fody" Version="6.7.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+		<PackageReference Include="Scrutor" Version="4.2.2" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="Views\ActivityListView.xaml.cs">
-	    <DependentUpon>ActivityListView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\ActivityView.xaml.cs">
-	    <DependentUpon>ActivityView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\LoginView.xaml.cs">
-	    <DependentUpon>LoginView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\UserEditView.xaml.cs">
-	    <DependentUpon>UserEditView.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
+  <ItemGroup>
+    <MauiXaml Update="Shells\AppShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Activity\ActivityDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Activity\ActivityEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Activity\ActivityListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Activity\ActivityProjectEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Activity\ActivityUserEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\ContentPageBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Project\ProjectActivitiesEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Project\ProjectDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Project\ProjectEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Project\ProjectListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Project\ProjectUsersEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\User\UserActivitiesEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\User\UserDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\User\UserEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\User\UserListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\User\UserProjectsEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
 
-	<ItemGroup>
-	  <MauiXaml Update="Views\ActivityListView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Trackerino.BL\Trackerino.BL.csproj" />
+    <ProjectReference Include="..\Trackerino.DAL\Trackerino.DAL.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <MauiXaml Update="Views\ContentPageBase.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Activity\ActivityDetailView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Activity\ActivityEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Activity\ActivityListView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Activity\ActivityProjectEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Activity\ActivityUserEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Project\ProjectActivitiesEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Project\ProjectDetailView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Project\ProjectEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Project\ProjectListView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Project\ProjectUsersEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\User\UserActivitiesEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\User\UserDetailView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\User\UserEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\User\UserListView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\User\UserProjectsEditView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\ContentPageBase.xaml.cs">
+      <DependentUpon>ContentPageBase.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Messages\" />
-	</ItemGroup>
+  <ItemGroup>
+    <!-- Generator dependencies -->
+    <PackageReference Include="CsvTextFieldParser" Version="1.2.2-preview" GeneratePathProperty="true" PrivateAssets="all" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\Trackerino.BL\Trackerino.BL.csproj" />
-	</ItemGroup>
+  <PropertyGroup>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+  </PropertyGroup>
+
+  <Target Name="GetDependencyTargetPaths">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="$(PKGCsvTextFieldParser)\lib\netstandard2.0\CsvTextFieldParser.dll" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>
 
 </Project>

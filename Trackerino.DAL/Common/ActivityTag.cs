@@ -4,5 +4,8 @@ public enum ActivityTag
 {
     None = 0,
     Work = 1,
-    Meeting = 2
+    School = 2,
+    Fun = 3,
+    Sport = 4,
+    Other = 5
 }

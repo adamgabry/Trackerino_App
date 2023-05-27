@@ -1,25 +1,48 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Reflection;
+using CommunityToolkit.Maui;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Trackerino.App.Services.Interfaces;
+using Trackerino.BL;
 
-namespace Trackerino.App
+[assembly: System.Resources.NeutralResourcesLanguage("en")]
+namespace Trackerino.App;
+
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("Inter-Bold.ttf", "InterBold");
-                    fonts.AddFont("Inter-Regular.ttf", "InterRegular");
-                });
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("Inter-Regular.ttf", "InterRegular");
+                fonts.AddFont("Inter-Bold.ttf", "InterBold");
+            });
 
+        builder.Services
+            .AddDALServices()
+            .AddAppServices()
+            .AddBLServices();
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+        var app = builder.Build();
+
+        app.Services.GetRequiredService<IDbMigrator>().Migrate();
+        RegisterRouting(app.Services.GetRequiredService<INavigationService>());
+
+        return app;
+    }
+
+    private static void RegisterRouting(INavigationService navigationService)
+    {
+        foreach (var route in navigationService.Routes)
+        {
+            Routing.RegisterRoute(route.Route, route.ViewType);
         }
     }
 }

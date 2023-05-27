@@ -53,6 +53,58 @@ namespace Trackerino.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Activities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fccccd03-fa27-46d8-950d-7a5d9fd1b103"),
+                            Description = "Seeded Activity 1 description",
+                            EndDateTime = new DateTime(2023, 12, 24, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProjectId = new Guid("0d7d53ae-d631-4daa-8c71-c3370e69a16b"),
+                            StartDateTime = new DateTime(2023, 12, 24, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            Tag = 1,
+                            UserId = new Guid("3fada1af-3777-43b8-817b-b796005bdc43")
+                        },
+                        new
+                        {
+                            Id = new Guid("f7edb698-5130-4fcb-8f49-c1ac22dacfe8"),
+                            Description = "Seeded Activity 2 description",
+                            EndDateTime = new DateTime(2023, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProjectId = new Guid("0d7d53ae-d631-4daa-8c71-c3370e69a16b"),
+                            StartDateTime = new DateTime(2023, 1, 1, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            Tag = 0,
+                            UserId = new Guid("b86d6d89-e319-44ca-a5b5-03f3b61c6079")
+                        },
+                        new
+                        {
+                            Id = new Guid("4fa608f9-77d2-498b-a6c1-387fda3dfb3d"),
+                            Description = "Hour long meeting",
+                            EndDateTime = new DateTime(2023, 1, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProjectId = new Guid("0d7d53ae-d631-4daa-8c71-c3370e69a16b"),
+                            StartDateTime = new DateTime(2023, 1, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Tag = 2,
+                            UserId = new Guid("c6128de8-a1a1-45fc-a777-4e6cf056ebb0")
+                        },
+                        new
+                        {
+                            Id = new Guid("143332b9-080e-4953-aea5-bef64679b052"),
+                            Description = "Hour long meeting",
+                            EndDateTime = new DateTime(2023, 1, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProjectId = new Guid("0d7d53ae-d631-4daa-8c71-c3370e69a16b"),
+                            StartDateTime = new DateTime(2023, 1, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Tag = 2,
+                            UserId = new Guid("c6128de8-a1a1-45fc-a777-4e6cf056ebb0")
+                        },
+                        new
+                        {
+                            Id = new Guid("274d0cc9-a948-4818-aadb-a8b4c0506619"),
+                            Description = "Hour long meeting",
+                            EndDateTime = new DateTime(2023, 1, 24, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProjectId = new Guid("0d7d53ae-d631-4daa-8c71-c3370e69a16b"),
+                            StartDateTime = new DateTime(2023, 1, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Tag = 2,
+                            UserId = new Guid("c6128de8-a1a1-45fc-a777-4e6cf056ebb0")
+                        });
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.ProjectEntity", b =>
@@ -68,6 +120,43 @@ namespace Trackerino.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0d7d53ae-d631-4daa-8c71-c3370e69a16b"),
+                            Name = "Project seed"
+                        },
+                        new
+                        {
+                            Id = new Guid("229ec7a1-58bf-4269-8a82-ec741a5abfac"),
+                            Name = "Project seed"
+                        },
+                        new
+                        {
+                            Id = new Guid("98b7f7b6-0f51-43b3-b8c0-b5fcfff6dc2e"),
+                            Name = "Project seed"
+                        },
+                        new
+                        {
+                            Id = new Guid("0953f3ce-7b1a-48c1-9796-d2bac7f67868"),
+                            Name = "Project seed"
+                        },
+                        new
+                        {
+                            Id = new Guid("5dca4cea-b8a8-4c86-a0b3-ffb78fba1a09"),
+                            Name = "Project seed"
+                        },
+                        new
+                        {
+                            Id = new Guid("4fd824c0-a7d1-48ba-8e7c-4f136cf8bf31"),
+                            Name = "Project seed"
+                        },
+                        new
+                        {
+                            Id = new Guid("f78ed923-e094-4016-9045-3f5bb7f2eb88"),
+                            Name = "Project seed"
+                        });
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.UserEntity", b =>
@@ -90,6 +179,55 @@ namespace Trackerino.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e1a7b31f-0223-4b1b-b8ad-4aaa627908b9"),
+                            ImageUrl = "https://static.wikia.nocookie.net/mrrobot/images/3/3e/Elliot.jpg/revision/latest?cb=20150810201239",
+                            Name = "Eliot",
+                            Surname = "Anderson"
+                        },
+                        new
+                        {
+                            Id = new Guid("a4ead4ba-e1ec-43d9-b6a8-38dd8ef70bf2"),
+                            ImageUrl = "https://static.wikia.nocookie.net/mrrobot/images/3/3e/Elliot.jpg/revision/latest?cb=20150810201239",
+                            Name = "Eliot",
+                            Surname = "Anderson"
+                        },
+                        new
+                        {
+                            Id = new Guid("3fada1af-3777-43b8-817b-b796005bdc43"),
+                            Name = "User1 seed Name ",
+                            Surname = "User1 seed Surname"
+                        },
+                        new
+                        {
+                            Id = new Guid("b86d6d89-e319-44ca-a5b5-03f3b61c6079"),
+                            Name = "User2 seed Name ",
+                            Surname = "User2 seed Surname"
+                        },
+                        new
+                        {
+                            Id = new Guid("c6128de8-a1a1-45fc-a777-4e6cf056ebb0"),
+                            ImageUrl = "https://static.wikia.nocookie.net/mrrobot/images/3/3e/Elliot.jpg/revision/latest?cb=20150810201239",
+                            Name = "Eliot",
+                            Surname = "Anderson"
+                        },
+                        new
+                        {
+                            Id = new Guid("77146ea0-2d86-4874-b75e-fba628afc698"),
+                            ImageUrl = "https://static.wikia.nocookie.net/mrrobot/images/3/3e/Elliot.jpg/revision/latest?cb=20150810201239",
+                            Name = "Eliot",
+                            Surname = "Anderson"
+                        },
+                        new
+                        {
+                            Id = new Guid("88db5c3b-bd8d-439a-ba86-b7dd75735185"),
+                            ImageUrl = "https://static.wikia.nocookie.net/mrrobot/images/3/3e/Elliot.jpg/revision/latest?cb=20150810201239",
+                            Name = "Eliot",
+                            Surname = "Anderson"
+                        });
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.UserProjectEntity", b =>
@@ -111,6 +249,32 @@ namespace Trackerino.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserProject");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("58f19566-686f-4093-a8a6-77b20ea10863"),
+                            ProjectId = new Guid("0d7d53ae-d631-4daa-8c71-c3370e69a16b"),
+                            UserId = new Guid("3fada1af-3777-43b8-817b-b796005bdc43")
+                        },
+                        new
+                        {
+                            Id = new Guid("87833e66-05ba-4d6b-900b-fe5ace88dbd8"),
+                            ProjectId = new Guid("0d7d53ae-d631-4daa-8c71-c3370e69a16b"),
+                            UserId = new Guid("b86d6d89-e319-44ca-a5b5-03f3b61c6079")
+                        },
+                        new
+                        {
+                            Id = new Guid("a2e6849d-a158-4436-980c-7fc26b60c674"),
+                            ProjectId = new Guid("4fd824c0-a7d1-48ba-8e7c-4f136cf8bf31"),
+                            UserId = new Guid("3fada1af-3777-43b8-817b-b796005bdc43")
+                        },
+                        new
+                        {
+                            Id = new Guid("30872eff-ced4-4f2b-89db-0ee83a74d279"),
+                            ProjectId = new Guid("f78ed923-e094-4016-9045-3f5bb7f2eb88"),
+                            UserId = new Guid("3fada1af-3777-43b8-817b-b796005bdc43")
+                        });
                 });
 
             modelBuilder.Entity("Trackerino.DAL.Entities.ActivityEntity", b =>
