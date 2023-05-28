@@ -14,7 +14,7 @@ public static class UserSeeds
         Surname = default!,
         ImageUrl = default
     };
-    
+
     public static readonly UserEntity UserEntity = new()
     {
         Id = Guid.Parse("C6128DE8-A1A1-45FC-A777-4E6CF056EBB0"),
