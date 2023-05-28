@@ -1,10 +1,10 @@
-﻿using Trackerino.DAL.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using Trackerino.DAL.Common;
 using Trackerino.DAL.Entities;
-using Microsoft.EntityFrameworkCore;
 
-namespace Trackerino.Common.Tests.Seeds;
+namespace Trackerino.DAL.TestSeeds;
 
-public static class ActivitySeeds
+public static class TestActivitySeeds
 {
     public static readonly ActivityEntity EmptyActivityEntity = new()
     {
@@ -24,13 +24,13 @@ public static class ActivitySeeds
         Description = "Hour long meeting",
         StartDateTime = new DateTime(2023, 1, 24, 14, 0, 0),
         EndDateTime = new DateTime(2023, 1, 24, 15, 0, 0),
-        UserId = UserSeeds.UserEntity.Id,
-        ProjectId = ProjectSeeds.ProjectEntity.Id
+        UserId = TestUserSeeds.UserEntity.Id,
+        ProjectId = TestProjectSeeds.ProjectEntity.Id
     };
 
     //To ensure that no tests reuse these clones for non-idempotent operations
-    public static readonly ActivityEntity ActivityEntityUpdate = ActivityEntity with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052"), ProjectId = ProjectSeeds.ProjectEntity.Id, UserId = UserSeeds.UserEntity.Id };
-    public static readonly ActivityEntity ActivityEntityDelete = ActivityEntity with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"), ProjectId = ProjectSeeds.ProjectEntity.Id, UserId = UserSeeds.UserEntity.Id };
+    public static readonly ActivityEntity ActivityEntityUpdate = ActivityEntity with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052"), ProjectId = TestProjectSeeds.ProjectEntity.Id, UserId = TestUserSeeds.UserEntity.Id };
+    public static readonly ActivityEntity ActivityEntityDelete = ActivityEntity with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"), ProjectId = TestProjectSeeds.ProjectEntity.Id, UserId = TestUserSeeds.UserEntity.Id };
 
     public static ActivityEntity ActivityEntity1 = new()
     {
@@ -39,8 +39,8 @@ public static class ActivitySeeds
         Tag = ActivityTag.Work,
         StartDateTime = new DateTime(2023, 12, 24, 20, 0, 0),
         EndDateTime = new DateTime(2023, 12, 24, 22, 0, 0),
-        UserId = UserSeeds.UserEntity1.Id,
-        ProjectId = ProjectSeeds.ProjectEntity.Id
+        UserId = TestUserSeeds.UserEntity1.Id,
+        ProjectId = TestProjectSeeds.ProjectEntity.Id
     };
 
     public static ActivityEntity ActivityEntity2 = new()
@@ -50,8 +50,8 @@ public static class ActivitySeeds
         Tag = ActivityTag.None,
         StartDateTime = new DateTime(2023, 1, 1, 8, 0, 0),
         EndDateTime = new DateTime(2023, 1, 1, 9, 0, 0),
-        UserId = UserSeeds.UserEntity2.Id,
-        ProjectId = ProjectSeeds.ProjectEntity.Id,
+        UserId = TestUserSeeds.UserEntity2.Id,
+        ProjectId = TestProjectSeeds.ProjectEntity.Id,
     };
 
 

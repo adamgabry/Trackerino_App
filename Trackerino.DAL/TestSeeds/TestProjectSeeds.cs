@@ -1,10 +1,9 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Entities;
 
-namespace Trackerino.Common.Tests.Seeds;
+namespace Trackerino.DAL.TestSeeds;
 
-public static class ProjectSeeds
+public static class TestProjectSeeds
 {
     public static readonly ProjectEntity EmptyProjectEntity = new()
     {
@@ -29,15 +28,15 @@ public static class ProjectSeeds
     public static readonly ProjectEntity ProjectForUserProjectEntityDelete = ProjectEntity with { Id = Guid.Parse("F78ED923-E094-4016-9045-3F5BB7F2EB88") };
 
 
-    static ProjectSeeds()
+    static TestProjectSeeds()
     {
-        //ProjectEntity.Activities.Add(ActivitySeeds.ActivityEntity1);
-        //ProjectEntity.Activities.Add(ActivitySeeds.ActivityEntity2);
+        //ProjectEntity.Activities.Add(TestActivitySeeds.ActivityEntity1);
+        //ProjectEntity.Activities.Add(TestActivitySeeds.ActivityEntity2);
 
-        //ProjectEntity.Users.Add(UserProjectSeeds.UserProjectEntity1);
-        //ProjectEntity.Users.Add(UserProjectSeeds.UserProjectEntity2);
+        //ProjectEntity.Users.Add(TestUserProjectSeeds.UserProjectEntity1);
+        //ProjectEntity.Users.Add(TestUserProjectSeeds.UserProjectEntity2);
 
-        //ProjectForUserProjectEntityDelete.Users.Add(UserProjectSeeds.UserProjectEntityDelete);
+        //ProjectForUserProjectEntityDelete.Users.Add(TestUserProjectSeeds.UserProjectEntityDelete);
     }
 
     public static void Seed(this ModelBuilder modelBuilder)

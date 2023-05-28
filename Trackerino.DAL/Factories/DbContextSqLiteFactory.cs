@@ -12,6 +12,6 @@ namespace Trackerino.DAL.Factories
             _seedDemoData = seedDemoData;
             _dbContextOptionsBuilder.UseSqlite($"Data Source={databaseName}.db;Cache=Shared");
         }
-        public TrackerinoDbContext CreateDbContext() => new (_dbContextOptionsBuilder.Options, _seedDemoData, false);
+        public TrackerinoDbContext CreateDbContext() => new (_dbContextOptionsBuilder.Options, _seedDemoData,false);
     }
 }

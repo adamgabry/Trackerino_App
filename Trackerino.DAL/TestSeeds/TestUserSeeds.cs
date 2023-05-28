@@ -1,11 +1,9 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using Trackerino.DAL.Common;
+﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Entities;
 
-namespace Trackerino.Common.Tests.Seeds;
+namespace Trackerino.DAL.TestSeeds;
 
-public static class UserSeeds
+public static class TestUserSeeds
 {
     public static readonly UserEntity EmptyUserEntity = new()
     {

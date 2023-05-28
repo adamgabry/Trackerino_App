@@ -4,7 +4,7 @@ using Trackerino.BL.Facades;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
 using Trackerino.Common.Tests;
-using Trackerino.Common.Tests.Seeds;
+using Trackerino.DAL.TestSeeds;
 
 
 namespace Trackerino.BL.Tests
@@ -48,27 +48,27 @@ namespace Trackerino.BL.Tests
         {
             // Arrange
             var projects = await _projectFacadeSUT.GetAsync();
-            var project = projects.Single(p => p.Id == ProjectSeeds.ProjectEntity.Id);
+            var project = projects.Single(p => p.Id == TestProjectSeeds.ProjectEntity.Id);
 
             // Assert
-            DeepAssert.Equal(ProjectModelMapper.MapToListModel(ProjectSeeds.ProjectEntity), project);
+            DeepAssert.Equal(ProjectModelMapper.MapToListModel(TestProjectSeeds.ProjectEntity), project);
         }
 
         [Fact]
         public async Task GetById_SeededProject()
         {
             // Arrange
-            var project = await _projectFacadeSUT.GetAsync(ProjectSeeds.ProjectEntity.Id);
+            var project = await _projectFacadeSUT.GetAsync(TestProjectSeeds.ProjectEntity.Id);
 
             // Assert
-            DeepAssert.Equal(ProjectModelMapper.MapToDetailModel(ProjectSeeds.ProjectEntity), project);
+            DeepAssert.Equal(ProjectModelMapper.MapToDetailModel(TestProjectSeeds.ProjectEntity), project);
         }
 
         [Fact]
         public async Task GetById_NonExistent()
         {
             // Arrange
-            var project = await _projectFacadeSUT.GetAsync(ProjectSeeds.EmptyProjectEntity.Id);
+            var project = await _projectFacadeSUT.GetAsync(TestProjectSeeds.EmptyProjectEntity.Id);
 
             // Assert
             Assert.Null(project);
@@ -78,18 +78,18 @@ namespace Trackerino.BL.Tests
         public async Task SeededProject_DeleteById_Deleted()
         {
             // Act
-            await _projectFacadeSUT.DeleteAsync(ProjectSeeds.ProjectEntityDelete.Id);
+            await _projectFacadeSUT.DeleteAsync(TestProjectSeeds.ProjectEntityDelete.Id);
 
             // Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Projects.AnyAsync(p => p.Id == ProjectSeeds.ProjectEntityDelete.Id));
+            Assert.False(await dbxAssert.Projects.AnyAsync(p => p.Id == TestProjectSeeds.ProjectEntityDelete.Id));
         }
 
         [Fact]
         public async Task Delete_ProjectWithActivities_Throws()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await _projectFacadeSUT.DeleteAsync(ProjectSeeds.ProjectEntity.Id));
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => await _projectFacadeSUT.DeleteAsync(TestProjectSeeds.ProjectEntity.Id));
         }
         [Fact]
         public async Task Delete_NonExistent_Project_Throws()

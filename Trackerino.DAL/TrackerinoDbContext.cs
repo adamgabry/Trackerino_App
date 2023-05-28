@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.DemoSeeds;
+using Trackerino.DAL.TestSeeds;
 using Trackerino.DAL.Entities;
 
 namespace Trackerino.DAL
@@ -45,6 +46,13 @@ namespace Trackerino.DAL
                 UserSeeds.Seed(modelBuilder);
                 ActivitySeeds.Seed(modelBuilder);
                 UserProjectSeeds.Seed(modelBuilder);
+            }
+            if (_seedTestingData)
+            {
+                TestProjectSeeds.Seed(modelBuilder);
+                TestUserSeeds.Seed(modelBuilder);
+                TestActivitySeeds.Seed(modelBuilder);
+                TestUserProjectSeeds.Seed(modelBuilder);
             }
         }
     }

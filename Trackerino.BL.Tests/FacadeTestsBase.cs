@@ -15,7 +15,7 @@ namespace Trackerino.BL.Tests
     {
         protected FacadeTestsBase()
         {
-            DbContextFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: true);
+            DbContextFactory = new DbContextLocalDbFactory(GetType().FullName!, seedTestingData: true);
 
             ActivityEntityMapper = new ActivityEntityMapper();
             ProjectEntityMapper = new ProjectEntityMapper();
