@@ -42,4 +42,4 @@ steps:
     command: 'test'
     projects: 'Trackerino.DAL.Tests/Trackerino.DAL.Tests.csproj'
     projects: 'Trackerino.BL.Tests/Trackerino.BL.Tests.csproj'
-    testRunTitle: 
+    testRunTitle: Tests
