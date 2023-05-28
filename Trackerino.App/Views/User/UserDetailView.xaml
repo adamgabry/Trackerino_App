@@ -1,15 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!--<?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Trackerino.App.Views.User.UserDetailView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentView>-->
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:views="clr-namespace:Trackerino.App.Views"
@@ -26,79 +14,6 @@
             <Label Grid.Row="0"
                    FontSize="24"
                    Text="User details" />
-
-            <!--<Button Grid.Row="0"
-                    Padding="12, 6"
-                    HorizontalOptions="End" VerticalOptions="Start"
-                    Text="Add user"
-                    Command="{Binding GoToCreateCommand}"
-                    CornerRadius="25"
-                    FontFamily="MontserratMedium"
-                    FontSize="14" />-->
-
-            <ListView Grid.Row="1"
-              Margin="0,10"
-              ItemsSource="{Binding User}"
-              RowHeight="70">
-                <ListView.Header>
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="3*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Label Grid.Column="0" Text="Photo" />
-                        <Label Grid.Column="1" Text="Name" />
-                        <Label Grid.Column="2" Text="Surname" />
-                        <Label Grid.Column="3" Text="ID" />
-                    </Grid>
-                </ListView.Header>
-
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="m:UserDetailModel">
-                        <ViewCell>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Frame Grid.Column="0"
-                               Padding="0"
-                               BackgroundColor="LightGray"
-                               CornerRadius="25"
-                               WidthRequest="50"
-                               HeightRequest="50"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center">
-                                    <Image Source="{Binding ImageUrl}"
-                                   Aspect="AspectFill"
-                                   HorizontalOptions="Fill"
-                                   VerticalOptions="Fill" />
-                                </Frame>
-
-                                <Label Grid.Column="1"
-                               Text="{Binding Name}"
-                               Margin="10,0,0,0"
-                               VerticalOptions="Center" />
-
-                                <Label Grid.Column="2"
-                               Text="{Binding Surname}"
-                               VerticalOptions="Center" />
-
-                                <Label Grid.Column="3"
-                               Text="{Binding Id}"
-                               VerticalOptions="Center" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
         </Grid>
     </StackLayout>
 

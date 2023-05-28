@@ -3,12 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:Trackerino.App.Views"
              xmlns:vm="clr-namespace:Trackerino.App.ViewModels"
-             xmlns:conv="clr-namespace:Trackerino.App.Converters"
              xmlns:m="clr-namespace:Trackerino.BL.Models;assembly=Trackerino.BL"
              x:DataType="vm:ActivityListViewModel"
              x:Name="ActivityListViewRoot"
              x:Class="Trackerino.App.Views.Activity.ActivityListView"
-
              Title="Activities">
 
     <StackLayout Padding="20">
@@ -16,86 +14,79 @@
               RowSpacing="20">
             <Label Grid.Row="0"
                    FontSize="24"
-                   Text="History" />
+                   Text="Select Activity" />
 
             <Button Grid.Row="0"
                     Padding="12, 6"
                     HorizontalOptions="End" VerticalOptions="Start"
-                    Text="New activity"
+                    Text="Add Activity"
                     Command="{Binding GoToCreateCommand}"
                     CornerRadius="25"
                     FontFamily="MontserratMedium"
                     FontSize="14" />
 
-            <ListView Grid.Row="1"
-              Margin="0,10"
-              ItemsSource="{Binding Activities}"
-              RowHeight="70">
-                <ListView.Header>
+            <CollectionView Grid.Row="1"
+                Margin="0,10"
+                ItemsSource="{Binding Activities}"
+                SelectionMode="Single">
+                <CollectionView.Header>
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="2*" />
+                            <!--<ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />-->
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Text="Start" />
-                        <Label Grid.Column="1" Text="End" />
-                        <Label Grid.Column="2" Text="Tag" />
-                        <Label Grid.Column="3" Text="Description" />
-                        <Label Grid.Column="4" Text="ID" />
+                        <Label Grid.Column="0" Text="Start Date" />
+                        <Label Grid.Column="1" Text="End Date" />
+                        <Label Grid.Column="2" Text="Description" />
+                        <!--<Label Grid.Column="3" Text="User" />
+                        <Label Grid.Column="4" Text="Project" />-->
                     </Grid>
-                </ListView.Header>
+                </CollectionView.Header>
 
-                <ListView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:ActivityListModel">
-                        <ViewCell>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="3*" />
-                                    <ColumnDefinition Width="2*" />
-                                </Grid.ColumnDefinitions>
+                        <Grid Margin="10">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                          CommandParameter="{Binding Id}" />
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                                <!--<ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />-->
+                            </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="0"
-                                       Text="{Binding StartDateTime, Converter={StaticResource DateTimeToStringConverter}}"
-                                       VerticalOptions="Center" />
+                            <Label Grid.Column="0"
+                       Text="{Binding StartDateTime}"
+                       VerticalOptions="Center" />
 
-                                <Label Grid.Column="1"
-                                       Text="{Binding EndDateTime, Converter={StaticResource DateTimeToStringConverter}}"
-                                       VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                       Text="{Binding EndDateTime}"
+                       VerticalOptions="Center" />
 
-                                <Label Grid.Column="2"
-                                       Text="{Binding Tag }"
-                                       VerticalOptions="Center" />
+                            <Label Grid.Column="2"
+                       Text="{Binding Description}"
+                       VerticalOptions="Center" />
 
-                                <Label Grid.Column="3"
-                                       Text="{Binding Description }"
-                                       VerticalOptions="Center" />
+                            <!--<Label Grid.Column="3"
+                       Text="{Binding User.Name}"
+                       VerticalOptions="Center" />
 
-                                <Label Grid.Column="4"
-                                       Text="{Binding Id}"
-                                       VerticalOptions="Center" />
-                            </Grid>
-                        </ViewCell>
+                            <Label Grid.Column="4"
+                       Text="{Binding Project.Name}"
+                       VerticalOptions="Center" />-->
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </Grid>
     </StackLayout>
 
 </views:ContentPageBase>
-
-<!--public required Guid Id { get; set; }
-public required DateTime StartDateTime { get; set; }
-public required DateTime EndDateTime { get; set; }
-public ActivityTag Tag { get; set; }
-public string? Description { get; set; }
-public UserEntity? User { get; set; }
-public required Guid UserId { get; set; }
-public ProjectEntity? Project { get; set; }
-public  required  Guid ProjectId { get; set; }-->

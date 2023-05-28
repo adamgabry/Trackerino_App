@@ -1,9 +1,12 @@
+using Trackerino.App.ViewModels;
+
 namespace Trackerino.App.Views.Project;
 
-public partial class ProjectDetailView : ContentView
+public partial class ProjectDetailView
 {
-	public ProjectDetailView()
-	{
-		InitializeComponent();
-	}
+    public ProjectDetailView(ProjectDetailViewModel viewModel)
+        : base(viewModel)
+    {
+        InitializeComponent();
+    }
 }
