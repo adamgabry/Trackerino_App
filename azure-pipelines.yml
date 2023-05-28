@@ -42,7 +42,7 @@ steps:
     command: 'test'
     projects: 'Trackerino.DAL.Tests/Trackerino.DAL.Tests.csproj'
     testRunTitle: DAL Tests
-- task: DotNetCoreCLI@3
+- task: DotNetCoreCLI@2
   inputs:
     command: 'test'
     projects: 'Trackerino.BL.Tests/Trackerino.BL.Tests.csproj'
