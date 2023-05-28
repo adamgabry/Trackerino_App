@@ -16,6 +16,9 @@ namespace Trackerino.App.ViewModels
 
         public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
 
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+
         public ICommand FilterActivitiesCommand { get; }
 
         public ActivityListViewModel(
@@ -62,11 +65,18 @@ namespace Trackerino.App.ViewModels
 
         public async Task FilterActivitiesAsync()
         {
-            // Implement the filtering logic based on selected start and end dates
-            DateTime startDate = new DateTime(2023, 1, 1, 8, 0, 0);  // Get the selected start date
-            DateTime endDate = new DateTime(2023, 2, 1, 9, 0, 0 );  // Get the selected end date
+            // Retrieve the selected start and end dates from the StartDateTime and EndDateTime properties
+            DateTime? startDate = StartDateTime;
+            DateTime? endDate = EndDateTime;
 
-            Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
+            if (startDate != null && endDate != null)
+            {
+                Activities = await _activityFacade.GetFilteredAsync(startDate.Value, endDate.Value);
+            }
+            else
+            {
+                Activities = await _activityFacade.GetAsync();
+            }
         }
     }
 }

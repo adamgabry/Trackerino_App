@@ -23,7 +23,7 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel, Acti
 
         // Filter the activities based on start and end dates
         IEnumerable<ActivityListModel> filteredActivities = activities
-            .Where(activity => activity.StartDateTime >= startDate && activity.EndDateTime <= endDate);
+            .Where(activity => activity.StartDateTime <= endDate && activity.EndDateTime >= startDate);
 
         return filteredActivities;
     }
