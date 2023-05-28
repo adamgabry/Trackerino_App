@@ -6,31 +6,63 @@
                        x:DataType="vm:UserDetailViewModel"
                        x:Name="UserDetailViewRoot"
                        x:Class="Trackerino.App.Views.User.UserDetailView"
-                       Title="Users">
-    
+                       Title="User Details">
+
     <StackLayout Padding="20">
-        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *"
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto"
               RowSpacing="20">
-            <Label Grid.Row="0"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
                    FontSize="24"
-                   Text="User details" />
+                   Text="User Details" />
 
-            <Button Grid.Row="0"
-                    Text="Edit"
-                    Padding="12, 6"
-                    HorizontalOptions="End" VerticalOptions="Start"
-                    Command="{Binding GoToEditCommand}"
-                    CornerRadius="25"
-                    FontSize="14" />
+            <StackLayout Grid.Column="1" Orientation="Horizontal"
+                         HorizontalOptions="End">
+                <Button Text="Edit"
+                        Padding="12, 6"
+                        Command="{Binding GoToEditCommand}"
+                        CornerRadius="25"
+                        FontSize="14" />
 
-            <Button Grid.Row="0"
-                    Text="Delete"
-                    Padding="12, 6"
-                    HorizontalOptions="End" VerticalOptions="Start"
-                    Command="{Binding DeleteCommand}"
-                    CornerRadius="25"
-                    FontSize="14" />
-            </Grid>
-        </StackLayout>
+                <Button Text="Delete"
+                        Padding="12, 6"
+                        Command="{Binding DeleteCommand}"
+                        CornerRadius="25"
+                        FontSize="14" />
+            </StackLayout>
+        </Grid>
+        <Grid HorizontalOptions="Start" VerticalOptions="Start"
+              RowDefinitions="Auto, Auto, Auto"
+              ColumnDefinitions="Auto, Auto, *"
+              RowSpacing="10" ColumnSpacing="20">
+
+            <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
+                   HorizontalOptions="Start" VerticalOptions="Center"
+                   Padding="0" CornerRadius="100">
+                <Image Aspect="AspectFill"
+                       WidthRequest="100" HeightRequest="100"
+                       Source="{Binding User.ImageUrl}" />
+            </Frame>
+
+            <Label Grid.Row="0" Grid.Column="1"
+                   FontSize="12" Text="Name" />
+            <Label Grid.Row="0" Grid.Column="2"
+                   FontSize="14" Text="{Binding User.Name}" />
+
+            <Label Grid.Row="1" Grid.Column="1"
+                   FontSize="12" Text="Surname" />
+            <Label Grid.Row="1" Grid.Column="2"
+                   FontSize="14" Text="{Binding User.Surname}" />
+
+            <Label Grid.Row="2" Grid.Column="1"
+                   FontSize="12" Text="ID" />
+            <Label Grid.Row="2" Grid.Column="2"
+                   FontSize="14" Text="{Binding User.Id}" />
+        </Grid>
+    </StackLayout>
 
 </views:ContentPageBase>
