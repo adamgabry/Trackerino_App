@@ -1,7 +1,6 @@
 ﻿using Trackerino.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Trackerino.Common.Tests;
-using Trackerino.Common.Tests.Seeds;
 
 namespace Trackerino.DAL.Tests.EntityTests
 {

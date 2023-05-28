@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Facades;
 using Trackerino.BL.Models;
-using Trackerino.Common.Tests.Seeds;
 using Trackerino.Common.Tests;
+using Trackerino.DAL.TestSeeds;
 
 namespace Trackerino.BL.Tests
 {
@@ -37,23 +37,23 @@ namespace Trackerino.BL.Tests
         public async Task GetAll_Single_User()
         {
             var users = await _userFacadeSUT.GetAsync();
-            var user = users.Single(u => u.Id == UserSeeds.UserEntity1.Id);
+            var user = users.Single(u => u.Id == TestUserSeeds.UserEntity1.Id);
 
-            DeepAssert.Equal(UserModelMapper.MapToListModel(UserSeeds.UserEntity1), user);
+            DeepAssert.Equal(UserModelMapper.MapToListModel(TestUserSeeds.UserEntity1), user);
         }
 
         [Fact]
         public async Task GetById_SeededUser()
         {
-            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var user = await _userFacadeSUT.GetAsync(TestUserSeeds.UserEntity1.Id);
 
-            DeepAssert.Equal(UserModelMapper.MapToDetailModel(UserSeeds.UserEntity1), user);
+            DeepAssert.Equal(UserModelMapper.MapToDetailModel(TestUserSeeds.UserEntity1), user);
         }
 
         [Fact]
         public async Task GetById_NonExistent()
         {
-            var user = await _userFacadeSUT.GetAsync(UserSeeds.EmptyUserEntity.Id);
+            var user = await _userFacadeSUT.GetAsync(TestUserSeeds.EmptyUserEntity.Id);
 
             Assert.Null(user);
         }
@@ -61,17 +61,17 @@ namespace Trackerino.BL.Tests
         [Fact]
         public async Task SeededUser_DeleteById_Deleted()
         {
-            await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntityDelete.Id);
+            await _userFacadeSUT.DeleteAsync(TestUserSeeds.UserEntityDelete.Id);
 
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Users.AnyAsync(u => u.Id == UserSeeds.UserEntityDelete.Id));
+            Assert.False(await dbxAssert.Users.AnyAsync(u => u.Id == TestUserSeeds.UserEntityDelete.Id));
         }
 
         [Fact]
         public async Task Delete_UserWithProjectActivity_Throws()
         {
             //Act & Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntity2.Id));
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => await _userFacadeSUT.DeleteAsync(TestUserSeeds.UserEntity2.Id));
         }
 
         [Fact]

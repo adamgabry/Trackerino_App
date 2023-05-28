@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.BL.Facades;
 using Trackerino.BL.Facades.Interfaces;
-using Trackerino.Common.Tests.Seeds;
+using Trackerino.DAL.TestSeeds;
 
 namespace Trackerino.BL.Tests.Facades
 {
@@ -17,8 +17,8 @@ namespace Trackerino.BL.Tests.Facades
         public async Task DeleteAsync_ExistingUserProject_UserProjectDeleted()
         {
             // Arrange
-            var userProjectFromDb = UserProjectSeeds.UserProjectEntity1;
-            var userId = UserSeeds.UserEntity1.Id;
+            var userProjectFromDb = TestUserProjectSeeds.UserProjectEntity1;
+            var userId = TestUserSeeds.UserEntity1.Id;
 
             // Act
             await _userProjectFacadeSUT.DeleteAsync(userProjectFromDb.Id);
@@ -36,11 +36,11 @@ namespace Trackerino.BL.Tests.Facades
             // Arrange
             var userProject = new UserProjectDetailModel()
             {
-                Id = UserProjectSeeds.UserProjectEntity1.Id,
-                ProjectId = ProjectSeeds.ProjectEntity.Id,
-                ProjectName = ProjectSeeds.ProjectEntity.Name
+                Id = TestUserProjectSeeds.UserProjectEntity1.Id,
+                ProjectId = TestProjectSeeds.ProjectEntity.Id,
+                ProjectName = TestProjectSeeds.ProjectEntity.Name
             };
-            var userId = UserSeeds.UserEntity1.Id;
+            var userId = TestUserSeeds.UserEntity1.Id;
 
             // Act
             await _userProjectFacadeSUT.SaveAsync(userProject, userId);
@@ -56,14 +56,14 @@ namespace Trackerino.BL.Tests.Facades
         public async Task SaveAsync_ExistingUserProject_UserProjectUpdated()
         {
             // Arrange
-            var userProjectFromDb = UserProjectSeeds.UserProjectEntity1;
+            var userProjectFromDb = TestUserProjectSeeds.UserProjectEntity1;
             var updatedUserProject = new UserProjectDetailModel()
             {
                 Id = userProjectFromDb.Id,
                 ProjectId = userProjectFromDb.ProjectId,
-                ProjectName = ProjectSeeds.ProjectEntity.Name
+                ProjectName = TestProjectSeeds.ProjectEntity.Name
             };
-            var userId = UserSeeds.UserEntity1.Id;
+            var userId = TestUserSeeds.UserEntity1.Id;
 
             // Act
             await _userProjectFacadeSUT.SaveAsync(updatedUserProject, userId);
