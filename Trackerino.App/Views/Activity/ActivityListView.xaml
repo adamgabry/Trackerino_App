@@ -10,6 +10,101 @@
              Title="Activities">
 
     <StackLayout Padding="20">
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+        <Label 
+            Grid.Column="0"
+            Text="Start Date:"
+            VerticalOptions="Center"
+        />
+        <DatePicker
+            Grid.Column="1"
+            Date="{Binding StartDateTime, Mode=TwoWay}"
+            VerticalOptions="Center" 
+        />
+
+        <Label 
+            Grid.Column="0"
+            Grid.Row="1"
+            Text="End Date:"
+            VerticalOptions="Center"
+        />
+        <DatePicker 
+            Grid.Column="1"
+            Grid.Row="1"
+            Date="{Binding EndDateTime, Mode=TwoWay}"
+            VerticalOptions="Center" 
+        />
+
+        <Button 
+            Grid.Column="0"
+            Grid.Row="2"
+            Padding="12, 6"
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="CenterAndExpand"
+            Text="Filter"
+            Command="{Binding FilterActivitiesCommand}"
+            CornerRadius="25"
+            FontFamily="MontserratMedium"
+            FontSize="14"
+        />
+        <Button 
+            Grid.Column="2"
+            Grid.Row="0"
+            Padding="12, 6"
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="CenterAndExpand"
+            Text="Filter Last Week"
+            Command="{Binding FilterLastWeekActivitiesCommand}"
+            CornerRadius="25"
+            FontFamily="MontserratMedium"
+            FontSize="14"
+        />
+        <Button 
+            Grid.Column="2"
+            Grid.Row="1"
+            Padding="12, 6"
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="CenterAndExpand"
+            Text="Filter This Month"
+            Command="{Binding FilterThisMonthActivitiesCommand}"
+            CornerRadius="25"
+            FontFamily="MontserratMedium"
+            FontSize="14"
+        />
+        <Button 
+            Grid.Column="2"
+            Grid.Row="2"
+            Padding="12, 6"
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="CenterAndExpand"
+            Text="Filter Last Month"
+            Command="{Binding FilterLastMonthActivitiesCommand}"
+            CornerRadius="25"
+            FontFamily="MontserratMedium"
+            FontSize="14"
+        />
+        <Button 
+            Grid.Column="2"
+            Grid.Row="3"
+            Padding="12, 6"
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="CenterAndExpand"
+            Text="Filter Last Year"
+            Command="{Binding FilterLastYearActivitiesCommand}"
+            CornerRadius="25"
+            FontFamily="MontserratMedium"
+            FontSize="14"
+        />
+        </Grid>
+
         <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *"
               RowSpacing="20">
             <Label Grid.Row="0"
