@@ -30,12 +30,6 @@ steps:
     version: 7.x
     performMultiLevelLookup: true
 
-- task: VSBuild@1
-  inputs:
-    platform:
-    solution: '$(solution)'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
 
 - task: DotNetCoreCLI@2
   inputs:
