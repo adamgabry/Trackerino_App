@@ -24,7 +24,15 @@
                     CornerRadius="25"
                     FontFamily="MontserratMedium"
                     FontSize="14" />
-
+            <Button Grid.Row="0"
+                    Padding="12, 6"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Text="Filter"
+                    Command="{Binding FilterActivitiesCommand}"
+                    CornerRadius="5"
+                    FontFamily="MontserratMedium"
+                    FontSize="14" />
             <ListView Grid.Row="1"
               Margin="0,10"
               ItemsSource="{Binding Activities}"

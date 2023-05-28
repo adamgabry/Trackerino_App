@@ -5,6 +5,7 @@ using Trackerino.App.Services.Interfaces;
 using Trackerino.App.Services;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
+using System.Windows.Input;
 
 namespace Trackerino.App.ViewModels
 {
@@ -15,6 +16,8 @@ namespace Trackerino.App.ViewModels
 
         public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
 
+        public ICommand FilterActivitiesCommand { get; }
+
         public ActivityListViewModel(
             IActivityFacade activityFacade,
             INavigationService navigationService,
@@ -23,6 +26,8 @@ namespace Trackerino.App.ViewModels
         {
             _activityFacade = activityFacade;
             _navigationService = navigationService;
+
+            FilterActivitiesCommand = new AsyncRelayCommand(FilterActivitiesAsync);
         }
 
         protected override async Task LoadDataAsync()
@@ -53,6 +58,15 @@ namespace Trackerino.App.ViewModels
         public async void Receive(ActivityDeleteMessage message)
         {
             await LoadDataAsync();
+        }
+
+        public async Task FilterActivitiesAsync()
+        {
+            // Implement the filtering logic based on selected start and end dates
+            DateTime startDate = new DateTime(2023, 1, 1, 8, 0, 0);  // Get the selected start date
+            DateTime endDate = new DateTime(2023, 2, 1, 9, 0, 0 );  // Get the selected end date
+
+            Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
         }
     }
 }

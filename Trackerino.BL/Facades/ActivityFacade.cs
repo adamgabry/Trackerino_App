@@ -17,4 +17,14 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel, Acti
     {
 
     }
+    public async Task<IEnumerable<ActivityListModel>> GetFilteredAsync(DateTime startDate, DateTime endDate)
+    {
+        IEnumerable<ActivityListModel> activities = await GetAsync(); // Get all activities
+
+        // Filter the activities based on start and end dates
+        IEnumerable<ActivityListModel> filteredActivities = activities
+            .Where(activity => activity.StartDateTime >= startDate && activity.EndDateTime <= endDate);
+
+        return filteredActivities;
+    }
 }
