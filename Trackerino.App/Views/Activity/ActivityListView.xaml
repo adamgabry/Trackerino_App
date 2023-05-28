@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:Trackerino.App.Views"
              xmlns:vm="clr-namespace:Trackerino.App.ViewModels"
+             xmlns:conv="clr-namespace:Trackerino.App.Converters"
              xmlns:m="clr-namespace:Trackerino.BL.Models;assembly=Trackerino.BL"
              x:DataType="vm:ActivityListViewModel"
              x:Name="ActivityListViewRoot"
              x:Class="Trackerino.App.Views.Activity.ActivityListView"
+
              Title="Activities">
 
     <StackLayout Padding="20">
@@ -60,30 +62,29 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="0"
-                               Text="{Binding StartDateTime, Converter={StaticResource DateTimeToStringConverter}}"
-                               VerticalOptions="Center" />
+                                       Text="{Binding StartDateTime, Converter={StaticResource DateTimeToStringConverter}}"
+                                       VerticalOptions="Center" />
 
                                 <Label Grid.Column="1"
-                               Text="{Binding EndDateTime, Converter={StaticResource DateTimeToStringConverter}}"
-                               VerticalOptions="Center" />
+                                       Text="{Binding EndDateTime, Converter={StaticResource DateTimeToStringConverter}}"
+                                       VerticalOptions="Center" />
 
                                 <Label Grid.Column="2"
                                        Text="{Binding Tag }"
                                        VerticalOptions="Center" />
 
                                 <Label Grid.Column="3"
-                               Text="{Binding Description }"
-                               VerticalOptions="Center" />
+                                       Text="{Binding Description }"
+                                       VerticalOptions="Center" />
 
                                 <Label Grid.Column="4"
-                               Text="{Binding Id}"
-                               VerticalOptions="Center" />
+                                       Text="{Binding Id}"
+                                       VerticalOptions="Center" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </Grid>
     </StackLayout>
 

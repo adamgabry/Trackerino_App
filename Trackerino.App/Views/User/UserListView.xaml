@@ -49,6 +49,10 @@
                     <DataTemplate x:DataType="m:UserListModel">
                         <ViewCell>
                             <Grid Margin="10">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToDetailAsync}"
+                                                          CommandParameter="{Binding Id}" />
+                                </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="2*" />

@@ -12,19 +12,19 @@
 
     <Shell.MenuBarItems>
         <MenuBarItem Text="Screen">
-            <MenuFlyoutItem Text="Users"
-                            Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}" />
-
             <MenuFlyoutItem Text="Activities"
                             Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToActivitiesCommand}" />
+
+            <MenuFlyoutItem Text="Users"
+                            Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}" />
 
             <MenuFlyoutItem Text="Projects"
                             Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToProjectsCommand}" />
         </MenuBarItem>
     </Shell.MenuBarItems>
 
-    <ShellContent ContentTemplate="{DataTemplate u:UserListView}" Route="users" />
     <ShellContent ContentTemplate="{DataTemplate a:ActivityListView}" Route="activities" />
+    <ShellContent ContentTemplate="{DataTemplate u:UserListView}" Route="users" />
     <ShellContent ContentTemplate="{DataTemplate p:ProjectListView}" Route="projects" />
 
 </Shell>
