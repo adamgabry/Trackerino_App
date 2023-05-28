@@ -7,6 +7,7 @@ namespace Trackerino.BL.Mappers
     public class UserProjectActivityModelMapper : ModelMapperBase<ActivityEntity, UserProjectActivityListModel, UserProjectActivityDetailModel>, IUserProjectActivityModelMapper
     {
 
+
         public override UserProjectActivityListModel MapToListModel(ActivityEntity? entity)
             => entity?.Project is null
                 ? UserProjectActivityListModel.Empty

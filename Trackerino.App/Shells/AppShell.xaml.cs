@@ -1,10 +1,29 @@
-﻿namespace Trackerino.App
+﻿using CommunityToolkit.Mvvm.Input;
+using Trackerino.App.Services.Interfaces;
+using Trackerino.App.ViewModels;
+
+namespace Trackerino.App.Shells;
+
+public partial class AppShell
 {
-    public partial class AppShell : Shell
+    private readonly INavigationService _navigationService;
+
+    public AppShell(INavigationService navigationService)
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        _navigationService = navigationService;
+
+        InitializeComponent();
     }
+
+    [RelayCommand]
+    private async Task GoToUsersAsync()
+        => await _navigationService.GoToAsync<UserListViewModel>();
+
+    [RelayCommand]
+    private async Task GoToProjectsAsync()
+        => await _navigationService.GoToAsync<ProjectListViewModel>();
+
+    [RelayCommand]
+    private async Task GoToActivitiesAsync()
+        => await _navigationService.GoToAsync<ActivityListViewModel>();
 }

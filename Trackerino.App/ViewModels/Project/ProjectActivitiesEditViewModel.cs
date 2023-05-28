@@ -32,9 +32,9 @@ namespace Trackerino.App.ViewModels
             IMessengerService messengerService)
             : base(messengerService)
         {
-            this._activityFacade = activityFacade;
-            this._userProjectActivityFacade = userProjectActivityFacade;
-            this._userProjectActivityModelMapper = userProjectActivityModelMapper;
+            _activityFacade = activityFacade;
+            _userProjectActivityFacade = userProjectActivityFacade;
+            _userProjectActivityModelMapper = userProjectActivityModelMapper;
 
             ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
         }

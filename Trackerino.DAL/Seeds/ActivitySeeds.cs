@@ -1,8 +1,9 @@
 ﻿using Trackerino.DAL.Common;
 using Trackerino.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Trackerino.DAL.Seeds;
 
-namespace Trackerino.Common.Tests.Seeds;
+namespace Trackerino.DAL.Seeds;
 
 public static class ActivitySeeds
 {
@@ -20,7 +21,7 @@ public static class ActivitySeeds
     public static readonly ActivityEntity ActivityEntity = new()
     {
         Id = Guid.Parse(input: "4FA608F9-77D2-498B-A6C1-387FDA3DFB3D"),
-        Tag = ActivityTag.Work,
+        Tag = ActivityTag.School,
         Description = "Hour long meeting",
         StartDateTime = new DateTime(2023, 1, 24, 14, 0, 0),
         EndDateTime = new DateTime(2023, 1, 24, 15, 0, 0),

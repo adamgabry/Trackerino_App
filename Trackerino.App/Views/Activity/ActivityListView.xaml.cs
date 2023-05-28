@@ -1,9 +1,12 @@
+using Trackerino.App.ViewModels;
+
 namespace Trackerino.App.Views.Activity;
 
-public partial class ActivityListView : ContentView
+public partial class ActivityListView
 {
-	public ActivityListView()
-	{
-		InitializeComponent();
-	}
+    public ActivityListView(ActivityListViewModel viewModel)
+        : base(viewModel)
+    {
+        InitializeComponent();
+    }
 }
