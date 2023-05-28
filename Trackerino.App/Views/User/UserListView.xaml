@@ -22,14 +22,13 @@
                     Text="Add user"
                     Command="{Binding GoToCreateCommand}"
                     CornerRadius="25"
-                    FontFamily="MontserratMedium"
                     FontSize="14" />
 
-            <ListView Grid.Row="1"
-              Margin="0,10"
-              ItemsSource="{Binding Users}"
-              RowHeight="70">
-                <ListView.Header>
+            <CollectionView Grid.Row="1"
+                            Margin="0,10"
+                            ItemsSource="{Binding Users}"
+                            SelectionMode="Single">
+                <CollectionView.Header>
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="70" />
@@ -43,51 +42,52 @@
                         <Label Grid.Column="2" Text="Surname" />
                         <Label Grid.Column="3" Text="ID" />
                     </Grid>
-                </ListView.Header>
+                </CollectionView.Header>
 
-                <ListView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:UserListModel">
-                        <ViewCell>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3*" />
-                                </Grid.ColumnDefinitions>
+                        <Grid Margin="10">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                                      CommandParameter="{Binding Id}" />
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
 
-                                <Frame Grid.Column="0"
-                               Padding="0"
-                               BackgroundColor="LightGray"
-                               CornerRadius="25"
-                               WidthRequest="50"
-                               HeightRequest="50"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center">
-                                    <Image Source="{Binding ImageUrl}"
-                                   Aspect="AspectFill"
-                                   HorizontalOptions="Fill"
-                                   VerticalOptions="Fill" />
-                                </Frame>
+                            <Frame Grid.Column="0"
+                                   Padding="0"
+                                   BackgroundColor="LightGray"
+                                   CornerRadius="25"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+                                <Image Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="Fill" />
+                            </Frame>
 
-                                <Label Grid.Column="1"
-                               Text="{Binding Name}"
-                               Margin="10,0,0,0"
-                               VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Name}"
+                                   Margin="10,0,0,0"
+                                   VerticalOptions="Center" />
 
-                                <Label Grid.Column="2"
-                               Text="{Binding Surname}"
-                               VerticalOptions="Center" />
+                            <Label Grid.Column="2"
+                                   Text="{Binding Surname}"
+                                   VerticalOptions="Center" />
 
-                                <Label Grid.Column="3"
-                               Text="{Binding Id}"
-                               VerticalOptions="Center" />
-                            </Grid>
-                        </ViewCell>
+                            <Label Grid.Column="3"
+                                   Text="{Binding Id}"
+                                   VerticalOptions="Center" />
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </StackLayout>
 
