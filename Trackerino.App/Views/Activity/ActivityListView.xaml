@@ -14,12 +14,12 @@
               RowSpacing="20">
             <Label Grid.Row="0"
                    FontSize="24"
-                   Text="Select Activity" />
+                   Text="Select activity" />
 
             <Button Grid.Row="0"
                     Padding="12, 6"
                     HorizontalOptions="End" VerticalOptions="Start"
-                    Text="Add Activity"
+                    Text="Add activity"
                     Command="{Binding GoToCreateCommand}"
                     CornerRadius="25"
                     FontFamily="MontserratMedium"

@@ -7,14 +7,30 @@
                        x:Name="UserDetailViewRoot"
                        x:Class="Trackerino.App.Views.User.UserDetailView"
                        Title="Users">
-
+    
     <StackLayout Padding="20">
         <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *"
               RowSpacing="20">
             <Label Grid.Row="0"
                    FontSize="24"
                    Text="User details" />
-        </Grid>
-    </StackLayout>
+
+            <Button Grid.Row="0"
+                    Text="Edit"
+                    Padding="12, 6"
+                    HorizontalOptions="End" VerticalOptions="Start"
+                    Command="{Binding GoToEditCommand}"
+                    CornerRadius="25"
+                    FontSize="14" />
+
+            <Button Grid.Row="0"
+                    Text="Delete"
+                    Padding="12, 6"
+                    HorizontalOptions="End" VerticalOptions="Start"
+                    Command="{Binding DeleteCommand}"
+                    CornerRadius="25"
+                    FontSize="14" />
+            </Grid>
+        </StackLayout>
 
 </views:ContentPageBase>

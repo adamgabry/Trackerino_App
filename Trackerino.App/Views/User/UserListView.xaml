@@ -22,7 +22,6 @@
                     Text="Add user"
                     Command="{Binding GoToCreateCommand}"
                     CornerRadius="25"
-                    FontFamily="MontserratMedium"
                     FontSize="14" />
 
             <CollectionView Grid.Row="1"

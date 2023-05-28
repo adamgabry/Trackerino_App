@@ -14,15 +14,14 @@
               RowSpacing="20">
             <Label Grid.Row="0"
                    FontSize="24"
-                   Text="Select Project" />
+                   Text="Select project" />
 
             <Button Grid.Row="0"
                     Padding="12, 6"
                     HorizontalOptions="End" VerticalOptions="Start"
-                    Text="Add Project"
+                    Text="Add project"
                     Command="{Binding GoToCreateCommand}"
                     CornerRadius="25"
-                    FontFamily="MontserratMedium"
                     FontSize="14" />
 
             <CollectionView Grid.Row="1"
