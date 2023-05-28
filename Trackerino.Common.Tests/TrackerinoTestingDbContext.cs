@@ -9,21 +9,8 @@ public class TrackerinoTestingDbContext : TrackerinoDbContext
     private readonly bool _seedTestingData;
 
     public TrackerinoTestingDbContext(DbContextOptions contextOptions, bool seedTestingData = true)
-        : base(contextOptions, seedDemoData: true)
+        : base(contextOptions, seedDemoData: false, seedTestingData)
     {
         _seedTestingData = seedTestingData;
-    }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-
-        if (_seedTestingData)
-        {
-            ActivitySeeds.Seed(modelBuilder);
-            ProjectSeeds.Seed(modelBuilder);
-            UserSeeds.Seed(modelBuilder);
-            UserProjectSeeds.Seed(modelBuilder);
-        }
     }
 }

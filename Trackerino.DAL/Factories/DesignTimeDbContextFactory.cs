@@ -3,12 +3,12 @@ namespace Trackerino.DAL.Factories;
 
 public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<TrackerinoDbContext>
 {
-    private readonly DbContextLocalDbFactory _dbContextLocalDbFactory;
+    private readonly DbContextSqLiteFactory _dbContextSqLiteFactory;
     public DesignTimeDbContextFactory()
     {
-        _dbContextLocalDbFactory = new DbContextLocalDbFactory("Trackerino", seedDemoData:true);
+        _dbContextSqLiteFactory = new DbContextSqLiteFactory("Trackerino",true);
     }
 
-    public TrackerinoDbContext CreateDbContext(string[] args) => _dbContextLocalDbFactory.CreateDbContext();
+    public TrackerinoDbContext CreateDbContext(string[] args) => _dbContextSqLiteFactory.CreateDbContext();
 }
 

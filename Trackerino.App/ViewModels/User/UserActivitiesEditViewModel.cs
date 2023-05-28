@@ -68,8 +68,8 @@ namespace Trackerino.App.ViewModels
             {
                 _userProjectActivityModelMapper.MapToExistingDetailModel(ActivityNew, ActivitySelected);
 
-                await _userProjectActivityFacade.SaveAsync(ActivityNew, User.Id, Project.Id);
-                User.Activities.Add(_userProjectActivityModelMapper.MapToListModel(ActivityNew));
+                await _userProjectActivityFacade.SaveAsync(ActivityNew, User.Id, Project!.Id);
+                User!.Activities!.Add(_userProjectActivityModelMapper.MapToListModel(ActivityNew));
 
                 ActivityNew = GetActivityNew();
 
@@ -83,7 +83,7 @@ namespace Trackerino.App.ViewModels
             if (model is not null
                 && User is not null)
             {
-                await _userProjectActivityFacade.SaveAsync(model, User.Id, Project.Id);
+                await _userProjectActivityFacade.SaveAsync(model, User.Id, Project!.Id);
 
                 MessengerService.Send(new UserActivitiesEditMessage());
             }
@@ -95,7 +95,7 @@ namespace Trackerino.App.ViewModels
             if (User is not null)
             {
                 await _activityFacade.DeleteAsync(model.Id);
-                User.Activities.Remove(model);
+                User!.Activities!.Remove(model);
 
                 MessengerService.Send(new UserActivitiesDeleteMessage());
             }

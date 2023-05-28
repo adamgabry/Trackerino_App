@@ -5,7 +5,7 @@ using Trackerino.App.Options;
 
 namespace Trackerino.App;
 
-interface IDbMigrator
+public interface IDbMigrator
 {
     public void Migrate();
     public Task MigrateAsync(CancellationToken cancellationToken);

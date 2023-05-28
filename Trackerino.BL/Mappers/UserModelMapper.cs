@@ -33,9 +33,7 @@ namespace Trackerino.BL.Mappers
                     Name = entity.Name,
                     Surname = entity.Surname,
                     ImageUrl = entity.ImageUrl,
-                   // Activities = _userProjectActivityModelMapper.MapToListModel(entity.Activities).ToObservableCollection(),
-                   // Projects = _userProjectModelMapper.MapToListModel(entity.Projects).ToObservableCollection()
-            };
+                };
 
         public override UserEntity MapToEntity(UserDetailModel model)
             => new()

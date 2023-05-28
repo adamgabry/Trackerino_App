@@ -8,12 +8,10 @@ public class DbContextTestsBase : IAsyncLifetime
 {
     protected DbContextTestsBase()
     {
-        //TrackerinoContextTestingFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: false);
         TrackerinoDbContextFactory = new DbContextLocalDbTestingFactory(GetType().FullName!, seedTestingData: false);
         TrackerinoDbContextSut = TrackerinoDbContextFactory.CreateDbContext();
 
     }
-    //protected IDbContextFactory<TrackerinoDbContext> TrackerinoContextTestingFactory { get; }
     protected TrackerinoDbContext TrackerinoDbContextSut { get; }
     protected IDbContextFactory<TrackerinoDbContext> TrackerinoDbContextFactory { get; }
 

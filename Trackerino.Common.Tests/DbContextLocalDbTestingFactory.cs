@@ -12,9 +12,12 @@ public class DbContextLocalDbTestingFactory : IDbContextFactory<TrackerinoDbCont
     {
         _seedTestingData = seedTestingData;
         _databaseName = databaseName;
-        _dbContextOptionsBuilder.UseSqlServer(
-            $"Data Source=(LocalDB)\\MSSQLLocalDB; Initial Catalog = ${_databaseName}; MultipleActiveResultSets = True; Integrated Security = True; Encrypt=False; TrustServerCertificate = True;");
     }
-    public TrackerinoDbContext CreateDbContext() => new(_dbContextOptionsBuilder.Options, _seedTestingData);
+    public TrackerinoDbContext CreateDbContext()
+    {
+        _dbContextOptionsBuilder.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB; Initial Catalog = ${_databaseName}; MultipleActiveResultSets = True; Integrated Security = True; Encrypt=False; TrustServerCertificate = True;");
+
+        return new TrackerinoTestingDbContext(_dbContextOptionsBuilder.Options, _seedTestingData);
+    }
 }
 
