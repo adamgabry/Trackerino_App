@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL;
-using Trackerino.DAL.Factories;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using Trackerino.DAL.Migrations;
-
 namespace Trackerino.Common.Tests;
 
 public class DbContextLocalDbTestingFactory : IDbContextFactory<TrackerinoDbContext>

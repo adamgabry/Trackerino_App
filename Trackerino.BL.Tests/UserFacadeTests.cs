@@ -5,12 +5,12 @@ using Trackerino.BL.Facades;
 using Trackerino.BL.Mappers;
 using Trackerino.BL.Models;
 using Trackerino.BL.Tests;
-using Trackerino.Common.Tests.Seeds;
 using Trackerino.Common.Tests;
 using Trackerino.DAL.UnitOfWork;
 using Xunit.Abstractions;
 using Microsoft.EntityFrameworkCore.Query;
 using Trackerino.DAL.Common;
+using Trackerino.Common.Tests.Seeds;
 
 /*      UserEntityWithNoActivities,
         UserEntityWithNoProjects,

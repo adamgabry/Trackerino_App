@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using Trackerino.DAL.DemoSeeds;
 using Trackerino.DAL.Entities;
-using Trackerino.DAL.Seeds;
 
 namespace Trackerino.DAL
 {

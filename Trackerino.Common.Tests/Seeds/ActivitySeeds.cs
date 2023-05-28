@@ -16,7 +16,7 @@ public static class ActivitySeeds
         UserId = default,
         ProjectId = default
     };
-    
+
     public static readonly ActivityEntity ActivityEntity = new()
     {
         Id = Guid.Parse(input: "4FA608F9-77D2-498B-A6C1-387FDA3DFB3D"),
@@ -29,8 +29,8 @@ public static class ActivitySeeds
     };
 
     //To ensure that no tests reuse these clones for non-idempotent operations
-    public static readonly ActivityEntity ActivityEntityUpdate = ActivityEntity with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052"),ProjectId = ProjectSeeds.ProjectEntity.Id, UserId = UserSeeds.UserEntity.Id};
-    public static readonly ActivityEntity ActivityEntityDelete = ActivityEntity with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"),ProjectId = ProjectSeeds.ProjectEntity.Id, UserId = UserSeeds.UserEntity.Id};
+    public static readonly ActivityEntity ActivityEntityUpdate = ActivityEntity with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052"), ProjectId = ProjectSeeds.ProjectEntity.Id, UserId = UserSeeds.UserEntity.Id };
+    public static readonly ActivityEntity ActivityEntityDelete = ActivityEntity with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"), ProjectId = ProjectSeeds.ProjectEntity.Id, UserId = UserSeeds.UserEntity.Id };
 
     public static ActivityEntity ActivityEntity1 = new()
     {

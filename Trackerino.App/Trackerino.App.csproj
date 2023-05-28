@@ -39,7 +39,6 @@
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -51,32 +50,6 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Inter-Bold.ttf" />
 	  <None Remove="Resources\Fonts\Inter-Regular.ttf" />
-	  <None Remove="Resources\Images\icon_calendar.png" />
-	  <None Remove="Resources\Images\icon_calendar.svg" />
-	  <None Remove="Resources\Images\icon_dollar.png" />
-	  <None Remove="Resources\Images\icon_dollar.svg" />
-	  <None Remove="Resources\Images\icon_down.png" />
-	  <None Remove="Resources\Images\icon_down.svg" />
-	  <None Remove="Resources\Images\icon_edit.png" />
-	  <None Remove="Resources\Images\icon_edit.svg" />
-	  <None Remove="Resources\Images\icon_filter.png" />
-	  <None Remove="Resources\Images\icon_filter.svg" />
-	  <None Remove="Resources\Images\icon_info.png" />
-	  <None Remove="Resources\Images\icon_info.svg" />
-	  <None Remove="Resources\Images\icon_minus.png" />
-	  <None Remove="Resources\Images\icon_minus.svg" />
-	  <None Remove="Resources\Images\icon_person.png" />
-	  <None Remove="Resources\Images\icon_person.svg" />
-	  <None Remove="Resources\Images\icon_play.png" />
-	  <None Remove="Resources\Images\icon_play.svg" />
-	  <None Remove="Resources\Images\icon_plus.png" />
-	  <None Remove="Resources\Images\icon_plus.svg" />
-	  <None Remove="Resources\Images\icon_stop.png" />
-	  <None Remove="Resources\Images\icon_stop.svg" />
-	  <None Remove="Resources\Images\icon_unlock.png" />
-	  <None Remove="Resources\Images\icon_unlock.svg" />
-	  <None Remove="Resources\Images\icon_up.png" />
-	  <None Remove="Resources\Images\icon_up.svg" />
 	</ItemGroup>
 
 

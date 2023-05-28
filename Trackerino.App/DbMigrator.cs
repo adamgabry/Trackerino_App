@@ -31,7 +31,7 @@ public class SqLiteDbMigrator : IDbMigrator
     public async Task MigrateAsync(CancellationToken cancellationToken)
     {
         await using TrackerinoDbContext dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
-
+        
         await dbContext.Database.EnsureDeletedAsync(cancellationToken);
         // Ensures that database is created applying the latest state
         // Application of migration later on may fail
