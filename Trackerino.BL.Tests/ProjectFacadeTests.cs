@@ -1,15 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using Trackerino.BL.Facades;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
 using Trackerino.Common.Tests;
 using Trackerino.Common.Tests.Seeds;
-using Xunit;
-using Xunit.Abstractions;
+
 
 namespace Trackerino.BL.Tests
 {
@@ -127,4 +123,3 @@ namespace Trackerino.BL.Tests
         }
     }
 }
-

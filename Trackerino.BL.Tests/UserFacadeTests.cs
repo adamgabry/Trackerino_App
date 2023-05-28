@@ -2,24 +2,10 @@
 using System.Collections.ObjectModel;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Facades;
-using Trackerino.BL.Mappers;
 using Trackerino.BL.Models;
-using Trackerino.BL.Tests;
-using Trackerino.Common.Tests;
-using Trackerino.DAL.UnitOfWork;
-using Xunit.Abstractions;
-using Microsoft.EntityFrameworkCore.Query;
-using Trackerino.DAL.Common;
 using Trackerino.Common.Tests.Seeds;
+using Trackerino.Common.Tests;
 
-/*      UserEntityWithNoActivities,
-        UserEntityWithNoProjects,
-        UserEntity1,
-        UserEntity2,
-        UserEntity,
-        UserEntityUpdate,
-        UserEntityDelete);
-*/
 namespace Trackerino.BL.Tests
 {
     public sealed class UserFacadeTests : FacadeTestsBase
@@ -42,26 +28,6 @@ namespace Trackerino.BL.Tests
                 ImageUrl = null,
                 Projects = new ObservableCollection<UserProjectListModel>(),
                 Activities = new ObservableCollection<UserProjectActivityListModel>()
-                /* Projects = new ObservableCollection<UserProjectListModel>() {
-                     new()
-                     {
-                         Id = Guid.Empty,
-                         ProjectName = "projecttest",
-                         ProjectId = Guid.Empty,
-                     }
-                 },
-                 Activities = new ObservableCollection<UserProjectActivityListModel>()
-                 {
-                     new()
-                     {
-                     Id = Guid.Empty,
-                     ActivityId = Guid.Empty,
-                     StartDateTime = DateTime.Now,
-                     EndDateTime = DateTime.Now.AddHours(1),
-                     Tag = ActivityTag.None,
-                     }
-                 }
-                */
             };
 
             var _ = await _userFacadeSUT.SaveAsync(model);

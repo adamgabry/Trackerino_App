@@ -7,9 +7,12 @@ namespace Trackerino.DAL
     public class TrackerinoDbContext : DbContext
     {
         private readonly bool _seedDemoData;
-        public TrackerinoDbContext(DbContextOptions contextOptions, bool seedDemoData)
-            : base(contextOptions) =>
+        private readonly bool _seedTestingData;
+        public TrackerinoDbContext(DbContextOptions contextOptions, bool seedDemoData, bool seedTestingData)
+            : base(contextOptions){
             _seedDemoData = seedDemoData;
+            _seedTestingData = seedTestingData;
+        }
 
         public DbSet<UserProjectEntity> UserProject=> Set<UserProjectEntity>();
         public DbSet<UserEntity> Users => Set<UserEntity>();

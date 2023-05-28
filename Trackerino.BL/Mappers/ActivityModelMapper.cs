@@ -39,9 +39,6 @@ namespace Trackerino.BL.Mappers
                     StartDateTime = entity.StartDateTime,
                     EndDateTime = entity.EndDateTime,
                     Tag = entity.Tag,
-                   //User = _userModelMapper.MapToListModel(entity.User),
-                   //Project = _projectModelMapper.MapToListModel(entity.Project)
-
                 };
 
         public override ActivityEntity MapToEntity(ActivityDetailModel model)
@@ -51,8 +48,8 @@ namespace Trackerino.BL.Mappers
                 StartDateTime = model.StartDateTime,
                 EndDateTime = model.EndDateTime,
                 Tag = model.Tag,
-                ProjectId = model.Project.Id,
-                UserId = model.User.Id,
+                ProjectId = model.Project!.Id,
+                UserId = model.User!.Id,
             };
     }
 }
