@@ -144,15 +144,15 @@
                             <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="3*" />
-                            <!--<ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="2*" />-->
+                            <ColumnDefinition Width="2*" />
+                            <!--<ColumnDefinition Width="2*" />-->
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Text="Start Date" />
                         <Label Grid.Column="1" Text="End Date" />
                         <Label Grid.Column="2" Text="Description" />
-                        <!--<Label Grid.Column="3" Text="User" />
-                        <Label Grid.Column="4" Text="Project" />-->
+                        <Label Grid.Column="3" Text="ID" />
+                        <!--<Label Grid.Column="4" Text="Project" />-->
                     </Grid>
                 </CollectionView.Header>
 
@@ -167,8 +167,8 @@
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="3*" />
-                                <!--<ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="2*" />-->
+                                <ColumnDefinition Width="2*" />
+                                <!--<ColumnDefinition Width="2*" />-->
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0"
@@ -183,11 +183,11 @@
                        Text="{Binding Description}"
                        VerticalOptions="Center" />
 
-                            <!--<Label Grid.Column="3"
-                       Text="{Binding User.Name}"
+                            <Label Grid.Column="3"
+                       Text="{Binding Id}"
                        VerticalOptions="Center" />
 
-                            <Label Grid.Column="4"
+                            <!--<Label Grid.Column="4"
                        Text="{Binding Project.Name}"
                        VerticalOptions="Center" />-->
                         </Grid>

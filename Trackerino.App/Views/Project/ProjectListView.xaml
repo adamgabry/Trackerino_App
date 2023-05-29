@@ -59,6 +59,7 @@
                             <Label Grid.Column="1"
                                    Text="{Binding Id}"
                                    VerticalOptions="Center" />
+
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

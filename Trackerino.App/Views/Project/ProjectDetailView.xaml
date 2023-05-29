@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:views="clr-namespace:Trackerino.App.Views"
@@ -7,14 +6,49 @@
                        x:DataType="vm:ProjectDetailViewModel"
                        x:Name="ProjectDetailViewRoot"
                        x:Class="Trackerino.App.Views.Project.ProjectDetailView"
-                       Title="Projects">
+                       Title="Project Details">
 
     <StackLayout Padding="20">
-        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *"
+
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto"
               RowSpacing="20">
-            <Label Grid.Row="0"
+
+            <Label Grid.Column="0"
                    FontSize="24"
-                   Text="Project details" />
+                   Text="Project Detail" />
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal"
+                         HorizontalOptions="End" VerticalOptions="Start">
+
+                <Button Text="Edit"
+                        Padding="12, 6"
+                        Command="{Binding GoToEditCommand}"
+                        CornerRadius="25"
+                        FontSize="14" />
+
+                <Button Text="Delete"
+                        Padding="12, 6"
+                        Command="{Binding DeleteCommand}"
+                        CornerRadius="25"
+                        FontSize="14" />
+            </StackLayout>
+        </Grid>
+
+        <Grid HorizontalOptions="Start" VerticalOptions="Start"
+              RowDefinitions="Auto, Auto"
+              ColumnDefinitions="Auto, *"
+              RowSpacing="10" ColumnSpacing="20">
+            
+            <Label Grid.Row="0" Grid.Column="0"
+                   FontSize="12" Text="Name" />
+            <Label Grid.Row="0" Grid.Column="1"
+                   FontSize="14" Text="{Binding Project.Name}" />
+
+            <Label Grid.Row="1" Grid.Column="0"
+                   FontSize="12" Text="ID" />
+            <Label Grid.Row="1" Grid.Column="1"
+                   FontSize="14" Text="{Binding Project.Id}" />
+
         </Grid>
     </StackLayout>
 
