@@ -1,11 +1,49 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Trackerino.App.Views.Project.ProjectEditView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentView>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:Trackerino.App.Views"
+                       xmlns:vm="clr-namespace:Trackerino.App.ViewModels"
+                       xmlns:m="clr-namespace:Trackerino.BL.Models;assembly=Trackerino.BL"
+                       x:DataType="vm:ProjectEditViewModel"
+                       x:Name="ProjectEditViewRoot"
+                       x:Class="Trackerino.App.Views.Project.ProjectEditView"
+                       Title="Project Edit">
+
+    <StackLayout Padding="20">
+
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto"
+              RowSpacing="20">
+
+            <Label Grid.Column="0"
+                   FontSize="24"
+                   Text="Project Edit" />
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal"
+                         HorizontalOptions="End" VerticalOptions="Start">
+
+                <Button Text="Save"
+                        Padding="12, 6"
+                        Command="{Binding SaveCommand}"
+                        CornerRadius="25"
+                        FontSize="14" />
+            </StackLayout>
+        </Grid>
+
+        <Grid HorizontalOptions="Start" VerticalOptions="Start"
+              RowDefinitions="Auto, Auto"
+              ColumnDefinitions="Auto, *"
+              RowSpacing="10" ColumnSpacing="20">
+
+            <Label Grid.Row="0" Grid.Column="0"
+                   FontSize="12" Text="Name" />
+            <Entry Grid.Row="0" Grid.Column="1"
+                   FontSize="14" Text="{Binding Project.Name}" />
+
+            <Label Grid.Row="1" Grid.Column="0"
+                   FontSize="12" Text="ID" />
+            <Label Grid.Row="1" Grid.Column="1"
+                   FontSize="14" Text="{Binding Project.Id}" />
+
+        </Grid>
+    </StackLayout>
+
+</views:ContentPageBase>

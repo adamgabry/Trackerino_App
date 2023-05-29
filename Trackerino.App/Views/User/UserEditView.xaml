@@ -9,19 +9,16 @@
                        Title="User Edit">
 
     <StackLayout Padding="20">
+
         <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto"
               RowSpacing="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
 
             <Label Grid.Column="0"
                    FontSize="24"
                    Text="User Edit" />
 
-            <StackLayout Grid.Column="1" Orientation="Horizontal"
-                         HorizontalOptions="End">
+            <StackLayout Grid.Row="0" Orientation="Horizontal"
+                         HorizontalOptions="End" VerticalOptions="Start">
 
                 <Button Text="Save"
                         Padding="12, 6"
@@ -30,6 +27,7 @@
                         FontSize="14" />
             </StackLayout>
         </Grid>
+
         <Grid HorizontalOptions="Start" VerticalOptions="Start"
               RowDefinitions="Auto, Auto, Auto, Auto"
               ColumnDefinitions="*, Auto, *"
