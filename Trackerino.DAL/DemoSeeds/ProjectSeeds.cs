@@ -34,5 +34,6 @@ public static class ProjectSeeds
             ProjectEntityICS,
             ProjectEntityGen
         );
+
     }
 }
