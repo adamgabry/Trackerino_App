@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Entities;
 
 namespace Trackerino.DAL.DemoSeeds;
@@ -40,8 +41,21 @@ public static class UserSeeds
         Id = Guid.Parse("f1fc25f9-60ca-4a79-9907-6c27e23dc869"),
         Name = "Jakub",
         Surname = "Kovář",
-        ImageUrl = "https://static.wikia.nocookie.net/mrrobot/images/1/1a/Mr.-Robot-1x04-3.jpg/revision/latest/scale-to-width-down/350?cb=20150725100044"
+        ImageUrl = "https://static.wikia.nocookie.net/mrrobot/images/1/1a/Mr.-Robot-1x04-3.jpg/revision/latest/scale-to-width-down/350?cb=20150725100044",
+        Projects = new List<UserProjectEntity>(),
+        Activities = new List<ActivityEntity>()
     };
+
+    // static UserSeeds()
+    // {
+    //     AdamkO.Activities.Add(ActivitySeeds.ActivityEntityGame);
+    //     Seidly.Activities.Add(ActivitySeeds.ActivityEntityIOS);
+    //     Seidly.Activities.Add(ActivitySeeds.ActivityEntityDb);
+    //     Yeet.Activities.Add(ActivitySeeds.ActivityEntityUi);
+    //     Max.Activities.Add(ActivitySeeds.ActivityEntitySport);
+    //     Max.Activities.Add(ActivitySeeds.ActivityEntityModel);
+    //     CervenyPanda.Activities.Add(ActivitySeeds.ActivityEntityNone);
+    // }
 
     public static void Seed(this ModelBuilder modelBuilder)
     {

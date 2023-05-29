@@ -23,8 +23,9 @@ namespace Trackerino.App.ViewModels
         public ICommand FilterActivitiesCommand { get; }
         public ICommand FilterLastWeekActivitiesCommand { get; }
         public ICommand FilterLastMonthActivitiesCommand { get; }
-        public ICommand FilterThisMonthActivitiesCommand { get; }
-        public ICommand FilterLastYearActivitiesCommand { get; }
+        public ICommand FilterPreviousMonthActivitiesCommand { get; }
+        public ICommand FilterPreviousYearActivitiesCommand { get; }
+        public ICommand ResetFilterActivitiesCommand { get; }
         public ActivityListViewModel(
             IActivityFacade activityFacade,
             INavigationService navigationService,
@@ -42,11 +43,13 @@ namespace Trackerino.App.ViewModels
 
             FilterLastWeekActivitiesCommand = new AsyncRelayCommand(FilterLastWeekActivitiesAsync);
 
+            FilterPreviousMonthActivitiesCommand = new AsyncRelayCommand(FilterPreviousMonthActivitiesAsync);
+
             FilterLastMonthActivitiesCommand = new AsyncRelayCommand(FilterLastMonthActivitiesAsync);
 
-            FilterLastMonthActivitiesCommand = new AsyncRelayCommand(FilterThisMonthActivitiesAsync);
+            FilterPreviousYearActivitiesCommand = new AsyncRelayCommand(FilterPreviousYearActivitiesAsync);
 
-            FilterLastYearActivitiesCommand = new AsyncRelayCommand(FilterLastYearActivitiesAsync);
+            ResetFilterActivitiesCommand = new AsyncRelayCommand(ResetFilterActivitiesAsync);
         }
 
         protected override async Task LoadDataAsync()
@@ -94,37 +97,48 @@ namespace Trackerino.App.ViewModels
                 Activities = await _activityFacade.GetAsync();
             }
         }
+
+        public async Task UpdateDatePicker(DateTime startDate, DateTime endDate )
+        {
+            StartDateTime = startDate;
+            EndDateTime = endDate;
+        }
         public async Task FilterLastWeekActivitiesAsync()
         {
             DateTime startDate = DateTime.Now.AddDays(-7);
             DateTime endDate = DateTime.Now;
             Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
+            await UpdateDatePicker(startDate, endDate);
         }
         public async Task FilterLastMonthActivitiesAsync()
         {
-            DateTime today = DateTime.Today;
-            DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
-            DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-
-            DateTime startDate = firstDayOfMonth.AddMonths(-1);
-            DateTime endDate = lastDayOfMonth.AddMonths(-1);
-            Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
-        }
-        public async Task FilterThisMonthActivitiesAsync()
-        {
-            DateTime today = DateTime.Today;
-            DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
-
-            DateTime startDate = firstDayOfMonth;
-            DateTime endDate = today;
-
-            Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
-        }
-        public async Task FilterLastYearActivitiesAsync()
-        {
-            DateTime startDate = DateTime.Now.AddYears(-1);
+            DateTime startDate = DateTime.Now.AddMonths(-1);
             DateTime endDate = DateTime.Now;
             Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
+            await UpdateDatePicker(startDate, endDate);
+        }
+        public async Task FilterPreviousMonthActivitiesAsync()
+        {
+            DateTime pMonth = DateTime.Today.AddMonths(-1);
+            DateTime startDate = new DateTime(pMonth.Year, pMonth.Month, 1);
+            DateTime endDate = new DateTime(pMonth.Year, pMonth.Month, DateTime.DaysInMonth(pMonth.Year, pMonth.Month));
+
+            Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
+            await UpdateDatePicker(startDate, endDate);
+        }
+        public async Task FilterPreviousYearActivitiesAsync()
+        {
+            DateTime today = DateTime.Today;
+            DateTime startDate = new DateTime(today.Year, 1, 1).AddYears(-1);
+            DateTime endDate = new DateTime(today.Year, 12, 31).AddYears(-1);
+
+            Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
+            await UpdateDatePicker(startDate, endDate);
+        }
+        public async Task ResetFilterActivitiesAsync()
+        {
+            Activities = await _activityFacade.GetAsync();
+            await UpdateDatePicker(DateTime.Today, DateTime.Today);
         }
     }
 }

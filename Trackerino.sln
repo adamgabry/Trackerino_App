@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackerino.BL.Tests", "Trac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackerino.Common.Tests", "Trackerino.Common.Tests\Trackerino.Common.Tests.csproj", "{F6C046CF-49D3-4E27-BF17-6F439AA3419D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trackerino.App", "Trackerino.App\Trackerino.App.csproj", "{0E454071-61A6-4446-963A-3EB9722AFA7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trackerino.App", "Trackerino.App\Trackerino.App.csproj", "{0E454071-61A6-4446-963A-3EB9722AFA7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
