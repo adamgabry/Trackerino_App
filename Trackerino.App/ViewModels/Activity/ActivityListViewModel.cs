@@ -34,6 +34,10 @@ namespace Trackerino.App.ViewModels
             _activityFacade = activityFacade;
             _navigationService = navigationService;
 
+            StartDateTime = DateTime.Now.AddDays(-7);
+
+            EndDateTime = DateTime.Now;
+
             FilterActivitiesCommand = new AsyncRelayCommand(FilterActivitiesAsync);
 
             FilterLastWeekActivitiesCommand = new AsyncRelayCommand(FilterLastWeekActivitiesAsync);
