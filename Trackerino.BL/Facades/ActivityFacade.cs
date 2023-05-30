@@ -1,4 +1,5 @@
-﻿using Trackerino.BL.Facades.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Mappers.Interfaces;
 using Trackerino.BL.Models;
 using Trackerino.DAL.Entities;
@@ -26,5 +27,43 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel, Acti
             .Where(activity => activity.StartDateTime <= endDate && activity.EndDateTime >= startDate);
 
         return filteredActivities;
+    }
+    public override async Task<ActivityDetailModel?> GetAsync(Guid id)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+
+        IQueryable<ActivityEntity> query = uow.GetRepository<ActivityEntity, ActivityEntityMapper>().Get();
+
+        if (string.IsNullOrWhiteSpace(IncludesNavigationPathDetail) is false)
+        {
+            query = query.Include(IncludesNavigationPathDetail);
+        }
+
+        ActivityEntity? entity = await query.SingleOrDefaultAsync(e => e.Id == id);
+
+        IQueryable<UserEntity> query2 = uow.GetRepository<UserEntity, UserEntityMapper>().Get();
+
+        if (string.IsNullOrWhiteSpace(IncludesNavigationPathDetail) is false)
+        {
+            query2 = query2.Include(IncludesNavigationPathDetail);
+        }
+
+        IQueryable<ProjectEntity> query3 = uow.GetRepository<ProjectEntity, ProjectEntityMapper>().Get();
+
+        if (string.IsNullOrWhiteSpace(IncludesNavigationPathDetail) is false)
+        {
+            query2 = query2.Include(IncludesNavigationPathDetail);
+        }
+
+
+        if (entity == null)
+        {
+            return null;
+
+        }
+
+        entity.User = await query2.SingleOrDefaultAsync(e => e.Id == entity.UserId);
+        entity.Project = await query3.SingleOrDefaultAsync(e => e.Id == entity.ProjectId);
+        return ModelMapper.MapToDetailModel(entity);
     }
 }
