@@ -12,6 +12,9 @@
 
     <Shell.MenuBarItems>
         <MenuBarItem Text="Screen">
+            <MenuFlyoutItem Text="Login"
+                            Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToLoginCommand}" />
+
             <MenuFlyoutItem Text="Activities"
                             Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToActivitiesCommand}" />
 
@@ -23,6 +26,7 @@
         </MenuBarItem>
     </Shell.MenuBarItems>
 
+    <ShellContent ContentTemplate="{DataTemplate u:UserLoginView}" Route="login" />
     <ShellContent ContentTemplate="{DataTemplate a:ActivityListView}" Route="activities" />
     <ShellContent ContentTemplate="{DataTemplate u:UserListView}" Route="users" />
     <ShellContent ContentTemplate="{DataTemplate p:ProjectListView}" Route="projects" />

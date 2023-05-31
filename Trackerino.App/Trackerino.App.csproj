@@ -120,6 +120,9 @@
     <MauiXaml Update="Views\User\UserListView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\User\UserLoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\User\UserProjectsEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -133,6 +136,9 @@
   <ItemGroup>
     <Compile Update="Views\ContentPageBase.xaml.cs">
       <DependentUpon>ContentPageBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\User\UserLoginView.xaml.cs">
+      <DependentUpon>UserLoginView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

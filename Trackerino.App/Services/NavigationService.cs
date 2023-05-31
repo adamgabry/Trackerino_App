@@ -11,6 +11,8 @@ namespace Trackerino.App.Services
     {
         public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
         {
+            new("//login", typeof(UserLoginView), typeof(UserLoginViewModel)),
+
             new("//users", typeof(UserListView), typeof(UserListViewModel)),
             new("//users/detail", typeof(UserDetailView), typeof(UserDetailViewModel)),
 
