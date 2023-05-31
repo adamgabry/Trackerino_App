@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using System.Collections.ObjectModel;
 using Trackerino.App.Messages;
 using Trackerino.App.Services.Interfaces;
-using Trackerino.App.Services;
+using Trackerino.BL.Facades;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
+using Trackerino.DAL.Repositories;
 
 namespace Trackerino.App.ViewModels
 {
@@ -12,7 +14,9 @@ namespace Trackerino.App.ViewModels
     public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectEditMessage>, IRecipient<ProjectActivitiesAddMessage>, IRecipient<ProjectActivitiesDeleteMessage>,
         IRecipient<ProjectUsersAddMessage>, IRecipient<ProjectUsersDeleteMessage>
     {
+
         private readonly IProjectFacade _projectFacade;
+        private readonly IProjectUserFacade _projectUserFacade;
         private readonly INavigationService _navigationService;
         private readonly IAlertService _alertService;
 
@@ -21,6 +25,7 @@ namespace Trackerino.App.ViewModels
 
         public ProjectDetailViewModel(
             IProjectFacade projectFacade,
+            IProjectUserFacade projectUserFacade,
             INavigationService navigationService,
             IMessengerService messengerService,
             IAlertService alertService)
@@ -29,15 +34,14 @@ namespace Trackerino.App.ViewModels
             _projectFacade = projectFacade;
             _navigationService = navigationService;
             _alertService = alertService;
+            _projectUserFacade = projectUserFacade;
         }
-
         protected override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
 
             Project = await _projectFacade.GetAsync(Id);
         }
-
         [RelayCommand]
         private async Task DeleteAsync()
         {
@@ -51,7 +55,7 @@ namespace Trackerino.App.ViewModels
                 }
                 catch (InvalidOperationException)
                 {
-                    //TODO await _alertService.DisplayAsync(UserDetailViewModelTexts.DeleteError_Alert_Title, UserDetailViewModelTexts.DeleteError_Alert_Message);
+                    //await _alertService.DisplayAsync(UserDetailViewModelTexts.DeleteError_Alert_Title, UserDetailViewModelTexts.DeleteError_Alert_Message);
                 }
             }
         }
@@ -61,6 +65,17 @@ namespace Trackerino.App.ViewModels
         {
             await _navigationService.GoToAsync("/edit",
                 new Dictionary<string, object?> { [nameof(Project)] = Project });
+        }
+
+        private IAsyncRelayCommand _userJoinCommand;
+        public IAsyncRelayCommand UserJoinsCommand => _userJoinCommand ??= new AsyncRelayCommand(UserJoinsAsync);
+
+        private async Task UserJoinsAsync()
+        {
+            await _navigationService.GoToAsync("/edit/users", new Dictionary<string, object?>
+            {
+                [nameof(ProjectUsersEditViewModel.Project)] = Project
+            });
         }
 
         public async void Receive(ProjectEditMessage message)

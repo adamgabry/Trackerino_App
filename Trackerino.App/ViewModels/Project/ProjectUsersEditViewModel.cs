@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using Trackerino.App.Messages;
 using Trackerino.App.Services.Interfaces;
@@ -49,23 +46,28 @@ namespace Trackerino.App.ViewModels
             foreach (var user in users)
             {
                 Users.Add(user);
+            }
+            foreach (var user in users)
+            {
                 ProjectUserNew = GetProjectNew();
             }
         }
+        private IAsyncRelayCommand _AddNewUser;
+        public IAsyncRelayCommand AddNewUserToProject => _AddNewUser ??= new AsyncRelayCommand(AddNewUserToProjectAsync);
 
         [RelayCommand]
         private async Task AddNewUserToProjectAsync()
         {
             if (ProjectUserNew is not null
-                && ProjectSelected is not null
+                //&& ProjectSelected is not null
                 && Project is not null)
             {
-                _projectUserModelMapper.MapToExistingDetailModel(ProjectUserNew, ProjectSelected);
+                //_projectUserModelMapper.MapToExistingDetailModel(ProjectUserNew, ProjectSelected);
 
                 await _projectUserFacade.SaveAsync(ProjectUserNew, Project.Id);
                 Project.Users.Add(_projectUserModelMapper.MapToListModel(ProjectUserNew));
 
-                ProjectUserNew = GetProjectNew();
+                //ProjectUserNew = GetProjectNew();
 
                 MessengerService.Send(new ProjectUsersAddMessage());
             }
@@ -97,15 +99,19 @@ namespace Trackerino.App.ViewModels
 
         private ProjectUserDetailModel GetProjectNew()
         {
-            var userFirst = Users.First();
-            return new()
-            {
-                Id = Guid.NewGuid(),
-                UserId = userFirst.Id,
-                UserName = userFirst.Name,
-                UserSurname = userFirst.Surname,
-                UserImageUrl = string.Empty,
-            };
+            string activeUserId = Preferences.Get("ActiveUser", defaultValue: string.Empty);
+            Guid userIdGuid;
+
+                userIdGuid = Guid.Parse(activeUserId);
+                var userFirst = Users.FirstOrDefault(user => user.Id == userIdGuid);
+                return new()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = userFirst.Id,
+                    UserName = userFirst.Name,
+                    UserSurname = userFirst.Surname,
+                    UserImageUrl = string.Empty,
+                };
         }
     }
 }

@@ -1,9 +1,12 @@
+using Trackerino.App.ViewModels;
+
 namespace Trackerino.App.Views.Project;
 
-public partial class ProjectUsersEditView : ContentView
+public partial class ProjectUsersEditView
 {
-	public ProjectUsersEditView()
-	{
-		InitializeComponent();
-	}
+    public ProjectUsersEditView(ProjectUsersEditViewModel viewModel)
+        : base(viewModel)
+    {
+        InitializeComponent();
+    }
 }
