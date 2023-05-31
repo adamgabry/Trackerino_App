@@ -38,22 +38,5 @@ namespace Trackerino.App.ViewModels
             Preferences.Set("ActiveUser", id.ToString());
             await _navigationService.GoToAsync("//activities");
         }
-
-        //[RelayCommand]
-        //private async Task GoToDetailAsync(Guid id)
-        //{
-        //    await _navigationService.GoToAsync<UserDetailViewModel>(
-        //        new Dictionary<string, object?> { [nameof(UserDetailViewModel.Id)] = id });
-        //}
-
-        //public async void Receive(UserEditMessage message)
-        //{
-        //    await LoadDataAsync();
-        //}
-
-        //public async void Receive(UserDeleteMessage message)
-        //{
-        //    await LoadDataAsync();
-        //}
     }
 }
