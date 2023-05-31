@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:Trackerino.App.Views"
+                       xmlns:vm="clr-namespace:Trackerino.App.ViewModels"
+                       xmlns:m="clr-namespace:Trackerino.BL.Models;assembly=Trackerino.BL"
+                       x:DataType="vm:UserLoginViewModel"
+                       x:Name="UserLoginViewRoot"
+                       x:Class="Trackerino.App.Views.User.UserLoginView"
+                       Title="Login">
+
+    <StackLayout Padding="20">
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *"
+              RowSpacing="20">
+            <Label Grid.Row="0"
+                   FontSize="24"
+                   Text="Login as user" />
+
+            <CollectionView Grid.Row="1"
+                            Margin="0,10"
+                            ItemsSource="{Binding Users}"
+                            SelectionMode="Single">
+                <CollectionView.Header>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Text="Photo" />
+                        <Label Grid.Column="1" Text="Name" />
+                        <Label Grid.Column="2" Text="Surname" />
+                        <Label Grid.Column="3" Text="ID" />
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:UserListModel">
+                        <Grid Margin="10">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference UserLoginViewRoot}, Path=BindingContext.LoginCommand}"
+                                                      CommandParameter="{Binding Id}" />
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Column="0"
+                                   Padding="0"
+                                   BackgroundColor="LightGray"
+                                   CornerRadius="25"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+                                <Image Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="Fill" />
+                            </Frame>
+
+                            <Label Grid.Column="1"
+                                   Text="{Binding Name}"
+                                   Margin="10,0,0,0"
+                                   VerticalOptions="Center" />
+
+                            <Label Grid.Column="2"
+                                   Text="{Binding Surname}"
+                                   VerticalOptions="Center" />
+
+                            <Label Grid.Column="3"
+                                   Text="{Binding Id}"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </StackLayout>
+
+</views:ContentPageBase>
+    
