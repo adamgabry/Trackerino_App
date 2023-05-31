@@ -30,7 +30,7 @@
 
         <Grid HorizontalOptions="Start" VerticalOptions="Start"
               RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
-              ColumnDefinitions="Auto, Auto, *"
+              ColumnDefinitions="Auto, Auto, *, *"
               RowSpacing="10" ColumnSpacing="20">
 
             <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
@@ -59,13 +59,28 @@
 
             <Label Grid.Row="3" Grid.Column="1"
                    FontSize="12" Text="Start" />
-            <Label Grid.Row="3" Grid.Column="2"
-                   FontSize="14" Text="{Binding Activity.StartDateTime}" />
+            <DatePicker Grid.Row="3" Grid.Column="2"
+                        FontSize="14"
+                        Format="yyyy-MM-dd"
+                        Date="{Binding Activity.StartDateTime.Date}" />
+
+            <TimePicker Grid.Row="3" Grid.Column="3"
+                        FontSize="14"
+                        Format="HH:mm"
+                        Time="{Binding Activity.StartDateTime.TimeOfDay}"/>
+
 
             <Label Grid.Row="4" Grid.Column="1"
                    FontSize="12" Text="End" />
-            <Label Grid.Row="4" Grid.Column="2"
-                   FontSize="14" Text="{Binding Activity.EndDateTime}" />
+            <DatePicker Grid.Row="4" Grid.Column="2"
+                        FontSize="14"
+                        Format="yyyy-MM-dd"
+                        Date="{Binding Activity.EndDateTime.Date}" />
+
+            <TimePicker Grid.Row="4" Grid.Column="3"
+                        FontSize="14"
+                        Format="HH:mm"
+                        Time="{Binding Activity.EndDateTime.TimeOfDay}"/>
 
             <Label Grid.Row="5" Grid.Column="1"
                    FontSize="12" Text="Tag" />
