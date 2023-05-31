@@ -10,7 +10,7 @@
 
     <StackLayout Padding="20">
 
-        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto"
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto"
               RowSpacing="20">
 
             <Label Grid.Column="0"
@@ -32,10 +32,21 @@
                         CornerRadius="25"
                         FontSize="14" />
             </StackLayout>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal"
+                         HorizontalOptions="End" VerticalOptions="Start">
+                <Button Text="Join"
+                        Padding="12, 6"
+                        Command="{Binding UserJoinsCommand}"
+                        CornerRadius="25"
+                        FontSize="14" 
+                />
+            </StackLayout>
+            
         </Grid>
 
         <Grid HorizontalOptions="Start" VerticalOptions="Start"
-              RowDefinitions="Auto, Auto"
+              RowDefinitions="Auto, Auto, Auto"
               ColumnDefinitions="Auto, *"
               RowSpacing="10" ColumnSpacing="20">
             
@@ -48,6 +59,11 @@
                    FontSize="12" Text="ID" />
             <Label Grid.Row="1" Grid.Column="1"
                    FontSize="14" Text="{Binding Project.Id}" />
+            
+            <Label Grid.Row="2" Grid.Column="0"
+                   FontSize="12" Text="Users" />
+            <Label Grid.Row="2" Grid.Column="1"
+                   FontSize="14" Text="{Binding Project.Users.Count}" />
 
         </Grid>
     </StackLayout>
