@@ -1,12 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Trackerino.App.Messages;
 using Trackerino.App.Services.Interfaces;
-using Trackerino.App.Services;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
-using System;
-using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace Trackerino.App.ViewModels
 {
@@ -52,7 +48,8 @@ namespace Trackerino.App.ViewModels
             Activity.StartDateTime = start.AddMinutes(StartTime.TotalMinutes);
             Activity.EndDateTime = end.AddMinutes(EndTime.TotalMinutes);
             //check for overlaps
-            IEnumerable<ActivityListModel> existingActivities = await _activityFacade.GetAsync();
+            string userIdString = Preferences.Get("ActiveUser", string.Empty);
+            IEnumerable<ActivityListModel> existingActivities = await _activityFacade.GetFilteredByUserAsync(Guid.Parse(userIdString));
             if (!CheckActivityOverlap(existingActivities))
             {
                 await _activityFacade.SaveAsync(Activity);
