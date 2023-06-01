@@ -28,6 +28,7 @@
                             Margin="0,10"
                             ItemsSource="{Binding Projects}"
                             SelectionMode="Single">
+
                 <CollectionView.Header>
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
