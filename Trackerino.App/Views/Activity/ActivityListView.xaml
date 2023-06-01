@@ -128,7 +128,7 @@
             <Button Grid.Row="0"
                     Padding="12, 6"
                     HorizontalOptions="End" VerticalOptions="Start"
-                    Text="Add Activity"
+                    Text="Track new"
                     Command="{Binding GoToCreateCommand}"
                     CornerRadius="25"
                     FontFamily="MontserratMedium"
