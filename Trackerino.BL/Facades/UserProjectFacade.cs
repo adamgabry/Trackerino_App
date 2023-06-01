@@ -1,4 +1,5 @@
-﻿using Trackerino.BL.Facades.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Mappers.Interfaces;
 using Trackerino.BL.Models;
 using Trackerino.DAL.Entities;
@@ -46,5 +47,16 @@ public class UserProjectFacade :
 
         await repository.InsertAsync(entity);
         await uow.CommitAsync();
+    }
+
+    public async Task<IEnumerable<UserProjectListModel>> GetFilteredByUserAsync(Guid id)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<UserProjectEntity> entities = await uow
+            .GetRepository<UserProjectEntity, UserProjectEntityMapper>()
+            .Get()
+            .ToListAsync();
+
+        return ModelMapper.MapToListModel(entities.Where(e => e.UserId == id));
     }
 }
