@@ -12,8 +12,8 @@ public static class ActivitySeeds
         Id = Guid.Parse(input: "4FA608F9-77D2-498B-A6C1-387FDA3DFB3D"),
         Tag = ActivityTag.School,
         Description = "Study session for IOS",
-        StartDateTime = new DateTime(2023, 5, 24, 14, 0, 0),
-        EndDateTime = new DateTime(2023, 5, 24, 16, 32, 0),
+        StartDateTime = new DateTime(2023, 5, 29, 14, 0, 0),
+        EndDateTime = new DateTime(2023, 5, 29, 16, 32, 0),
         UserId = UserSeeds.Seidly.Id,
         ProjectId = ProjectSeeds.ProjectEntityStudy.Id
     };
@@ -47,6 +47,17 @@ public static class ActivitySeeds
         StartDateTime = new DateTime(2022, 6, 24, 10, 0, 0),
         EndDateTime = new DateTime(2022, 6, 24, 11, 30, 21),
         UserId = UserSeeds.Max.Id,
+        ProjectId = ProjectSeeds.ProjectEntityGen.Id
+    };
+
+    public static readonly ActivityEntity ActivityEntitySport1 = new()
+    {
+        Id = Guid.Parse(input: "ab2ff451-faad-4a85-8082-ac348d12de36"),
+        Tag = ActivityTag.Sport,
+        Description = "Basketball session",
+        StartDateTime = new DateTime(2023, 4, 24, 8, 15, 0),
+        EndDateTime = new DateTime(2023, 4, 24, 11, 30, 21),
+        UserId = UserSeeds.AdamkO.Id,
         ProjectId = ProjectSeeds.ProjectEntityGen.Id
     };
 
@@ -91,7 +102,8 @@ public static class ActivitySeeds
             ActivityEntityIOS,
             ActivityEntityModel,
             ActivityEntitySport,
-            ActivityEntityUi
+            ActivityEntityUi,
+            ActivityEntitySport1
             );
     }
 }

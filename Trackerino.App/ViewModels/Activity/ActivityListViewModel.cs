@@ -2,11 +2,9 @@
 using CommunityToolkit.Mvvm.Messaging;
 using Trackerino.App.Messages;
 using Trackerino.App.Services.Interfaces;
-using Trackerino.App.Services;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
 using System.Windows.Input;
-using Trackerino.BL.Facades;
 
 namespace Trackerino.App.ViewModels
 {
@@ -98,10 +96,11 @@ namespace Trackerino.App.ViewModels
             }
         }
 
-        public async Task UpdateDatePicker(DateTime startDate, DateTime endDate )
+        public Task UpdateDatePicker(DateTime startDate, DateTime endDate )
         {
             StartDateTime = startDate;
             EndDateTime = endDate;
+            return Task.CompletedTask;
         }
         public async Task FilterLastWeekActivitiesAsync()
         {
@@ -119,18 +118,18 @@ namespace Trackerino.App.ViewModels
         }
         public async Task FilterPreviousMonthActivitiesAsync()
         {
-            DateTime pMonth = DateTime.Today.AddMonths(-1);
-            DateTime startDate = new DateTime(pMonth.Year, pMonth.Month, 1);
-            DateTime endDate = new DateTime(pMonth.Year, pMonth.Month, DateTime.DaysInMonth(pMonth.Year, pMonth.Month));
+            var pMonth = DateTime.Today.AddMonths(-1);
+            var startDate = new DateTime(pMonth.Year, pMonth.Month, 1);
+            var endDate = new DateTime(pMonth.Year, pMonth.Month, DateTime.DaysInMonth(pMonth.Year, pMonth.Month));
 
             Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
             await UpdateDatePicker(startDate, endDate);
         }
         public async Task FilterPreviousYearActivitiesAsync()
         {
-            DateTime today = DateTime.Today;
-            DateTime startDate = new DateTime(today.Year, 1, 1).AddYears(-1);
-            DateTime endDate = new DateTime(today.Year, 12, 31).AddYears(-1);
+            var today = DateTime.Today;
+            var startDate = new DateTime(today.Year, 1, 1).AddYears(-1);
+            var endDate = new DateTime(today.Year, 12, 31).AddYears(-1);
 
             Activities = await _activityFacade.GetFilteredAsync(startDate, endDate);
             await UpdateDatePicker(startDate, endDate);
@@ -138,7 +137,10 @@ namespace Trackerino.App.ViewModels
         public async Task ResetFilterActivitiesAsync()
         {
             Activities = await _activityFacade.GetAsync();
+            
+            
             await UpdateDatePicker(DateTime.Today, DateTime.Today);
+            await base.LoadDataAsync();
         }
     }
 }

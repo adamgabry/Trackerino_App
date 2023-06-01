@@ -10,13 +10,12 @@
              Title="Activities">
 
     <StackLayout Padding="20">
-        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="50, 50, 50">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="180" />
             </Grid.ColumnDefinitions>
 
         <Label 
@@ -30,6 +29,7 @@
             Grid.Row="0"
             Date="{Binding StartDateTime, Mode=TwoWay}"
             VerticalOptions="Center" 
+            HorizontalOptions="Start"
         />
 
         <Label 
@@ -43,6 +43,7 @@
             Grid.Row="1"
             Date="{Binding EndDateTime, Mode=TwoWay}"
             VerticalOptions="Center" 
+            HorizontalOptions="Start"
         />
 
         <Button 
@@ -62,7 +63,7 @@
             Grid.Row="0"
             Padding="12, 6"
             HorizontalOptions="FillAndExpand" 
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Text="Filter Last Week"
             Command="{Binding FilterLastWeekActivitiesCommand}"
             CornerRadius="25"
@@ -74,7 +75,7 @@
             Grid.Row="1"
             Padding="12, 6"
             HorizontalOptions="FillAndExpand" 
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Text="Filter Last Month"
             Command="{Binding FilterLastMonthActivitiesCommand}"
             CornerRadius="25"
@@ -86,7 +87,7 @@
             Grid.Row="0"
             Padding="12, 6"
             HorizontalOptions="FillAndExpand" 
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Text="Filter Previous Month"
             Command="{Binding FilterPreviousMonthActivitiesCommand}"
             CornerRadius="25"
@@ -98,7 +99,7 @@
             Grid.Row="1"
             Padding="12, 6"
             HorizontalOptions="FillAndExpand" 
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Text="Filter Previous Year"
             Command="{Binding FilterPreviousYearActivitiesCommand}"
             CornerRadius="25"
@@ -106,10 +107,10 @@
             FontSize="14"
         />
             <Button 
-            Grid.Column="0"
-            Grid.Row="3"
+            Grid.Column="1"
+            Grid.Row="2"
             Padding="12, 6"
-            HorizontalOptions="FillAndExpand" 
+            HorizontalOptions="Start" 
             VerticalOptions="CenterAndExpand"
             Text="Reset Filters"
             Command="{Binding ResetFilterActivitiesCommand}"
@@ -119,10 +120,18 @@
             />
         </Grid>
 
-        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *"
+        <Grid HorizontalOptions="FillAndExpand"
               RowSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="400" />
+            </Grid.RowDefinitions>
             <Label Grid.Row="0"
                    FontSize="24"
+                   VerticalOptions="Center"
                    Text="Select Activity" />
 
             <Button Grid.Row="0"
@@ -137,9 +146,12 @@
             <CollectionView Grid.Row="1"
                 Margin="0,10"
                 ItemsSource="{Binding Activities}"
-                SelectionMode="Single">
+                SelectionMode="Single"
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="FillAndExpand"
+                VerticalScrollBarVisibility="Always">
                 <CollectionView.Header>
-                    <Grid Margin="10">
+                    <Grid Margin="10" MinimumHeightRequest="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="2*" />
@@ -158,7 +170,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:ActivityListModel">
-                        <Grid Margin="10">
+                        <Grid Margin="10" >
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}"
                                           CommandParameter="{Binding Id}" />

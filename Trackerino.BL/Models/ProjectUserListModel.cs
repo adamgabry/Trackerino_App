@@ -6,7 +6,7 @@
         public required string UserName { get; set; }
 
         public required string UserSurname { get; set; }
-        public required string UserImageUrl { get; set; }
+        public required string? UserImageUrl { get; set; }
 
         public static ProjectUserDetailModel Empty => new()
         {

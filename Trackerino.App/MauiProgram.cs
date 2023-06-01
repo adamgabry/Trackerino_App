@@ -31,8 +31,17 @@ public static class MauiProgram
 #endif
 
         var app = builder.Build();
+        try
+        {
+            app.Services.GetRequiredService<IDbMigrator>().Migrate();
 
-        app.Services.GetRequiredService<IDbMigrator>().Migrate();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
         RegisterRouting(app.Services.GetRequiredService<INavigationService>());
 
         return app;
