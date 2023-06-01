@@ -1,4 +1,5 @@
-﻿using Trackerino.BL.Mappers.Interfaces;
+﻿using System.Collections.ObjectModel;
+using Trackerino.BL.Mappers.Interfaces;
 using Trackerino.BL.Models;
 using Trackerino.DAL.Entities;
 
@@ -25,15 +26,42 @@ namespace Trackerino.BL.Mappers
                 };
 
         public override ProjectDetailModel MapToDetailModel(ProjectEntity? entity)
-            => entity is null
-                ? ProjectDetailModel.Empty
-                : new ProjectDetailModel
-                {
-                    Id = entity.Id,
-                    Name = entity.Name,
-                    Users = _projectUserModelMapper.MapToListModel(entity.Users).ToObservableCollection(),
-                    Activities = _userProjectActivityModelMapper.MapToListModel(entity.Activities).ToObservableCollection(),
-                };
+        {
+            if (entity is null)
+                return ProjectDetailModel.Empty;
+
+            var detailModel = new ProjectDetailModel
+            {
+                Id = entity.Id,
+                Name = entity.Name
+            };
+
+            var users = entity.Users;
+            var activities = entity.Activities;
+
+            if (users.Count > 0)
+            {
+                detailModel.Users = _projectUserModelMapper.MapToListModel(users).ToObservableCollection();
+            }
+            else
+            {
+                detailModel.Users = new ObservableCollection<ProjectUserListModel>();
+                // Optionally, you can add a placeholder item or perform other actions when there are no users
+            }
+
+            if (activities.Count > 0)
+            {
+                detailModel.Activities = _userProjectActivityModelMapper.MapToListModel(activities).ToObservableCollection();
+            }
+            else
+            {
+                detailModel.Activities = new ObservableCollection<UserProjectActivityListModel>();
+                // Optionally, you can add a placeholder item or perform other actions when there are no activities
+            }
+
+            return detailModel;
+        }
+
 
         public override ProjectEntity MapToEntity(ProjectDetailModel model)
             => new()

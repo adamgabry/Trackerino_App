@@ -1,4 +1,5 @@
-﻿using Trackerino.BL.Mappers.Interfaces;
+﻿using System.Collections.ObjectModel;
+using Trackerino.BL.Mappers.Interfaces;
 using Trackerino.BL.Models;
 using Trackerino.DAL.Entities;
 
@@ -27,16 +28,44 @@ namespace Trackerino.BL.Mappers
                 };
 
         public override UserDetailModel MapToDetailModel(UserEntity? entity)
-            => entity is null ? UserDetailModel.Empty : new UserDetailModel
-                {
-                    Id = entity.Id,
-                    Name = entity.Name,
-                    Surname = entity.Surname,
-                    ImageUrl = entity.ImageUrl,
-                    Projects = _userProjectModelMapper.MapToListModel(entity.Projects).ToObservableCollection(),
-                    Activities = _userProjectActivityModelMapper.MapToListModel(entity.Activities).ToObservableCollection(),
-                    
-                };
+        {
+            if (entity is null)
+                return UserDetailModel.Empty;
+
+            var projects = entity.Projects;
+            var activities = entity.Activities;
+
+            var detailModel = new UserDetailModel
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Surname = entity.Surname,
+                ImageUrl = entity.ImageUrl
+            };
+
+            if (projects.Count > 0)
+            {
+                detailModel.Projects = _userProjectModelMapper.MapToListModel(projects).ToObservableCollection();
+            }
+            else
+            {
+                detailModel.Projects = new ObservableCollection<UserProjectListModel>();
+                // Optionally, you can add a placeholder item or perform other actions when there are no projects
+            }
+
+            if (activities.Count > 0)
+            {
+                detailModel.Activities = _userProjectActivityModelMapper.MapToListModel(activities).ToObservableCollection();
+            }
+            else
+            {
+                detailModel.Activities = new ObservableCollection<UserProjectActivityListModel>();
+                // Optionally, you can add a placeholder item or perform other actions when there are no activities
+            }
+
+            return detailModel;
+        }
+
 
         public override UserEntity MapToEntity(UserDetailModel model)
             => new()
