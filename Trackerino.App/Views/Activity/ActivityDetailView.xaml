@@ -35,7 +35,7 @@
         </Grid>
 
         <Grid HorizontalOptions="Start" VerticalOptions="Start"
-              RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+              RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
               ColumnDefinitions="Auto, Auto, *"
               RowSpacing="10" ColumnSpacing="20">
 
@@ -79,9 +79,25 @@
                    FontSize="14" Text="{Binding Activity.Tag}" />
 
             <Label Grid.Row="6" Grid.Column="1"
-                   FontSize="12" Text="Description" />
+                   FontSize="12" Text="ID" />
             <Label Grid.Row="6" Grid.Column="2"
+                   FontSize="14" Text="{Binding Activity.Id}" />
+
+            <Label Grid.Row="7" Grid.Column="1"
+                   FontSize="12" Text="Description" />
+            <Label Grid.Row="7" Grid.Column="2"
                    FontSize="14" Text="{Binding Activity.Description}" />
+
+            <Label Grid.Row="8" Grid.Column="1"
+                   FontSize="12" Text="Project Name" />
+            <Label Grid.Row="8" Grid.Column="2"
+                   FontSize="14" Text="{Binding Activity.Project.Name}" />
+
+            <Label Grid.Row="9" Grid.Column="1"
+                   FontSize="12" Text="Project ID" />
+            <Label Grid.Row="9" Grid.Column="2"
+                   FontSize="14" Text="{Binding Activity.Project.Id}" />
+
 
         </Grid>
     </StackLayout>

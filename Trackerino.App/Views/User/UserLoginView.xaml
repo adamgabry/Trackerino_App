@@ -24,16 +24,14 @@
                 <CollectionView.Header>
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Text="Photo" />
-                        <Label Grid.Column="1" Text="Name" />
-                        <Label Grid.Column="2" Text="Surname" />
-                        <Label Grid.Column="3" Text="ID" />
+                        <Label Grid.Column="0" Text="Name" />
+                        <Label Grid.Column="1" Text="Surname" />
+                        <Label Grid.Column="2" Text="Login" />
                     </Grid>
                 </CollectionView.Header>
 
@@ -45,38 +43,28 @@
                                                       CommandParameter="{Binding Id}" />
                             </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Frame Grid.Column="0"
-                                   Padding="0"
-                                   BackgroundColor="LightGray"
-                                   CornerRadius="25"
-                                   WidthRequest="50"
-                                   HeightRequest="50"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center">
-                                <Image Source="{Binding ImageUrl}"
-                                       Aspect="AspectFill"
-                                       HorizontalOptions="Fill"
-                                       VerticalOptions="Fill" />
-                            </Frame>
-
-                            <Label Grid.Column="1"
+                            <Label Grid.Column="0"
                                    Text="{Binding Name}"
                                    Margin="10,0,0,0"
                                    VerticalOptions="Center" />
 
-                            <Label Grid.Column="2"
+                            <Label Grid.Column="1"
                                    Text="{Binding Surname}"
                                    VerticalOptions="Center" />
 
-                            <Label Grid.Column="3"
-                                   Text="{Binding Id}"
-                                   VerticalOptions="Center" />
+                            <Button Grid.Column="2" Padding="12, 6"
+                                   HorizontalOptions="End" VerticalOptions="Start"
+                                   Text="Login"
+                                   CornerRadius="25"
+                                   FontSize="14"
+                                   Command="{Binding Source={x:Reference UserLoginViewRoot}, Path=BindingContext.LoginCommand}"
+                                   CommandParameter="{Binding Id}" />
+
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

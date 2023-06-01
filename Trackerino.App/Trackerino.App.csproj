@@ -79,9 +79,6 @@
     <MauiXaml Update="Views\Activity\ActivityListView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\Activity\ActivityProjectEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
 
     <MauiXaml Update="Views\Activity\ActivityTrackView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -91,9 +88,6 @@
     </MauiXaml>
 
     <MauiXaml Update="Views\ContentPageBase.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Views\Project\ProjectActivitiesEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\Project\ProjectDetailView.xaml">
@@ -108,9 +102,6 @@
     <MauiXaml Update="Views\Project\ProjectUsersEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\User\UserActivitiesEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
     <MauiXaml Update="Views\User\UserDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -121,9 +112,6 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\User\UserLoginView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Views\User\UserProjectsEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>

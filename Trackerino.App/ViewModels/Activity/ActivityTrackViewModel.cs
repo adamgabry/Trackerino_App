@@ -17,6 +17,7 @@ namespace Trackerino.App.ViewModels
     [QueryProperty(nameof(Activity), nameof(Activity))]
     public partial class ActivityTrackViewModel : ViewModelBase
     {
+        private readonly IProjectFacade _projectFacade;
         private readonly IUserFacade _userFacade;
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
@@ -27,6 +28,8 @@ namespace Trackerino.App.ViewModels
         private TimeSpan _duration;
 
         public List<ActivityTag> ActivityTags { get; set; }
+
+        public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
 
         public DateTime StartDateTime
         {
@@ -74,12 +77,14 @@ namespace Trackerino.App.ViewModels
         public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty; 
 
         public ActivityTrackViewModel(
+            IProjectFacade projectFacade,
             IActivityFacade activityFacade,
             IUserFacade userFacade,
             INavigationService navigationService,
             IMessengerService messengerService)
             : base(messengerService)
         {
+            _projectFacade = projectFacade;
             _activityFacade = activityFacade;
             _userFacade = userFacade;
             _navigationService = navigationService;
@@ -92,7 +97,14 @@ namespace Trackerino.App.ViewModels
             _timer.Elapsed += TimerElapsed;
             _timer.Start();
         }
-        
+
+        protected override async Task LoadDataAsync()
+        {
+            await base.LoadDataAsync();
+
+            Projects = await _projectFacade.GetAsync();
+        }
+
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
             UpdateDuration();
@@ -131,6 +143,12 @@ namespace Trackerino.App.ViewModels
                 _timer.Stop();
                 EndDateTime = DateTime.Now;
             }
+        }
+
+        [RelayCommand]
+        private async Task ActivityToProjectAsync(Guid projectId)
+        {
+            Activity.ProjectId = projectId;
         }
 
         [RelayCommand]

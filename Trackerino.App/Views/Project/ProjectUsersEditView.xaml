@@ -7,7 +7,7 @@
              xmlns:m="clr-namespace:Trackerino.BL.Models;assembly=Trackerino.BL"
              x:DataType="vm:ProjectUsersEditViewModel"
              x:Name="ProjectUsersEditViewRoot"
-             Title="Project UsersEdit">
+             Title="Trackerino">
 
     <StackLayout Padding="20">
 

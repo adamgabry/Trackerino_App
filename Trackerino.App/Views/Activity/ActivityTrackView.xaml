@@ -30,7 +30,7 @@
             </StackLayout>
         </Grid>
 
-        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
               ColumnDefinitions="Auto, Auto" RowSpacing="20" ColumnSpacing="10">
 
             <Button Text="Start tracking"
@@ -76,6 +76,45 @@
                    FontSize="14" Text="{Binding Activity.Description}" />
 
         </Grid>
+
+        <Label Grid.Column="0"
+               FontSize="24"
+               Text="Select project" />
+
+        <CollectionView Grid.Row="1"
+                        Margin="0,10"
+                        ItemsSource="{Binding Projects}"
+                        SelectionMode="Single">
+
+            <CollectionView.Header>
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Name" />
+                </Grid>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ProjectListModel">
+                    <Grid Margin="10">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityTrackViewRoot}, Path=BindingContext.ActivityToProjectCommand}"
+                                                  CommandParameter="{Binding  Id}" />
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Text="{Binding Name}"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
 
     </StackLayout>
 

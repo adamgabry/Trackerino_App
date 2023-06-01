@@ -19,9 +19,6 @@ namespace Trackerino.App.Services
             new("//users/edit", typeof(UserEditView), typeof(UserEditViewModel)),
             new("//users/detail/edit", typeof(UserEditView), typeof(UserEditViewModel)),
 
-            new("//users/detail/edit/activities", typeof(UserActivitiesEditView), typeof(UserActivitiesEditViewModel)),
-            new("//users/detail/edit/projects", typeof(UserProjectsEditView), typeof(UserProjectsEditViewModel)),
-
             new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
             new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
 
@@ -37,8 +34,6 @@ namespace Trackerino.App.Services
             new("//projects/detail/edit", typeof(ProjectEditView), typeof(ProjectEditViewModel)),
 
             new("//projects/detail/edit/users", typeof(ProjectUsersEditView), typeof(ProjectUsersEditViewModel)),
-            new("//projects/detail/edit/activities", typeof(ProjectActivitiesEditView),
-                typeof(ProjectActivitiesEditViewModel))
         };
 
         public async Task GoToAsync<TViewModel>()
