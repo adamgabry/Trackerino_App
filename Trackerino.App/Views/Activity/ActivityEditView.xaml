@@ -4,7 +4,7 @@
                        xmlns:vm="clr-namespace:Trackerino.App.ViewModels"
                        xmlns:m="clr-namespace:Trackerino.BL.Models;assembly=Trackerino.BL"
                        x:DataType="vm:ActivityEditViewModel"
-                       x:Name="ActivityEditlViewRoot"
+                       x:Name="ActivityEditViewRoot"
                        x:Class="Trackerino.App.Views.Activity.ActivityEditView"
                        Title="Activity Edit">
 

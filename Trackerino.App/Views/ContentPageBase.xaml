@@ -6,6 +6,7 @@
              xmlns:conv="clr-namespace:Trackerino.App.Converters">
     <ContentPage.Resources>
         <conv:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+        <conv:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
     </ContentPage.Resources>
 
 </ContentPage>

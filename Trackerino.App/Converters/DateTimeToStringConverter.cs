@@ -7,7 +7,14 @@ namespace Trackerino.App.Converters
     {
         public override string ConvertFrom(DateTime value, CultureInfo? culture)
         {
-            return value.ToString("yyyy-MM-dd, HH:mm", culture);
+            if (value != DateTime.UnixEpoch)
+            {
+                return value.ToString("yyyy-MM-dd, HH:mm:ss", culture);
+            }
+            else
+            {
+                return "";
+            }
         }
 
         public override string DefaultConvertReturnValue { get; set; } = string.Empty;
