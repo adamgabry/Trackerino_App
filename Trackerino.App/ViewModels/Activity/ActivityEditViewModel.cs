@@ -5,6 +5,7 @@ using Trackerino.App.Services;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
 using System;
+using System.Windows.Forms;
 
 namespace Trackerino.App.ViewModels
 {
@@ -14,10 +15,10 @@ namespace Trackerino.App.ViewModels
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
 
-        //public DateTime StartDate { get; set; }
-        //public TimeSpan StartTime { get; set; }
-        //public DateTime EndDate { get; set; }
-        //public TimeSpan EndTime { get; set; }
+        public DateTime StartDate { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public DateTime EndDate { get; set; }
+        public TimeSpan EndTime { get; set; }
 
 
         public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
@@ -28,24 +29,38 @@ namespace Trackerino.App.ViewModels
             IMessengerService messengerService)
             : base(messengerService)
         {
-            //StartDate = Activity.StartDateTime.TimeOfDay;
-            //StartTime = Activity.StartDateTime.TimeOfDay;
-
-            //EndDate = Activity.EndDateTime.Date;
-            //EndTime = Activity.EndDateTime.TimeOfDay;
-
             _activityFacade = activityFacade;
             _navigationService = navigationService;
+
         }
 
+        protected override async Task LoadDataAsync()
+        {
+            await base.LoadDataAsync();
+            await UpdatePickers();
+        }
 
         [RelayCommand]
         private async Task SaveAsync()
         {
+            DateTime start = StartDate.Date;
+            DateTime end = EndDate.Date;
+            Activity.StartDateTime = start.AddMinutes(StartTime.TotalMinutes);
+            Activity.EndDateTime = end.AddMinutes(EndTime.TotalMinutes);
             await _activityFacade.SaveAsync(Activity);
             
             MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
             _navigationService.SendBackButtonPressed();
+        }
+
+        private Task UpdatePickers()
+        {
+            StartDate = Activity.StartDateTime.Date;
+            StartTime = Activity.StartDateTime.TimeOfDay;
+
+            EndDate = Activity.EndDateTime.Date;
+            EndTime = Activity.EndDateTime.TimeOfDay;
+            return Task.CompletedTask;
         }
     }
 }

@@ -62,12 +62,12 @@
             <DatePicker Grid.Row="3" Grid.Column="2"
                         FontSize="14"
                         Format="yyyy-MM-dd"
-                        Date="{Binding Activity.StartDateTime.Date}" />
+                        Date="{Binding StartDate,Mode=TwoWay}" />
 
             <TimePicker Grid.Row="3" Grid.Column="3"
                         FontSize="14"
                         Format="HH:mm"
-                        Time="{Binding Activity.StartDateTime.TimeOfDay}"/>
+                        Time="{Binding StartTime,Mode=TwoWay}"/>
 
 
             <Label Grid.Row="4" Grid.Column="1"
@@ -75,12 +75,12 @@
             <DatePicker Grid.Row="4" Grid.Column="2"
                         FontSize="14"
                         Format="yyyy-MM-dd"
-                        Date="{Binding Activity.EndDateTime.Date}" />
+                        Date="{Binding EndDate,Mode=TwoWay}" />
 
             <TimePicker Grid.Row="4" Grid.Column="3"
                         FontSize="14"
                         Format="HH:mm"
-                        Time="{Binding Activity.EndDateTime.TimeOfDay}"/>
+                        Time="{Binding EndTime ,Mode=TwoWay}"/>
 
             <Label Grid.Row="5" Grid.Column="1"
                    FontSize="12" Text="Tag" />

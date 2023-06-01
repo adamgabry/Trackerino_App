@@ -98,10 +98,11 @@ namespace Trackerino.App.ViewModels
             }
         }
 
-        public async Task UpdateDatePicker(DateTime startDate, DateTime endDate )
+        public Task UpdateDatePicker(DateTime startDate, DateTime endDate )
         {
             StartDateTime = startDate;
             EndDateTime = endDate;
+            return Task.CompletedTask;
         }
         public async Task FilterLastWeekActivitiesAsync()
         {
