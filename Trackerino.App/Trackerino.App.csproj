@@ -87,6 +87,9 @@
     <MauiXaml Update="Views\Activity\ActivityProjectEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\Activity\ActivityTrackView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\Activity\ActivityUserEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -134,6 +137,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Activity\ActivityTrackView.xaml.cs">
+      <DependentUpon>ActivityTrackView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ContentPageBase.xaml.cs">
       <DependentUpon>ContentPageBase.xaml</DependentUpon>
     </Compile>
