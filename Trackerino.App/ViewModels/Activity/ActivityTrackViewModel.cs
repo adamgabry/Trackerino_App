@@ -81,19 +81,13 @@ namespace Trackerino.App.ViewModels
             _userFacade = userFacade;
             _navigationService = navigationService;
 
-            InitializeAsync().Wait();
+            string userIdString = Preferences.Get("ActiveUser", String.Empty);
+            Activity.UserId = Guid.Parse(userIdString);
             _timer = new System.Timers.Timer(1000);
             _timer.Elapsed += TimerElapsed;
             _timer.Start();
         }
-
-        public async Task InitializeAsync()
-        {
-            string userIdString = Preferences.Get("ActiveUser", String.Empty);
-            Guid userId = Guid.Parse(userIdString);
-            Activity.User = await _userFacade.GetAsync(userId);
-        }
-
+        
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
             UpdateDuration();
