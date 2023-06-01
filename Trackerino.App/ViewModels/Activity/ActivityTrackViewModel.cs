@@ -9,6 +9,7 @@ using Trackerino.BL.Facades;
 using System;
 using System.Threading.Tasks;
 using System.Timers;
+using Trackerino.App.Views.Activity;
 
 namespace Trackerino.App.ViewModels
 {
@@ -67,20 +68,30 @@ namespace Trackerino.App.ViewModels
             }
         }
 
-        public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
+        public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty; 
 
         public ActivityTrackViewModel(
             IActivityFacade activityFacade,
+            IUserFacade userFacade,
             INavigationService navigationService,
             IMessengerService messengerService)
             : base(messengerService)
         {
             _activityFacade = activityFacade;
+            _userFacade = userFacade;
             _navigationService = navigationService;
 
+            InitializeAsync().Wait();
             _timer = new System.Timers.Timer(1000);
             _timer.Elapsed += TimerElapsed;
             _timer.Start();
+        }
+
+        public async Task InitializeAsync()
+        {
+            string userIdString = Preferences.Get("ActiveUser", String.Empty);
+            Guid userId = Guid.Parse(userIdString);
+            Activity.User = await _userFacade.GetAsync(userId);
         }
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
