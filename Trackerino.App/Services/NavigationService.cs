@@ -26,6 +26,7 @@ namespace Trackerino.App.Services
             new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
 
             new("//activities/track", typeof(ActivityTrackView), typeof(ActivityTrackViewModel)),
+            new("//activities/track/project", typeof(ActivityTrackView), typeof(ActivityTrackViewModel)),
 
             new("//activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
             new("//activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
