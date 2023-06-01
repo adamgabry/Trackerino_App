@@ -6,7 +6,7 @@
                        x:DataType="vm:ActivityTrackViewModel"
                        x:Name="ActivityTrackViewRoot"
                        x:Class="Trackerino.App.Views.Activity.ActivityTrackView"
-                       Title="Activity Tracking">
+                       Title="Trackerino">
 
     <StackLayout Padding="20">
 
@@ -15,7 +15,7 @@
 
             <Label Grid.Column="0"
                    FontSize="24"
-                   Text="Activity Tracking" />
+                   Text="Current User" />
 
             <StackLayout Grid.Row="0" Orientation="Horizontal"
                          HorizontalOptions="End" VerticalOptions="Start">
@@ -29,7 +29,7 @@
         </Grid>
 
         <Grid HorizontalOptions="Start" VerticalOptions="Start"
-              RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+              RowDefinitions="Auto, Auto, Auto"
               ColumnDefinitions="Auto, Auto, *"
               RowSpacing="10" ColumnSpacing="20">
 
@@ -55,29 +55,61 @@
                    FontSize="12" Text="User ID" />
             <Label Grid.Row="2" Grid.Column="2"
                    FontSize="14" Text="{Binding Activity.User.Id}" />
+        </Grid>
 
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto"
+              ColumnDefinitions="Auto, *" RowSpacing="20">
 
-            <Label Grid.Row="3" Grid.Column="1"
+            <Label Grid.Column="0"
+                   FontSize="24"
+                   Text="Activity Tracking"
+                   Padding="0, 20"/>
+        </Grid>
+
+        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+              ColumnDefinitions="Auto, Auto" RowSpacing="20" ColumnSpacing="10">
+
+            <Button Text="Start tracking"
+                    Grid.Row="0" Grid.ColumnSpan="2"
+                    Padding="12, 0"
+                    Command="{Binding SetStartDateTimeCommand}"
+                    CornerRadius="25"
+                    FontSize="14" />
+
+            <Button Text="Stop tracking"
+                    Grid.Row="1" Grid.ColumnSpan="2"
+                    Padding="12, 0"
+                    Command="{Binding SetEndDateTimeCommand}"
+                    CornerRadius="25"
+                    FontSize="14" />
+
+            <Label Grid.Row="2" Grid.Column="0"
+                   FontSize="12" Text="Duration" />
+            <Label Grid.Row="2" Grid.Column="1"
+                   FontSize="14" Text="{Binding Duration, Converter={StaticResource TimeSpanToStringConverter}}" />
+
+            <Label Grid.Row="3" Grid.Column="0"
                    FontSize="12" Text="Start" />
-            <Label Grid.Row="3" Grid.Column="2"
-                   FontSize="14" Text="{Binding Activity.StartDateTime}" />
+            <Label Grid.Row="3" Grid.Column="1"
+                   FontSize="14" Text="{Binding StartDateTime, Converter={StaticResource DateTimeToStringConverter}}}" />
 
-            <Label Grid.Row="4" Grid.Column="1"
+            <Label Grid.Row="4" Grid.Column="0"
                    FontSize="12" Text="End" />
-            <Label Grid.Row="4" Grid.Column="2"
-                   FontSize="14" Text="{Binding Activity.EndDateTime}" />
+            <Label Grid.Row="4" Grid.Column="1"
+                   FontSize="14" Text="{Binding EndDateTime, Converter={StaticResource DateTimeToStringConverter}}}" />
 
-            <Label Grid.Row="5" Grid.Column="1"
+            <Label Grid.Row="5" Grid.Column="0"
                    FontSize="12" Text="Tag" />
-            <Entry Grid.Row="5" Grid.Column="2"
-                    FontSize="14" Text="{Binding Activity.Tag}" />
+            <Entry Grid.Row="5" Grid.Column="1"
+                   FontSize="14" Text="{Binding Activity.Tag}" />
 
-            <Label Grid.Row="6" Grid.Column="1"
+            <Label Grid.Row="6" Grid.Column="0"
                    FontSize="12" Text="Description" />
-            <Entry Grid.Row="6" Grid.Column="2"
+            <Entry Grid.Row="6" Grid.Column="1"
                    FontSize="14" Text="{Binding Activity.Description}" />
 
         </Grid>
+
     </StackLayout>
 
 </views:ContentPageBase>

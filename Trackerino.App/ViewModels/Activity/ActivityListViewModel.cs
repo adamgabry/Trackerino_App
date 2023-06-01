@@ -62,7 +62,7 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task GoToCreateAsync()
         {
-            await _navigationService.GoToAsync("/edit");
+            await _navigationService.GoToAsync("/track");
         }
 
         [RelayCommand]
