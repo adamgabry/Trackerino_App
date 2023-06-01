@@ -21,6 +21,7 @@ namespace Trackerino.App.ViewModels
         private readonly IUserFacade _userFacade;
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
+        private readonly IAlertService _alertService;
         private readonly System.Timers.Timer _timer;
 
         private DateTime _startDateTime = DateTime.UnixEpoch;
@@ -81,13 +82,15 @@ namespace Trackerino.App.ViewModels
             IActivityFacade activityFacade,
             IUserFacade userFacade,
             INavigationService navigationService,
-            IMessengerService messengerService)
+            IMessengerService messengerService,
+            IAlertService alertService)
             : base(messengerService)
         {
             _projectFacade = projectFacade;
             _activityFacade = activityFacade;
             _userFacade = userFacade;
             _navigationService = navigationService;
+            _alertService = alertService;
 
             ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
             Activity.UserId = Guid.Parse(Preferences.Get("ActiveUser", String.Empty));
@@ -132,6 +135,12 @@ namespace Trackerino.App.ViewModels
             {
                 StartDateTime = DateTime.Now;
             }
+            else
+            {
+                await _alertService.DisplayAsync("Activity can not be edited", "You cannot start the activity again");
+                return;
+            }
+
         }
 
         [RelayCommand]
@@ -142,6 +151,12 @@ namespace Trackerino.App.ViewModels
                 _timer.Stop();
                 EndDateTime = DateTime.Now;
             }
+            else
+            {
+                await _alertService.DisplayAsync("Activity can not be edited", "You must first start the activity");
+                return;
+            }
+
         }
 
         [RelayCommand]
@@ -153,8 +168,14 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task SaveAsync()
         {
-            if (StartDateTime == DateTime.UnixEpoch || EndDateTime == DateTime.UnixEpoch || Activity.ProjectId == Guid.Empty)
+            if (StartDateTime == DateTime.UnixEpoch || EndDateTime == DateTime.UnixEpoch)
             {
+                await _alertService.DisplayAsync("Activity can not be edited", "You must finish the activity");
+                return;
+            }
+            if(Activity.ProjectId == Guid.Empty)
+            {
+                await _alertService.DisplayAsync("Activity can not be edited", "You must select a project");
                 return;
             }
 
