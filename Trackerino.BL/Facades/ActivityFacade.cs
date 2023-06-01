@@ -28,6 +28,17 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel, Acti
 
         return filteredActivities;
     }
+
+    public async Task<IEnumerable<ActivityListModel>> GetFilteredByUserAsync(Guid Id)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<ActivityEntity> entities = await uow
+            .GetRepository<ActivityEntity, ActivityEntityMapper>()
+            .Get()
+            .ToListAsync();
+        
+        return ModelMapper.MapToListModel(entities.Where(e => e.UserId == Id));
+    }
     public override async Task<ActivityDetailModel?> GetAsync(Guid id)
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
