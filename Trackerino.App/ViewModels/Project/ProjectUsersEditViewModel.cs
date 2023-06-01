@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.Input;
 using Trackerino.App.Messages;
 using Trackerino.App.Services.Interfaces;
@@ -22,6 +23,8 @@ namespace Trackerino.App.ViewModels
         public ObservableCollection<UserListModel> Users { get; set; } = new();
 
         public UserListModel? ProjectSelected { get; set; }
+
+        public ProjectUserListModel? ProjectUsersList { get; set; }
 
         public ProjectUserDetailModel? ProjectUserNew { get; private set; }
 
@@ -58,20 +61,27 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task AddNewUserToProjectAsync()
         {
-            if (ProjectUserNew is not null
-                //&& ProjectSelected is not null
-                && Project is not null)
+            if (ProjectUserNew is not null && Project is not null)
             {
-                //_projectUserModelMapper.MapToExistingDetailModel(ProjectUserNew, ProjectSelected);
+                string activeUserId = Preferences.Get("ActiveUser", defaultValue: string.Empty);
+                Guid userIdGuid = Guid.Parse(activeUserId);
+                var userFirst = Users.FirstOrDefault(user => user.Id == userIdGuid);
 
-                await _projectUserFacade.SaveAsync(ProjectUserNew, Project.Id);
-                Project.Users.Add(_projectUserModelMapper.MapToListModel(ProjectUserNew));
+                //user is not in project already
+                if (userFirst != null && !Project.Users.Any(user => user.UserId == userFirst.Id))
+                {
+                    await _projectUserFacade.SaveAsync(ProjectUserNew, Project.Id);
 
-                //ProjectUserNew = GetProjectNew();
+                    Project.Users.Add(_projectUserModelMapper.MapToListModel(ProjectUserNew));
+                    ProjectUsersList = GetProjectUsers();
 
-                MessengerService.Send(new ProjectUsersAddMessage());
+                    MessengerService.Send(new ProjectUsersAddMessage());
+                }
             }
         }
+        //&& ProjectSelected is not null
+        //_projectUserModelMapper.MapToExistingDetailModel(ProjectUserNew, ProjectSelected);
+        //ProjectUserNew = GetProjectNew();
 
         [RelayCommand]
         private async Task UpdateUserAsync(ProjectUserListModel? model)
@@ -112,6 +122,22 @@ namespace Trackerino.App.ViewModels
                     UserSurname = userFirst.Surname,
                     UserImageUrl = string.Empty,
                 };
+        }
+        private ProjectUserListModel GetProjectUsers()
+        {
+            string activeUserId = Preferences.Get("ActiveUser", defaultValue: string.Empty);
+            Guid userIdGuid;
+
+            userIdGuid = Guid.Parse(activeUserId);
+            var userFirst = Users.FirstOrDefault(user => user.Id == userIdGuid);
+            return new()
+            {
+                Id = Guid.NewGuid(),
+                UserId = userFirst.Id,
+                UserName = userFirst.Name,
+                UserSurname = userFirst.Surname,
+                UserImageUrl = string.Empty,
+            };
         }
     }
 }
