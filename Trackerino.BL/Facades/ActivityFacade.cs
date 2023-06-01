@@ -14,10 +14,8 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel, Acti
     public ActivityFacade(
         IUnitOfWorkFactory unitOfWorkFactory,
         IActivityModelMapper modelMapper)
-        : base(unitOfWorkFactory, modelMapper)
-    {
+        : base(unitOfWorkFactory, modelMapper){ }
 
-    }
     public async Task<IEnumerable<ActivityListModel>> GetFilteredAsync(DateTime startDate, DateTime endDate)
     {
         IEnumerable<ActivityListModel> activities = await GetAsync(); // Get all activities
