@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using CommunityToolkit.Mvvm.Input;
 using Trackerino.App.Messages;
@@ -17,6 +18,7 @@ namespace Trackerino.App.ViewModels
         private readonly IUserFacade _userFacade;
         private readonly IProjectUserFacade _projectUserFacade;
         private readonly IProjectUserModelMapper _projectUserModelMapper;
+        private readonly INavigationService _navigationService;
 
         public ProjectDetailModel? Project { get; set; }
 
@@ -32,12 +34,14 @@ namespace Trackerino.App.ViewModels
             IUserFacade userFacade,
             IProjectUserFacade projectUserFacade,
             IProjectUserModelMapper projectUserModelMapper,
-            IMessengerService messengerService)
+            IMessengerService messengerService,
+            INavigationService navigationService)
             : base(messengerService)
         {
             _userFacade = userFacade;
             _projectUserFacade = projectUserFacade;
             _projectUserModelMapper = projectUserModelMapper;
+            _navigationService = navigationService;
         }
 
         protected override async Task LoadDataAsync()
@@ -75,7 +79,9 @@ namespace Trackerino.App.ViewModels
                     Project.Users.Add(_projectUserModelMapper.MapToListModel(ProjectUserNew));
                     ProjectUsersList = GetProjectUsers();
 
-                    MessengerService.Send(new ProjectUsersAddMessage());
+                    MessengerService.Send(new ProjectUsersEditMessage{UserId = userIdGuid, ProjectId = Project.Id});
+                    _navigationService.SendBackButtonPressed();
+                    _navigationService.SendBackButtonPressed();
                 }
             }
         }

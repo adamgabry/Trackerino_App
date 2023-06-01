@@ -83,8 +83,7 @@ namespace Trackerino.App.ViewModels
 
         private async Task ReloadDataAsync()
         {
-            Project = await _projectFacade.GetAsync(Project.Id)
-                     ?? ProjectDetailModel.Empty;
+            Project = await _projectFacade.GetAsync(Project.Id) ?? ProjectDetailModel.Empty;
         }
     }
 }

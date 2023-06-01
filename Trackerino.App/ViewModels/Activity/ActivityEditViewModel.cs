@@ -12,6 +12,7 @@ namespace Trackerino.App.ViewModels
     {
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
+        private readonly IAlertService _alertService;
 
 
         public List<ActivityTag> ActivityTags { get; set; }
@@ -29,13 +30,13 @@ namespace Trackerino.App.ViewModels
         public ActivityEditViewModel(
             IActivityFacade activityFacade,
             INavigationService navigationService,
-            IMessengerService messengerService)
+            IMessengerService messengerService, IAlertService alertService)
             : base(messengerService)
         {
             ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
             _activityFacade = activityFacade;
             _navigationService = navigationService;
-
+            _alertService = alertService;
         }
 
         protected override async Task LoadDataAsync()
@@ -60,6 +61,10 @@ namespace Trackerino.App.ViewModels
                 await _activityFacade.SaveAsync(Activity);
                 MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
                 _navigationService.SendBackButtonPressed();
+            }
+            else
+            {
+                await _alertService.DisplayAsync("Activity can not be edited", "You can do 1 activity at the same time");
             }
         }
         private bool CheckActivityOverlap(IEnumerable<ActivityListModel> existingActivities)
