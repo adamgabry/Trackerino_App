@@ -14,10 +14,8 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel, Acti
     public ActivityFacade(
         IUnitOfWorkFactory unitOfWorkFactory,
         IActivityModelMapper modelMapper)
-        : base(unitOfWorkFactory, modelMapper)
-    {
+        : base(unitOfWorkFactory, modelMapper){ }
 
-    }
     public async Task<IEnumerable<ActivityListModel>> GetFilteredAsync(DateTime startDate, DateTime endDate)
     {
         IEnumerable<ActivityListModel> activities = await GetAsync(); // Get all activities
@@ -27,6 +25,17 @@ public class ActivityFacade : FacadeBase<ActivityEntity, ActivityListModel, Acti
             .Where(activity => activity.StartDateTime <= endDate && activity.EndDateTime >= startDate);
 
         return filteredActivities;
+    }
+
+    public async Task<IEnumerable<ActivityListModel>> GetFilteredByUserAsync(Guid id)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<ActivityEntity> entities = await uow
+            .GetRepository<ActivityEntity, ActivityEntityMapper>()
+            .Get()
+            .ToListAsync();
+        
+        return ModelMapper.MapToListModel(entities.Where(e => e.UserId == id));
     }
     public override async Task<ActivityDetailModel?> GetAsync(Guid id)
     {

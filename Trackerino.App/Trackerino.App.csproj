@@ -82,12 +82,14 @@
     <MauiXaml Update="Views\Activity\ActivityProjectEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+
     <MauiXaml Update="Views\Activity\ActivityTrackView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\Activity\ActivityUserEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+
     <MauiXaml Update="Views\ContentPageBase.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
