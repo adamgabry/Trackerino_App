@@ -6,7 +6,7 @@
                        x:DataType="vm:UserDetailViewModel"
                        x:Name="UserDetailViewRoot"
                        x:Class="Trackerino.App.Views.User.UserDetailView"
-                       Title="User Details">
+                       Title="Trackerino">
 
     <StackLayout Padding="20">
 

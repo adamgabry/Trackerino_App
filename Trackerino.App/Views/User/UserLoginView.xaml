@@ -7,7 +7,7 @@
                        x:DataType="vm:UserLoginViewModel"
                        x:Name="UserLoginViewRoot"
                        x:Class="Trackerino.App.Views.User.UserLoginView"
-                       Title="Login">
+                       Title="Trackerino">
 
     <StackLayout Padding="20">
         <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, *"

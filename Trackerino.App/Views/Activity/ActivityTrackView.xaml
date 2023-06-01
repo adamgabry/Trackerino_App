@@ -2,7 +2,9 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:views="clr-namespace:Trackerino.App.Views"
                        xmlns:vm="clr-namespace:Trackerino.App.ViewModels"
+
                        xmlns:m="clr-namespace:Trackerino.BL.Models;assembly=Trackerino.BL"
+                       xmlns:common="clr-namespace:Trackerino.DAL.Common;assembly=Trackerino.DAL"
                        x:DataType="vm:ActivityTrackViewModel"
                        x:Name="ActivityTrackViewRoot"
                        x:Class="Trackerino.App.Views.Activity.ActivityTrackView"
@@ -15,7 +17,7 @@
 
             <Label Grid.Column="0"
                    FontSize="24"
-                   Text="Current User" />
+                   Text="Activity Tracking" />
 
             <StackLayout Grid.Row="0" Orientation="Horizontal"
                          HorizontalOptions="End" VerticalOptions="Start">
@@ -26,44 +28,6 @@
                         CornerRadius="25"
                         FontSize="14" />
             </StackLayout>
-        </Grid>
-
-        <Grid HorizontalOptions="Start" VerticalOptions="Start"
-              RowDefinitions="Auto, Auto, Auto"
-              ColumnDefinitions="Auto, Auto, *"
-              RowSpacing="10" ColumnSpacing="20">
-
-            <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
-                   HorizontalOptions="Start" VerticalOptions="Center"
-                   Padding="0" CornerRadius="100">
-                <Image Aspect="AspectFill"
-                       WidthRequest="100" HeightRequest="100"
-                       Source="{Binding Activity.User.ImageUrl}" />
-            </Frame>
-
-            <Label Grid.Row="0" Grid.Column="1"
-                   FontSize="12" Text="User Name" />
-            <Label Grid.Row="0" Grid.Column="2"
-                   FontSize="14" Text="{Binding Activity.User.Name}" />
-
-            <Label Grid.Row="1" Grid.Column="1"
-                   FontSize="12" Text="User Surname" />
-            <Label Grid.Row="1" Grid.Column="2"
-                   FontSize="14" Text="{Binding Activity.User.Surname}" />
-
-            <Label Grid.Row="2" Grid.Column="1"
-                   FontSize="12" Text="User ID" />
-            <Label Grid.Row="2" Grid.Column="2"
-                   FontSize="14" Text="{Binding Activity.User.Id}" />
-        </Grid>
-
-        <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto"
-              ColumnDefinitions="Auto, *" RowSpacing="20">
-
-            <Label Grid.Column="0"
-                   FontSize="24"
-                   Text="Activity Tracking"
-                   Padding="0, 20"/>
         </Grid>
 
         <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
@@ -91,17 +55,20 @@
             <Label Grid.Row="3" Grid.Column="0"
                    FontSize="12" Text="Start" />
             <Label Grid.Row="3" Grid.Column="1"
-                   FontSize="14" Text="{Binding StartDateTime, Converter={StaticResource DateTimeToStringConverter}}}" />
+                   FontSize="14" Text="{Binding StartDateTime, Converter={StaticResource DateTimeToStringConverter}}" />
 
             <Label Grid.Row="4" Grid.Column="0"
                    FontSize="12" Text="End" />
             <Label Grid.Row="4" Grid.Column="1"
-                   FontSize="14" Text="{Binding EndDateTime, Converter={StaticResource DateTimeToStringConverter}}}" />
+                   FontSize="14" Text="{Binding EndDateTime, Converter={StaticResource DateTimeToStringConverter}}" />
 
             <Label Grid.Row="5" Grid.Column="0"
                    FontSize="12" Text="Tag" />
-            <Entry Grid.Row="5" Grid.Column="1"
-                   FontSize="14" Text="{Binding Activity.Tag}" />
+            <Picker Grid.Row="5" Grid.Column="1"
+                   FontSize="14" 
+                   ItemsSource="{Binding ActivityTags}"
+                   ItemDisplayBinding="{Binding ., Converter={StaticResource ActivityTagToStringConverter}}"
+                   SelectedItem="{Binding Activity.Tag}" />
 
             <Label Grid.Row="6" Grid.Column="0"
                    FontSize="12" Text="Description" />

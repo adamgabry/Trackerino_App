@@ -6,7 +6,7 @@
                        x:DataType="vm:ProjectEditViewModel"
                        x:Name="ProjectEditViewRoot"
                        x:Class="Trackerino.App.Views.Project.ProjectEditView"
-                       Title="Project Edit">
+                       Title="Trackerino">
 
     <StackLayout Padding="20">
 

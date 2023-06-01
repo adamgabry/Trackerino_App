@@ -4,6 +4,7 @@ using Trackerino.App.Services.Interfaces;
 using Trackerino.App.Services;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
+using Trackerino.DAL.Common;
 
 namespace Trackerino.App.ViewModels
 {
@@ -13,6 +14,8 @@ namespace Trackerino.App.ViewModels
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
 
+        public List<ActivityTag> ActivityTags { get; set; }
+
         public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
 
         public ActivityEditViewModel(
@@ -21,6 +24,7 @@ namespace Trackerino.App.ViewModels
             IMessengerService messengerService)
             : base(messengerService)
         {
+            ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
             _activityFacade = activityFacade;
             _navigationService = navigationService;
         }
