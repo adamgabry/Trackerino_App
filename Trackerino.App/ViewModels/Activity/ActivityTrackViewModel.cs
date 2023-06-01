@@ -10,6 +10,7 @@ using System;
 using System.Threading.Tasks;
 using System.Timers;
 using Trackerino.App.Views.Activity;
+using Trackerino.DAL.Common;
 
 namespace Trackerino.App.ViewModels
 {
@@ -24,6 +25,8 @@ namespace Trackerino.App.ViewModels
         private DateTime _startDateTime = DateTime.UnixEpoch;
         private DateTime _endDateTime = DateTime.UnixEpoch;
         private TimeSpan _duration;
+
+        public List<ActivityTag> ActivityTags { get; set; }
 
         public DateTime StartDateTime
         {
@@ -81,8 +84,10 @@ namespace Trackerino.App.ViewModels
             _userFacade = userFacade;
             _navigationService = navigationService;
 
+            ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
             string userIdString = Preferences.Get("ActiveUser", String.Empty);
             Activity.UserId = Guid.Parse(userIdString);
+            Activity.ProjectId = Guid.Parse("0D7D53AE-D631-4DAA-8C71-C3370E69A16B");
             _timer = new System.Timers.Timer(1000);
             _timer.Elapsed += TimerElapsed;
             _timer.Start();
@@ -131,6 +136,14 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task SaveAsync()
         {
+            if (StartDateTime == DateTime.UnixEpoch || EndDateTime == DateTime.UnixEpoch)
+            {
+                return;
+            }
+
+            Activity.StartDateTime = StartDateTime;
+            Activity.EndDateTime = EndDateTime;
+
             await _activityFacade.SaveAsync(Activity);
 
             MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });

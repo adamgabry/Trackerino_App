@@ -6,7 +6,7 @@
                        x:DataType="vm:ActivityDetailViewModel"
                        x:Name="ActivityDetailViewRoot"
                        x:Class="Trackerino.App.Views.Activity.ActivityDetailView"
-                       Title="Activity Details">
+                       Title="Trackerino">
 
     <StackLayout Padding="20">
 

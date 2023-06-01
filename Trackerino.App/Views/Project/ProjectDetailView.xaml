@@ -6,7 +6,7 @@
                        x:DataType="vm:ProjectDetailViewModel"
                        x:Name="ProjectDetailViewRoot"
                        x:Class="Trackerino.App.Views.Project.ProjectDetailView"
-                       Title="Project Details">
+                       Title="Trackerino">
 
     <StackLayout Padding="20">
 

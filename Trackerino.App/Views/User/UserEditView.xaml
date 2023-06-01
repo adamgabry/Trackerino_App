@@ -6,7 +6,7 @@
                        x:DataType="vm:UserEditViewModel"
                        x:Name="UserEditViewRoot"
                        x:Class="Trackerino.App.Views.User.UserEditView"
-                       Title="User Edit">
+                       Title="Trackerino">
 
     <StackLayout Padding="20">
 

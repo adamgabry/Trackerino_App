@@ -3,10 +3,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Trackerino.App.Views.ContentPageBase"
-             xmlns:conv="clr-namespace:Trackerino.App.Converters">
+             xmlns:conv="clr-namespace:Trackerino.App.Converters"
+             xmlns:enum="clr-namespace:Trackerino.DAL.Common;assembly=Trackerino.DAL">
     <ContentPage.Resources>
         <conv:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
         <conv:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+        <conv:ActivityTagToStringConverter x:Key="ActivityTagToStringConverter"/>
     </ContentPage.Resources>
-
 </ContentPage>

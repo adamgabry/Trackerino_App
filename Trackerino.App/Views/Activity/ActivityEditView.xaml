@@ -6,7 +6,7 @@
                        x:DataType="vm:ActivityEditViewModel"
                        x:Name="ActivityEditViewRoot"
                        x:Class="Trackerino.App.Views.Activity.ActivityEditView"
-                       Title="Activity Edit">
+                       Title="Trackerino">
 
     <StackLayout Padding="20">
 
@@ -69,8 +69,11 @@
 
             <Label Grid.Row="5" Grid.Column="1"
                    FontSize="12" Text="Tag" />
-            <Entry Grid.Row="5" Grid.Column="2"
-                    FontSize="14" Text="{Binding Activity.Tag}" />
+            <Picker Grid.Row="5" Grid.Column="2"
+                    FontSize="14" 
+                    ItemsSource="{Binding ActivityTags}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource ActivityTagToStringConverter}}"
+                    SelectedItem="{Binding Activity.Tag}" />
 
             <Label Grid.Row="6" Grid.Column="1"
                    FontSize="12" Text="Description" />
