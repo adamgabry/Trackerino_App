@@ -91,12 +91,12 @@
             <Label Grid.Row="3" Grid.Column="0"
                    FontSize="12" Text="Start" />
             <Label Grid.Row="3" Grid.Column="1"
-                   FontSize="14" Text="{Binding StartDateTime, Converter={StaticResource DateTimeToStringConverter}}}" />
+                   FontSize="14" Text="{Binding StartDateTime, Converter={StaticResource DateTimeToStringConverter}}" />
 
             <Label Grid.Row="4" Grid.Column="0"
                    FontSize="12" Text="End" />
             <Label Grid.Row="4" Grid.Column="1"
-                   FontSize="14" Text="{Binding EndDateTime, Converter={StaticResource DateTimeToStringConverter}}}" />
+                   FontSize="14" Text="{Binding EndDateTime, Converter={StaticResource DateTimeToStringConverter}}" />
 
             <Label Grid.Row="5" Grid.Column="0"
                    FontSize="12" Text="Tag" />
