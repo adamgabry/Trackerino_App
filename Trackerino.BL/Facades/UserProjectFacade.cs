@@ -57,6 +57,7 @@ public class UserProjectFacade :
             .Get()
             .ToListAsync();
 
-        return ModelMapper.MapToListModel(entities.Where(e => e.UserId == id));
+        List<UserProjectEntity> filteredEntities = entities.Where(e => e.UserId == id).ToList();
+            return ModelMapper.MapToListModel(filteredEntities);
     }
 }

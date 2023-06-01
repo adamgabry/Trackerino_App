@@ -27,11 +27,12 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-
-                        <Label Grid.Column="0" Text="Name" />
-                        <Label Grid.Column="1" Text="Surname" />
-                        <Label Grid.Column="2" Text="Login" />
+                        <Label Grid.Column="0" Text="Photo" />
+                        <Label Grid.Column="1" Text="Name" />
+                        <Label Grid.Column="2" Text="Surname" />
+                        <Label Grid.Column="3" Text="Login" />
                     </Grid>
                 </CollectionView.Header>
 
@@ -46,18 +47,31 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-
-                            <Label Grid.Column="0"
+                            <Frame Grid.Column="0"
+                                   Padding="0"
+                                   BackgroundColor="LightGray"
+                                   CornerRadius="25"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center">
+                                <Image Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="Fill" />
+                            </Frame>
+                            <Label Grid.Column="1"
                                    Text="{Binding Name}"
                                    Margin="10,0,0,0"
                                    VerticalOptions="Center" />
 
-                            <Label Grid.Column="1"
+                            <Label Grid.Column="2"
                                    Text="{Binding Surname}"
                                    VerticalOptions="Center" />
 
-                            <Button Grid.Column="2" Padding="12, 6"
+                            <Button Grid.Column="3" Padding="12, 6"
                                    HorizontalOptions="End" VerticalOptions="Start"
                                    Text="Login"
                                    CornerRadius="25"

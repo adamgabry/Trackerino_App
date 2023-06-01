@@ -90,9 +90,8 @@ namespace Trackerino.App.ViewModels
             _navigationService = navigationService;
 
             ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
-            string userIdString = Preferences.Get("ActiveUser", String.Empty);
-            Activity.UserId = Guid.Parse(userIdString);
-            Activity.ProjectId = Guid.Parse("0D7D53AE-D631-4DAA-8C71-C3370E69A16B");
+            Activity.UserId = Guid.Parse(Preferences.Get("ActiveUser", String.Empty));
+            Activity.ProjectId = Guid.Empty;
             _timer = new System.Timers.Timer(1000);
             _timer.Elapsed += TimerElapsed;
             _timer.Start();
@@ -138,7 +137,7 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task SetEndDateTime()
         {
-            if (EndDateTime == DateTime.UnixEpoch)
+            if (StartDateTime != DateTime.UnixEpoch && EndDateTime == DateTime.UnixEpoch)
             {
                 _timer.Stop();
                 EndDateTime = DateTime.Now;
@@ -154,7 +153,7 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task SaveAsync()
         {
-            if (StartDateTime == DateTime.UnixEpoch || EndDateTime == DateTime.UnixEpoch)
+            if (StartDateTime == DateTime.UnixEpoch || EndDateTime == DateTime.UnixEpoch || Activity.ProjectId == Guid.Empty)
             {
                 return;
             }
