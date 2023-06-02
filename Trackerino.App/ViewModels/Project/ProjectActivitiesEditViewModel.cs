@@ -99,8 +99,7 @@ namespace Trackerino.App.ViewModels
             var activityFirst = Activities.First();
             return new()
             {
-                Id = Guid.NewGuid(),
-                ActivityId = activityFirst.Id,
+                Id = activityFirst.Id,
                 StartDateTime = default,
                 EndDateTime = default,
                 Tag = ActivityTag.None,

@@ -57,11 +57,12 @@ namespace Trackerino.BL.Tests
         [Fact]
         public async Task GetById_SeededProject()
         {
+            var detailModel = ProjectModelMapper.MapToDetailModel(TestProjectSeeds.ProjectEntity);
             // Arrange
-            var project = await _projectFacadeSUT.GetAsync(TestProjectSeeds.ProjectEntity.Id);
+            var project = await _projectFacadeSUT.GetAsync(detailModel.Id);
 
             // Assert
-            DeepAssert.Equal(ProjectModelMapper.MapToDetailModel(TestProjectSeeds.ProjectEntity), project);
+            DeepAssert.Equal(detailModel, project);
         }
 
         [Fact]

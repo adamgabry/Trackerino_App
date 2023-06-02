@@ -42,15 +42,16 @@ namespace Trackerino.DAL
             
             if (_seedDemoData)
             {
-                ProjectSeeds.Seed(modelBuilder);
                 UserSeeds.Seed(modelBuilder);
+                ProjectSeeds.Seed(modelBuilder);
                 ActivitySeeds.Seed(modelBuilder);
                 UserProjectSeeds.Seed(modelBuilder);
             }
             if (_seedTestingData)
             {
-                TestProjectSeeds.Seed(modelBuilder);
+                
                 TestUserSeeds.Seed(modelBuilder);
+                TestProjectSeeds.Seed(modelBuilder);
                 TestActivitySeeds.Seed(modelBuilder);
                 TestUserProjectSeeds.Seed(modelBuilder);
             }

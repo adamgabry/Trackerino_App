@@ -4,7 +4,6 @@ namespace Trackerino.BL.Models
 {
     public record UserProjectActivityDetailModel : ModelBase
     {
-        public required Guid ActivityId { get; set; }
         public required DateTime StartDateTime { get; set; }
         public required DateTime EndDateTime { get; set; }
         public ActivityTag Tag { get; set; }
@@ -14,11 +13,8 @@ namespace Trackerino.BL.Models
         public static UserProjectActivityDetailModel Empty => new()
         {
             Id = Guid.NewGuid(),
-            ActivityId = Guid.Empty,
             StartDateTime = default,
             EndDateTime = default,
-            Tag = ActivityTag.None,
-            Description = string.Empty
         };
     }
 }

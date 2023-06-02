@@ -54,16 +54,24 @@ public static class TestActivitySeeds
         ProjectId = TestProjectSeeds.ProjectEntity.Id,
     };
 
-
-    public static void Seed(this ModelBuilder modelBuilder)
+    static TestActivitySeeds()
     {
+        ActivityEntity.Project = TestProjectSeeds.ProjectEntity;
+        ActivityEntity.User = TestUserSeeds.UserEntity;
+
+        ActivityEntity1.Project = TestProjectSeeds.ProjectEntity;
+        ActivityEntity1.User = TestUserSeeds.UserEntity1;
+
+        ActivityEntity2.Project = TestProjectSeeds.ProjectEntity;
+        ActivityEntity2.User = TestUserSeeds.UserEntity2;
+    }
+    public static void Seed(this ModelBuilder modelBuilder)=>
         modelBuilder.Entity<ActivityEntity>().HasData(
-            ActivityEntity1,
-            ActivityEntity2,
-            ActivityEntity,
+            ActivityEntity1 with { User = null, Project = null},
+            ActivityEntity2 with { User = null, Project = null },
+            ActivityEntity with { User = null, Project = null },
             ActivityEntityUpdate,
             ActivityEntityDelete
             );
-    }
 }
 

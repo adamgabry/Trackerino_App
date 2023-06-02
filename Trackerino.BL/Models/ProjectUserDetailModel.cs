@@ -6,7 +6,7 @@
         public required string UserName { get; set; }
 
         public required string UserSurname { get; set; }
-        public required string? UserImageUrl { get; set; }
+        public string? UserImageUrl { get; set; }
 
         public static ProjectUserListModel Empty => new()
         {
@@ -14,7 +14,6 @@
             UserId = Guid.Empty,
             UserName = string.Empty,
             UserSurname = string.Empty,
-            UserImageUrl = string.Empty
 
         };
     }
