@@ -10,12 +10,15 @@ namespace Trackerino.App.ViewModels
     [QueryProperty(nameof(Activity), nameof(Activity))]
     public partial class ActivityEditViewModel : ViewModelBase
     {
+        private readonly IProjectFacade _projectFacade;
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
         private readonly IAlertService _alertService;
 
 
         public List<ActivityTag> ActivityTags { get; set; }
+
+        public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
 
         public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
 
@@ -28,12 +31,14 @@ namespace Trackerino.App.ViewModels
         public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
         
         public ActivityEditViewModel(
+            IProjectFacade projectFacade,
             IActivityFacade activityFacade,
             INavigationService navigationService,
             IMessengerService messengerService, IAlertService alertService)
             : base(messengerService)
         {
             ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
+            _projectFacade = projectFacade;
             _activityFacade = activityFacade;
             _navigationService = navigationService;
             _alertService = alertService;
@@ -43,8 +48,16 @@ namespace Trackerino.App.ViewModels
         {
             await base.LoadDataAsync();
             await UpdatePickers();
+            Projects = await _projectFacade.GetAsync();
+
         }
 
+        [RelayCommand]
+        private async Task ActivityToProjectAsync(Guid projectId)
+        {
+            Activity.ProjectId = projectId;
+        }
+    
         [RelayCommand]
         private async Task SaveAsync()
         {
