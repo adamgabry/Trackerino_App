@@ -64,8 +64,15 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task GoToEditAsync()
         {
-            await _navigationService.GoToAsync("/edit",
-                new Dictionary<string, object?> { [nameof(User)] = User });
+            if (Guid.Parse(Preferences.Get("ActiveUser", string.Empty)) == User.Id)
+            {
+                await _navigationService.GoToAsync("/edit",
+                    new Dictionary<string, object?> { [nameof(User)] = User });
+            }
+            else
+            {
+                await _alertService.DisplayAsync("Failed to edit", "You can not edit other users");
+            }
         }
 
         public async void Receive(UserEditMessage message)
