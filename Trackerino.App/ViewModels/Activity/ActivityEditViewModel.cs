@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Xaml.Media;
 using Trackerino.App.Messages;
 using Trackerino.App.Services.Interfaces;
 using Trackerino.BL.Facades.Interfaces;
@@ -26,8 +27,7 @@ namespace Trackerino.App.ViewModels
         public TimeSpan StartTime { get; set; }
         public DateTime EndDate { get; set; }
         public TimeSpan EndTime { get; set; }
-
-
+        public Guid ProjectId { get; set; }
         public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
         
         public ActivityEditViewModel(
@@ -48,6 +48,7 @@ namespace Trackerino.App.ViewModels
         {
             await base.LoadDataAsync();
             await UpdatePickers();
+            ProjectId = Activity.ProjectId;
             Projects = await _projectFacade.GetAsync();
 
         }
@@ -55,13 +56,14 @@ namespace Trackerino.App.ViewModels
         [RelayCommand]
         private async Task ActivityToProjectAsync(Guid projectId)
         {
-            Activity.ProjectId = projectId;
+            ProjectId = projectId;
         }
     
         [RelayCommand]
         private async Task SaveAsync()
         {
             //Get values from pickers
+            Activity.ProjectId = ProjectId;
             DateTime start = StartDate.Date;
             DateTime end = EndDate.Date;
             Activity.StartDateTime = start.AddMinutes(StartTime.TotalMinutes);
