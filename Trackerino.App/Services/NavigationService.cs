@@ -1,5 +1,4 @@
 ﻿using Trackerino.App.Models;
-using Trackerino.App.Services.Interfaces;
 using Trackerino.App.ViewModels;
 using Trackerino.App.Views.Activity;
 using Trackerino.App.Views.Project;

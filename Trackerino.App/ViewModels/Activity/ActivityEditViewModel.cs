@@ -1,8 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml.Media;
 using Trackerino.App.Messages;
-using Trackerino.App.Services.Interfaces;
-using Trackerino.BL.Facades.Interfaces;
+using Trackerino.App.Services;
+using Trackerino.BL.Facades;
 using Trackerino.BL.Models;
 using Trackerino.DAL.Common;
 

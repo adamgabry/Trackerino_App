@@ -1,7 +1,5 @@
 ﻿using Trackerino.DAL;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Trackerino.App.Options;
 
 namespace Trackerino.App;
 

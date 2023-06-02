@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Factories;
-using Trackerino.Common.Tests;
 
 namespace Trackerino.DAL.Tests;
 

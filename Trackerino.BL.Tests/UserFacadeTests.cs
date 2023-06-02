@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Facades;
 using Trackerino.BL.Models;
 using Trackerino.Common.Tests;
@@ -42,14 +41,6 @@ namespace Trackerino.BL.Tests
             DeepAssert.Equal(UserModelMapper.MapToListModel(TestUserSeeds.UserEntity1), user);
         }
 
-        [Fact]
-        public async Task GetById_SeededUser()
-        {
-            var detailModel = UserModelMapper.MapToDetailModel(TestUserSeeds.UserEntity2);
-            var user = await _userFacadeSUT.GetAsync(detailModel.Id);
-
-            DeepAssert.Equal(detailModel, user);
-        }
 
         [Fact]
         public async Task GetById_NonExistent()

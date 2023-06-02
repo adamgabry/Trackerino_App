@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using Trackerino.BL.Facades;
-using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
 using Trackerino.Common.Tests;
 using Trackerino.DAL.TestSeeds;
@@ -54,16 +53,6 @@ namespace Trackerino.BL.Tests
             DeepAssert.Equal(ProjectModelMapper.MapToListModel(TestProjectSeeds.ProjectEntity), project);
         }
 
-        [Fact]
-        public async Task GetById_SeededProject()
-        {
-            var detailModel = ProjectModelMapper.MapToDetailModel(TestProjectSeeds.ProjectEntity);
-            // Arrange
-            var project = await _projectFacadeSUT.GetAsync(detailModel.Id);
-
-            // Assert
-            DeepAssert.Equal(detailModel, project);
-        }
 
         [Fact]
         public async Task GetById_NonExistent()

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Trackerino.DAL.Entities;
+﻿using Trackerino.DAL.Entities;
 using Trackerino.DAL.Mappers;
 using Trackerino.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,4 @@
-﻿using Trackerino.App.Services.Interfaces;
-
-namespace Trackerino.App.Services;
+﻿namespace Trackerino.App.Services;
 
 public class AlertService : IAlertService
 {

@@ -1,8 +1,6 @@
-﻿using System.Reflection;
-using CommunityToolkit.Maui;
-using Microsoft.Extensions.Configuration;
+﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using Trackerino.App.Services.Interfaces;
+using Trackerino.App.Services;
 using Trackerino.BL;
 
 [assembly: System.Resources.NeutralResourcesLanguage("en")]

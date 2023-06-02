@@ -1,16 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Trackerino.App.Messages;
-using Trackerino.App.Services.Interfaces;
-using Trackerino.BL.Facades.Interfaces;
-using Trackerino.BL.Mappers.Interfaces;
+using Trackerino.App.Services;
+using Trackerino.BL.Facades;
+using Trackerino.BL.Mappers;
 using Trackerino.BL.Models;
-using Trackerino.DAL.Common;
 
 namespace Trackerino.App.ViewModels
 {

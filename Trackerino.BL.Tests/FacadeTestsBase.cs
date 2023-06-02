@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Xunit;
-using Xunit.Abstractions;
 using Trackerino.BL.Mappers;
-using Trackerino.BL.Mappers.Interfaces;
-using Trackerino.Common.Tests;
 using Trackerino.DAL;
-using Trackerino.DAL.Mappers;
 using Trackerino.DAL.UnitOfWork;
 using Trackerino.DAL.Factories;
 

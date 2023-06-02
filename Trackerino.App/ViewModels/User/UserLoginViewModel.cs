@@ -1,9 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm.Input;
-using Trackerino.App.Messages;
+﻿using CommunityToolkit.Mvvm.Input;
 using Trackerino.App.Services;
-using Trackerino.App.Services.Interfaces;
-using Trackerino.BL.Facades.Interfaces;
+using Trackerino.BL.Facades;
 using Trackerino.BL.Models;
 
 namespace Trackerino.App.ViewModels

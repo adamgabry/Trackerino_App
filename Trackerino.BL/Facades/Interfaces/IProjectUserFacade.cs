@@ -1,7 +1,6 @@
 ﻿using Trackerino.BL.Models;
-using Trackerino.DAL.Entities;
 
-namespace Trackerino.BL.Facades.Interfaces;
+namespace Trackerino.BL.Facades;
 
 public interface IProjectUserFacade
 {
