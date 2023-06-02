@@ -28,7 +28,7 @@ namespace Trackerino.App.ViewModels
         protected override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
-
+            Preferences.Set("ActiveUser", Guid.Empty.ToString());
             Users = await _userFacade.GetAsync();
         }
 
