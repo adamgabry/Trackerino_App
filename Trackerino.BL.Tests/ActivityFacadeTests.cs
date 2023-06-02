@@ -38,9 +38,10 @@ namespace Trackerino.BL.Tests
         [Fact]
         public async Task GetById_UserEntity()
         {
-            var activity = await _activityFacadeSUT.GetAsync(TestActivitySeeds.ActivityEntity1.Id);
+            var detailModel = ActivityModelMapper.MapToDetailModel(TestActivitySeeds.ActivityEntity1);
+            var activity = await _activityFacadeSUT.GetAsync(detailModel.Id);
 
-            DeepAssert.Equal(ActivityModelMapper.MapToDetailModel(TestActivitySeeds.ActivityEntity1), activity);
+            DeepAssert.Equal(detailModel, activity);
         }
         [Fact]
         public async Task UserEntity_DeleteById_Deleted()

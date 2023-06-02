@@ -17,35 +17,27 @@ namespace Trackerino.BL.Tests
         {
             DbContextFactory = new DbContextLocalDbFactory(GetType().FullName!, seedTestingData: true);
 
-            ActivityEntityMapper = new ActivityEntityMapper();
-            ProjectEntityMapper = new ProjectEntityMapper();
-            UserEntityMapper = new UserEntityMapper();
-            UserProjectEntityMapper = new UserProjectEntityMapper();
-
-            ActivityModelMapper = new ActivityModelMapper(UserModelMapper, ProjectModelMapper);
-            ProjectModelMapper = new ProjectModelMapper(ProjectUserModelMapper, UserProjectActivityModelMapper);
-            UserModelMapper = new UserModelMapper(UserProjectActivityModelMapper, UserProjectModelMapper);
             UserProjectModelMapper = new UserProjectModelMapper();
             ProjectUserModelMapper = new ProjectUserModelMapper();
+            UserProjectActivityModelMapper = new UserProjectActivityModelMapper();
+            ProjectModelMapper = new ProjectModelMapper(ProjectUserModelMapper, UserProjectActivityModelMapper);
+            UserModelMapper = new UserModelMapper(UserProjectActivityModelMapper, UserProjectModelMapper);
+            ActivityModelMapper = new ActivityModelMapper(UserModelMapper, ProjectModelMapper);
+            
+            
 
             UnitOfWorkFactory = new UnitOfWorkFactory(DbContextFactory);
         }
 
         protected IDbContextFactory<TrackerinoDbContext> DbContextFactory { get; }
-
-        protected ActivityEntityMapper ActivityEntityMapper { get; }
-        protected ProjectEntityMapper ProjectEntityMapper { get; }
-        protected UserEntityMapper UserEntityMapper { get; }
-        protected UserProjectEntityMapper UserProjectEntityMapper { get; }
-
-
-        protected IActivityModelMapper ActivityModelMapper { get; }
-        protected IProjectModelMapper ProjectModelMapper { get; }
-        protected IUserModelMapper UserModelMapper { get; }
-        protected IUserProjectModelMapper UserProjectModelMapper { get; }
-        protected IProjectUserModelMapper ProjectUserModelMapper { get; }
-        protected IUserProjectActivityModelMapper UserProjectActivityModelMapper { get; }
-        protected IUnitOfWorkFactory UnitOfWorkFactory { get; }
+        
+        protected ActivityModelMapper ActivityModelMapper { get; }
+        protected ProjectModelMapper ProjectModelMapper { get; }
+        protected UserModelMapper UserModelMapper { get; }
+        protected UserProjectModelMapper UserProjectModelMapper { get; }
+        protected ProjectUserModelMapper ProjectUserModelMapper { get; }
+        protected UserProjectActivityModelMapper UserProjectActivityModelMapper { get; }
+        protected UnitOfWorkFactory UnitOfWorkFactory { get; }
 
         public async Task InitializeAsync()
         {

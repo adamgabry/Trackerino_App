@@ -22,8 +22,8 @@ public static class TestUserSeeds
     };
 
     //To ensure that no tests reuse these clones for non-idempotent operations
-    public static readonly UserEntity UserEntityWithNoActivities = UserEntity with { Id = Guid.Parse("E1A7B31F-0223-4B1B-B8AD-4AAA627908B9"), Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() };
-    public static readonly UserEntity UserEntityWithNoProjects = UserEntity with { Id = Guid.Parse("A4EAD4BA-E1EC-43D9-B6A8-38DD8EF70BF2"), Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() };
+    public static readonly UserEntity UserEntityWithNoActivities = UserEntity with { Id = Guid.Parse("E1A7B31F-0223-4B1B-B8AD-4AAA627908B9") };
+    public static readonly UserEntity UserEntityWithNoProjects = UserEntity with { Id = Guid.Parse("A4EAD4BA-E1EC-43D9-B6A8-38DD8EF70BF2") };
     public static readonly UserEntity UserEntityUpdate = UserEntity with { Id = Guid.Parse("77146EA0-2D86-4874-B75E-FBA628AFC698") };
     public static readonly UserEntity UserEntityDelete = UserEntity with { Id = Guid.Parse("88DB5C3B-BD8D-439A-BA86-B7DD75735185") };
 
@@ -43,16 +43,26 @@ public static class TestUserSeeds
         ImageUrl = null
     };
 
-    public static void Seed(this ModelBuilder modelBuilder)
+    static TestUserSeeds()
     {
-        modelBuilder.Entity<UserEntity>().HasData(
-            UserEntityWithNoActivities,
-            UserEntityWithNoProjects,
-            UserEntity1,
-            UserEntity2,
-            UserEntity,
-            UserEntityUpdate,
-            UserEntityDelete);
+        UserEntity.Activities.Add(TestActivitySeeds.ActivityEntity);
+        UserEntity.Projects.Add(TestUserProjectSeeds.UserProjectEntity);
+
+        UserEntity1.Activities.Add(TestActivitySeeds.ActivityEntity1);
+        UserEntity1.Projects.Add(TestUserProjectSeeds.UserProjectEntity1);
+
+        UserEntity2.Activities.Add(TestActivitySeeds.ActivityEntity2);
+        UserEntity2.Projects.Add(TestUserProjectSeeds.UserProjectEntity2);
     }
+    public static void Seed(this ModelBuilder modelBuilder)=>
+    modelBuilder.Entity<UserEntity>().HasData(
+            UserEntityWithNoActivities with { Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() },
+            UserEntityWithNoProjects with { Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() },
+            UserEntity1 with { Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() },
+            UserEntity2 with { Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() },
+            UserEntity with { Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() },
+            UserEntityUpdate with { Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() },
+            UserEntityDelete with { Projects = Array.Empty<UserProjectEntity>(), Activities = Array.Empty<ActivityEntity>() });
+    
 }
 

@@ -14,7 +14,6 @@ namespace Trackerino.BL.Mappers
                 : new UserProjectActivityListModel
                 {
                     Id = entity.Id,
-                    ActivityId = entity.Id,
                     StartDateTime = entity.StartDateTime,
                     EndDateTime = entity.EndDateTime,
                     Tag = entity.Tag
@@ -26,7 +25,6 @@ namespace Trackerino.BL.Mappers
                 : new UserProjectActivityDetailModel
                 {
                     Id = entity.Id,
-                    ActivityId = entity.Id,
                     StartDateTime = entity.StartDateTime,
                     EndDateTime = entity.EndDateTime,
                     Description = entity.Description,
@@ -37,7 +35,6 @@ namespace Trackerino.BL.Mappers
             => new()
             {
                 Id = detailModel.Id,
-                ActivityId = detailModel.Id,
                 StartDateTime = detailModel.StartDateTime,
                 EndDateTime = detailModel.EndDateTime,
                 Tag = detailModel.Tag
@@ -49,6 +46,9 @@ namespace Trackerino.BL.Mappers
             ActivityListModel activity)
         {
             existingDetailModel.Id = activity.Id;
+            existingDetailModel.StartDateTime = activity.StartDateTime;
+            existingDetailModel.EndDateTime = activity.EndDateTime;
+            existingDetailModel.Description = activity.Description;
 
         }
 

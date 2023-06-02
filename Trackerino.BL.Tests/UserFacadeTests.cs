@@ -45,9 +45,10 @@ namespace Trackerino.BL.Tests
         [Fact]
         public async Task GetById_SeededUser()
         {
-            var user = await _userFacadeSUT.GetAsync(TestUserSeeds.UserEntity1.Id);
+            var detailModel = UserModelMapper.MapToDetailModel(TestUserSeeds.UserEntity2);
+            var user = await _userFacadeSUT.GetAsync(detailModel.Id);
 
-            DeepAssert.Equal(UserModelMapper.MapToDetailModel(TestUserSeeds.UserEntity1), user);
+            DeepAssert.Equal(detailModel, user);
         }
 
         [Fact]
