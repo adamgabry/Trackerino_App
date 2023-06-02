@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Xaml.Media;
 using Trackerino.App.Messages;
 using Trackerino.App.Services.Interfaces;
 using Trackerino.BL.Facades.Interfaces;
@@ -10,6 +11,7 @@ namespace Trackerino.App.ViewModels
     [QueryProperty(nameof(Activity), nameof(Activity))]
     public partial class ActivityEditViewModel : ViewModelBase
     {
+        private readonly IProjectFacade _projectFacade;
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
         private readonly IAlertService _alertService;
@@ -17,23 +19,26 @@ namespace Trackerino.App.ViewModels
 
         public List<ActivityTag> ActivityTags { get; set; }
 
+        public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
+
         public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
 
         public DateTime StartDate { get; set; }
         public TimeSpan StartTime { get; set; }
         public DateTime EndDate { get; set; }
         public TimeSpan EndTime { get; set; }
-
-
+        public Guid ProjectId { get; set; }
         public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
         
         public ActivityEditViewModel(
+            IProjectFacade projectFacade,
             IActivityFacade activityFacade,
             INavigationService navigationService,
             IMessengerService messengerService, IAlertService alertService)
             : base(messengerService)
         {
             ActivityTags = new List<ActivityTag>((ActivityTag[])Enum.GetValues(typeof(ActivityTag)));
+            _projectFacade = projectFacade;
             _activityFacade = activityFacade;
             _navigationService = navigationService;
             _alertService = alertService;
@@ -43,12 +48,22 @@ namespace Trackerino.App.ViewModels
         {
             await base.LoadDataAsync();
             await UpdatePickers();
+            ProjectId = Activity.ProjectId;
+            Projects = await _projectFacade.GetAsync();
+
         }
 
+        [RelayCommand]
+        private async Task ActivityToProjectAsync(Guid projectId)
+        {
+            ProjectId = projectId;
+        }
+    
         [RelayCommand]
         private async Task SaveAsync()
         {
             //Get values from pickers
+            Activity.ProjectId = ProjectId;
             DateTime start = StartDate.Date;
             DateTime end = EndDate.Date;
             Activity.StartDateTime = start.AddMinutes(StartTime.TotalMinutes);

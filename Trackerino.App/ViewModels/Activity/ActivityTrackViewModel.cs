@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Timers;
 using Trackerino.App.Views.Activity;
 using Trackerino.DAL.Common;
+using System.Linq;
+using Trackerino.BL;
 
 namespace Trackerino.App.ViewModels
 {
@@ -31,6 +33,8 @@ namespace Trackerino.App.ViewModels
         public List<ActivityTag> ActivityTags { get; set; }
 
         public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
+
+        public UserDetailModel User { get; set; } = null!;
 
         public DateTime StartDateTime
         {
@@ -100,10 +104,10 @@ namespace Trackerino.App.ViewModels
             _timer.Start();
         }
 
+
         protected override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
-
             Projects = await _projectFacade.GetAsync();
         }
 

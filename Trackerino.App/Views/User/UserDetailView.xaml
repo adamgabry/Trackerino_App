@@ -50,12 +50,12 @@
             <Label Grid.Row="0" Grid.Column="1"
                    FontSize="12" Text="Name" />
             <Label Grid.Row="0" Grid.Column="2"
-                   FontSize="14" Text="{Binding User.Name}" />
+                   FontSize="18" FontAttributes="Bold" Text="{Binding User.Name}" />
 
             <Label Grid.Row="1" Grid.Column="1"
                    FontSize="12" Text="Surname" />
             <Label Grid.Row="1" Grid.Column="2"
-                   FontSize="14" Text="{Binding User.Surname}" />
+                   FontSize="18" FontAttributes="Bold" Text="{Binding User.Surname}" />
 
             <Label Grid.Row="2" Grid.Column="1"
                    FontSize="12" Text="ID" />

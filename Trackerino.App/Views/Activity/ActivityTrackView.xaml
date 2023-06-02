@@ -73,7 +73,7 @@
             <Label Grid.Row="6" Grid.Column="0"
                    FontSize="12" Text="Description" />
             <Entry Grid.Row="6" Grid.Column="1"
-                   FontSize="14" Text="{Binding Activity.Description}" />
+                   FontSize="18" FontAttributes="Bold" Text="{Binding Activity.Description}" />
 
         </Grid>
 
