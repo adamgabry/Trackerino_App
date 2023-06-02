@@ -5,14 +5,7 @@ using Trackerino.App.Services;
 using Trackerino.BL.Facades.Interfaces;
 using Trackerino.BL.Models;
 using System.Timers;
-using Trackerino.BL.Facades;
-using System;
-using System.Threading.Tasks;
-using System.Timers;
-using Trackerino.App.Views.Activity;
 using Trackerino.DAL.Common;
-using System.Linq;
-using Trackerino.BL;
 
 namespace Trackerino.App.ViewModels
 {
@@ -20,7 +13,6 @@ namespace Trackerino.App.ViewModels
     public partial class ActivityTrackViewModel : ViewModelBase
     {
         private readonly IProjectFacade _projectFacade;
-        private readonly IUserFacade _userFacade;
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
         private readonly IAlertService _alertService;
@@ -92,7 +84,6 @@ namespace Trackerino.App.ViewModels
         {
             _projectFacade = projectFacade;
             _activityFacade = activityFacade;
-            _userFacade = userFacade;
             _navigationService = navigationService;
             _alertService = alertService;
 
@@ -164,9 +155,10 @@ namespace Trackerino.App.ViewModels
         }
 
         [RelayCommand]
-        private async Task ActivityToProjectAsync(Guid projectId)
+        private Task ActivityToProjectAsync(Guid projectId)
         {
             Activity.ProjectId = projectId;
+            return Task.CompletedTask;
         }
 
         [RelayCommand]

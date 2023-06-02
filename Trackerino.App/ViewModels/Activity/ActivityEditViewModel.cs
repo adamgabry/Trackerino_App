@@ -54,9 +54,10 @@ namespace Trackerino.App.ViewModels
         }
 
         [RelayCommand]
-        private async Task ActivityToProjectAsync(Guid projectId)
+        private Task ActivityToProjectAsync(Guid projectId)
         {
             ProjectId = projectId;
+            return Task.CompletedTask;
         }
     
         [RelayCommand]
@@ -68,18 +69,27 @@ namespace Trackerino.App.ViewModels
             DateTime end = EndDate.Date;
             Activity.StartDateTime = start.AddMinutes(StartTime.TotalMinutes);
             Activity.EndDateTime = end.AddMinutes(EndTime.TotalMinutes);
-            //check for overlaps
-            string userIdString = Preferences.Get("ActiveUser", string.Empty);
-            IEnumerable<ActivityListModel> existingActivities = await _activityFacade.GetFilteredByUserAsync(Guid.Parse(userIdString));
-            if (!CheckActivityOverlap(existingActivities))
+            if (!(Activity.StartDateTime < Activity.EndDateTime))
             {
-                await _activityFacade.SaveAsync(Activity);
-                MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
-                _navigationService.SendBackButtonPressed();
+                await _alertService.DisplayAsync("Activity can not be edited", "Start date must be before End Date");
             }
             else
             {
-                await _alertService.DisplayAsync("Activity can not be edited", "You can do 1 activity at the same time");
+                //check for overlaps
+                string userIdString = Preferences.Get("ActiveUser", string.Empty);
+                IEnumerable<ActivityListModel> existingActivities =
+                    await _activityFacade.GetFilteredByUserAsync(Guid.Parse(userIdString));
+                if (!CheckActivityOverlap(existingActivities))
+                {
+                    await _activityFacade.SaveAsync(Activity);
+                    MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+                    _navigationService.SendBackButtonPressed();
+                }
+                else
+                {
+                    await _alertService.DisplayAsync("Activity can not be edited",
+                        "You can do 1 activity at the same time");
+                }
             }
         }
         private bool CheckActivityOverlap(IEnumerable<ActivityListModel> existingActivities)

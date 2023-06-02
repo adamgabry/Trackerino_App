@@ -13,7 +13,6 @@ namespace Trackerino.App.ViewModels
     {
         private readonly IActivityFacade _activityFacade;
         private readonly INavigationService _navigationService;
-        private readonly IAlertService _alertService;
 
         public Guid Id { get; set; }
         public ActivityDetailModel? Activity { get; private set; }
@@ -27,7 +26,6 @@ namespace Trackerino.App.ViewModels
         {
             _activityFacade = activityFacade;
             _navigationService = navigationService;
-            _alertService = alertService;
         }
 
         protected override async Task LoadDataAsync()
