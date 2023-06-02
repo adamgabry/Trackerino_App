@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Trackerino.DAL.Entities;
+﻿using Trackerino.DAL.Entities;
 
 namespace Trackerino.DAL.Repositories;
 

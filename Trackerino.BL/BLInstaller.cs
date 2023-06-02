@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Trackerino.BL.Mappers;
 using Trackerino.DAL.UnitOfWork;
-using Trackerino.BL.Facades.Interfaces;
+using Trackerino.BL.Facades;
 
 namespace Trackerino.BL;
 

@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using Trackerino.App.Services.Interfaces;
 using Trackerino.App.Services;
 using Trackerino.App.Shells;
 using Trackerino.App.ViewModels;

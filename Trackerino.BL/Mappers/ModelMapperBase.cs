@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Trackerino.BL.Mappers.Interfaces;
-
-namespace Trackerino.BL.Mappers;
+﻿namespace Trackerino.BL.Mappers;
 
 public abstract class
     ModelMapperBase<TEntity, TListModel, TDetailModel> : IModelMapper<TEntity, TListModel, TDetailModel>

@@ -1,7 +1,7 @@
 ﻿using Trackerino.App.Models;
 using Trackerino.App.ViewModels;
 
-namespace Trackerino.App.Services.Interfaces;
+namespace Trackerino.App.Services;
 
 public interface INavigationService
 {

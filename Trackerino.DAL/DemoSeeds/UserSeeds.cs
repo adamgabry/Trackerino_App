@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.DAL.Entities;
 
 namespace Trackerino.DAL.DemoSeeds;

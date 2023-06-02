@@ -1,8 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using Trackerino.BL.Models;
+﻿using Trackerino.BL.Models;
 using Trackerino.DAL.Entities;
 
-namespace Trackerino.BL.Mappers.Interfaces
+namespace Trackerino.BL.Mappers
 {
     public interface IActivityModelMapper : IModelMapper<ActivityEntity, ActivityListModel, ActivityDetailModel>
     {

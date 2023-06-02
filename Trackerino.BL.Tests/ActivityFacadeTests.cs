@@ -1,10 +1,6 @@
 ﻿using Trackerino.BL.Facades;
-using Trackerino.BL.Models;
 using Trackerino.Common.Tests;
-using Trackerino.DAL.Common;
 using Microsoft.EntityFrameworkCore;
-using Xunit.Abstractions;
-using Trackerino.BL.Facades.Interfaces;
 using Trackerino.DAL.TestSeeds;
 
 namespace Trackerino.BL.Tests

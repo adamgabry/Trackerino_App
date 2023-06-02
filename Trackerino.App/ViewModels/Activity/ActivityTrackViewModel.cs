@@ -1,8 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Trackerino.App.Messages;
-using Trackerino.App.Services.Interfaces;
 using Trackerino.App.Services;
-using Trackerino.BL.Facades.Interfaces;
+using Trackerino.BL.Facades;
 using Trackerino.BL.Models;
 using System.Timers;
 using Trackerino.DAL.Common;

@@ -1,6 +1,4 @@
-﻿using Trackerino.BL.Facades.Interfaces;
-using Trackerino.BL.Mappers;
-using Trackerino.BL.Mappers.Interfaces;
+﻿using Trackerino.BL.Mappers;
 using Trackerino.BL.Models;
 using Trackerino.DAL.Entities;
 using Trackerino.DAL.Mappers;

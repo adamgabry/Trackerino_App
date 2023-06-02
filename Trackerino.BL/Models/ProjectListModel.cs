@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Trackerino.BL.Models
+﻿namespace Trackerino.BL.Models
 {
     public record ProjectListModel : ModelBase
     {

@@ -1,4 +1,4 @@
-﻿namespace Trackerino.BL.Mappers.Interfaces;
+﻿namespace Trackerino.BL.Mappers;
 
 public interface IModelMapper<TEntity, out TListModel, TDetailModel>
 {

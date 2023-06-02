@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Trackerino.App.ViewModels;
 
 namespace Trackerino.App.Views.Activity;

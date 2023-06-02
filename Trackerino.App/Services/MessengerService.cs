@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using Trackerino.App.Services.Interfaces;
 
 namespace Trackerino.App.Services;
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Trackerino.BL.Facades;
-using Trackerino.BL.Facades.Interfaces;
 using Trackerino.DAL.TestSeeds;
 
 namespace Trackerino.BL.Tests.Facades

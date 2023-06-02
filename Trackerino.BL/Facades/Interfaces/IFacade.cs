@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Trackerino.BL.Models;
+﻿using Trackerino.BL.Models;
 using Trackerino.DAL.Entities;
 
-namespace Trackerino.BL.Facades.Interfaces;
+namespace Trackerino.BL.Facades;
 
 public interface IFacade<TEntity, TListModel, TDetailModel>
     where TEntity : class, IEntity

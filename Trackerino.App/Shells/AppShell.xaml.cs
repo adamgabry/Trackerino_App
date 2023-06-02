@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Trackerino.App.Services.Interfaces;
+using Trackerino.App.Services;
 using Trackerino.App.ViewModels;
 
 namespace Trackerino.App.Shells;
